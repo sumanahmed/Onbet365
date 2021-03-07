@@ -1,0 +1,707 @@
+
+/*============= Full body Style Start ==================*/
+
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    height:100%; width:100%;
+    background:#2c4841;
+}
+
+.left-section{
+    width: 20%;
+    height: calc(100vh - 50px);
+    position:absolute; top:0px; bottom:0px; left:0; right:0px; overflow:auto;
+}
+
+.left-section, .right-section{
+    background: url(../img/transparent-pattren.png);
+    background-image: url(../img/transparent-pattren.png);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+}
+
+.logo_section{
+    background: #00885C;
+    text-align: center;
+}
+
+.logo_section img {
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.login_section input[type='text'] , .login_section input[type='password'], .login_section input[type='button']{
+    height: 25px;
+    font-size: 12px;
+}
+
+.login_section input[type='button']  {
+    margin-top: 0;
+}
+
+.profile_section {
+    padding: 20px 5px 10px 5px;
+}
+.single-profile {
+    display: flex;
+}
+
+.avater-image {
+    width: 21%;
+}
+
+.avater-image p {
+    margin: 0;
+    background: #ddd;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.welcome-text-coin {
+    width: 76%;
+    background: #ddd;
+    margin-left: 8px;
+    padding: 5px 0px 5px 7px;
+}
+
+.middle-section{
+    width: 60%;
+    height: calc(100vh - 50px);
+    position:absolute;
+    top:0px; 
+    bottom:200px;
+    left:20%;
+    right:0px;
+    overflow:auto;
+}
+
+#exTab1 .tab-content {
+    color : white;
+    background-color: #428bca;
+    padding : 5px 15px;
+  }
+
+.right-section{
+    width: 20%;
+    height: calc(100vh - 50px);
+    position:absolute; top:0px; bottom:0px; right:0px; overflow-x:auto;
+}
+
+
+.advance_section h4 {
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 13px;
+    background: #00885c;
+    padding-top: 13px;
+}
+
+.upcoming_match_wraper {
+    padding: 5px 5px;
+}
+
+.upcoming_single_match {
+    padding: 5px 5px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    display: block;
+    border-left: 3px solid #fbfa00 !important;
+    border: 1px solid #fffe01;
+}
+.upcoming_single_match:hover{
+    text-decoration: none;
+}
+.upcoming_single_match h5 {
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.both-team {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.both-team span {
+    font-size: 14px;
+    color:#ddd;
+}
+
+.date-time {
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+}
+span.date {
+    color: aquamarine;
+}
+
+span.time {color: darksalmon;}
+
+.footer-section{
+    height: 50px;
+    background:#00885c;
+    position:absolute; bottom:0px; left:0px; right:0px; overflow:hidden;
+}
+
+.footer-text{
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    left: 42%;
+    z-index: 9;
+    font-size: 14px;
+    font-weight: 700;
+}
+/*============= Full body Style End ==================*/
+
+
+/* =========== Back To Top style Start ============ */
+#back-to-top {
+    position: fixed;
+    width: 100px;
+    height: 73px;
+    background: #00885c;
+    bottom: 10px;
+    left: 47%;
+    text-align: center;
+    color: #fff;
+    border-radius: 100% 100% 0 0;
+    font-size: 30px;
+    text-decoration: none;
+    display: none;
+}
+/* =========== Back To Top style End ============ */
+
+
+/* =========== Back To Top style Start ============ */
+#back-to-top-mobile {
+    position: fixed;
+    width: 100px;
+    height: 73px;
+    background: #00885c;
+    bottom: 10px;
+    left: 47%;
+    text-align: center;
+    color: #fff;
+    border-radius: 100% 100% 0 0;
+    font-size: 30px;
+    text-decoration: none;
+    display: none;
+}
+/* =========== Back To Top style End ============ */
+
+
+/* =========== Scroller Style Start============ */
+.scrollCustom::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+	background-color: #00885c;
+    border-radius: 7px;
+    scrollbar-width: 7px;
+}
+
+.scrollCustom::-webkit-scrollbar
+{
+	width: 7px;
+	background-color: #00885c;
+    scrollbar-width: 7px;
+}
+
+.scrollCustom::-ms-overflow
+{
+	width: 7px;
+	background-color: #00885c;
+    scrollbar-width: 7px;
+}
+
+.scrollCustom::-webkit-scrollbar-thumb
+{
+	background-color: rgb(218, 216, 216);
+	border-radius: 10px;    
+}
+/* =========== Scroller style End============ */
+
+
+/* =========== News Ticker style ============ */
+.holder {
+    background:#023321;
+    padding:0.5rem;
+    overflow: hidden;
+}
+.news {
+    -moz-animation: marquee 30s linear infinite;
+    -webkit-animation: marquee 30s linear infinite;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+    color:#fff;
+}
+.news:hover {
+    animation-play-state: paused;
+    cursor:default;
+}
+
+@-moz-keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+@-webkit-keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+@keyframes marquee {
+    0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%) }
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%); }
+}
+/* =========== News Ticker style End ============ */
+
+
+
+/* =========== Slider style Start ============ */
+.single-custom-item {
+    position: relative;
+}
+
+.custom-slider-content {
+    position: absolute;
+    width: 550px;
+    left: 100px;
+    text-align: left;
+    top: 50px;
+}
+
+.custom-slider-content h2 {
+    color: #fff;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+.custom-slider-content p {
+    font-size: 16px;
+    font-weight: 100;
+    text-transform: capitalize;
+    line-height: 25px;
+    margin: 10px 0;
+}
+
+.SlideCustomBullot li {
+    width: 10px;
+    height: 10px;
+}
+
+/* =========== Slider style End ============ */
+
+
+
+/* =========== Preloader Style Start============ */
+#preloader {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 99999;
+    overflow: visible;
+    background: #000000 url(../img/preloader.gif) no-repeat center center;
+ }
+ /*========== Preloader Style End ===========*/
+
+ 
+
+
+ /* ========== Tab style Start==========*/
+ .online-play-tab-part {
+    background: #2c4841;
+}
+
+.online-play-tab-part ul li a {
+    color: #fff;
+}
+.online-play-tab-part ul li a:hover {
+    background: #047565;
+    transition: ease-in .2s;
+}
+
+.online-play-tab-part ul li a.active {
+    background: #047565;
+}
+
+#myTabContent {
+    color: #fff;
+    width: 100%;
+    padding: 5px 0px;
+}
+
+.sports_single_category {
+    background: #2c4841;
+    padding: 0px 2px;
+}
+
+.sports_single_category h4 {
+    font-size: 20px;
+    padding: 5px 0px;
+    background: #047565;
+}
+
+.matchTournamentLiveWrap {
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    border: 2px solid #c2cc9d;
+    border-left: 5px solid rgb(0 208 255);
+    padding: 5px;
+}
+
+.matchTournamentDetailPart {
+    display: table-cell;
+    width: 70%;
+}
+
+.matchTournamentLivePart {
+    display: table-cell;
+    width: 30%;
+}
+
+.matchTournamentDetailPart p {
+    margin: 0;
+}
+
+.overs-live-status {
+    margin: 0;
+}
+
+.overs-live-status b {
+    font-size: 12px;
+}
+
+.overs-live-status span {
+    float: right;
+    padding-right: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: red;
+    font-style: italic;
+}
+
+.overs-upcomming-status span {
+    float: right;
+    padding-right: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    font-style: italic;
+}
+
+.match-scores {
+    margin-bottom: 0;
+    font-size: 12px;
+}
+
+.question-part {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Clear floats after the columns */
+.choice-answer-part:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.single-item {
+    float: left;
+    width: 33.33%;
+    margin-bottom: 1px;
+    border:1px solid rgb(9, 148, 101);
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: 0;
+}
+
+.single-item:focus {
+    outline: 0px dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+}
+
+.single-item:hover {
+    background: #047565;
+    border:1px solid #047565;
+    color: #fff;
+    transition: ease-in .3s;
+}
+
+.single-item:hover.single-item span b {
+    color: #eaf901 !important;
+}
+ /* ========== Tab style End ==========*/
+
+
+
+/*=========== Modal custom style Start ==============*/
+
+.modal-custom-content {
+    border-radius: 0;
+    border: 0px;
+}
+
+.modal-custom-header {
+    padding: 5px;
+    display: block;
+    background:#047565;
+    border:0px;
+    border-radius: 0;
+    color:#fff;
+}
+
+.modal-custom-header h4 {
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+    padding-top: 5px;
+}
+
+
+.modal-custom-header .close {
+    padding: 5px;
+    margin: 0;
+}
+
+.modal-custom-body p {
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.modal-custom-body {
+    padding: 2px 0px;
+}
+.modalQusAnsBlock{
+    padding-left: 20px;
+}
+.modalQusAnsBlock p{
+    margin-bottom: 5px; padding-bottom: 5px; border-bottom:1px solid #ddd;font-size:13px;
+}
+.modalQusAnsBlock p > input , #betEstReturn{
+    border: none;
+    font-weight: bold;
+    color: orangered;
+    text-align: center;
+    width: 80px;
+    border-radius: 5px
+}
+.modalQusAnsBlock input{
+    width:80px;
+    border: 1px solid #eee;
+    padding-left: 10px;
+    margin-right:20px;
+}
+.modal-custom-footer {
+    padding: 0;
+}
+
+.modal-custom-footer button {
+    border-radius: 0;
+    background:#047565;
+    border:0px;
+}
+
+.modal-custom-footer button:hover {
+    background:#00885c;
+    transition: ease-in .2s;
+}
+/*=========== Modal custom style End ==============*/
+
+
+/* =========== Mobile Header Start ===============*/
+.mobile-header-login-wrapper {
+    display: none;
+    height: 160px;
+}
+
+#header-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.mobile-header{
+    background: #00895d;
+    margin-right: 3px;
+    border-bottom: 1px solid #137757;
+    width: 100%;
+}
+
+#three-dot {
+    float: right;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+.mobile-login {
+    padding: 5px;
+    background: #00895d;
+    height: 100px;
+}
+
+.mobile-header img {
+    padding: 5px;
+}
+
+.mobile-login input[type="text"], .mobile-login input[type="password"] {
+    display: block;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.mobile-login input[type="submit"] {
+    border: 1px solid #ddd;
+    font-size: 14px;
+    padding: 3px 10px;
+    background: #2c4841;
+    color: #fff;
+}
+
+.user-registration {
+    border: 1px solid #ddd;
+    padding: 3px 8px;
+    font-size: 14px;
+    background: #00885c;
+    color: #fff !important;
+    font-weight: 700;
+    float: right;
+    width: 50px;
+    height: 30px;
+    text-decoration: none;
+}
+.user-registration:hover{
+    text-decoration: none;
+    color: rgb(197, 197, 16);
+}
+
+
+.profile_section_mobile {
+    padding: 20px 5px 10px 5px;
+    height: 100px;
+    background: #00895d;
+}
+.single-profile-mobile {
+    display: flex;
+}
+
+.avater-image-mobile {
+    width: 21%;
+    padding-left: 27px;
+}
+
+.avater-image-mobile p {
+    margin: 0;
+    background: #ddd;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.welcome-text-coin-mobile {
+    width: 76%;
+    background: #ddd;
+    margin-left: 8px;
+    padding: 5px 0px 5px 7px;
+}
+
+.mobile-menu-wrapper {
+    display: none;
+    top:61px;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+}
+
+/*================= Mobile Header Style End ================*/
+
+/* ================ Bradecumbe Style Start =================*/
+.page-title-custom {
+    background: #00885c;
+    color: #fff;
+    padding: 10px;
+}
+
+.page-title-custom p {
+    margin-bottom: 0;
+}
+/* ================ Bradecumbe Style Start =================*/
+
+
+/* ================ Profile Page  Style Start =================*/
+
+.profile-wrapper {
+    background: #324c44;
+    color: #fff;
+    padding:10px;
+}
+
+.page-heading {
+    text-align: center;
+    padding-top:10px;
+}
+
+.profile-wrapper table{
+    margin-bottom: 0px;
+}
+.profile-wrapper p{
+    text-align: center;
+    margin-bottom: 0;
+    height: 90px;
+    padding-top: 10px;
+    
+}
+.profile-wrapper p b, .profile-wrapper p i{
+    font-size: 30px;
+    padding: 19px;
+    background: #ddd;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    color: #000;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+}
+/* ================ Profile Page Style Start =================*/
+
+

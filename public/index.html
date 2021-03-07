@@ -1,17 +1,84 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>DreamBet365</title>
+      <!-- Style -->
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="assets/css/animate.css">
+      <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+      <link rel="stylesheet" href="assets/css/eosMenu.css">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="assets/css/responsive.css">
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <div id="app">
+      <App></App>  
+    </div>
+    <!-- Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/eosMenu.js"></script>
+    <script src="assets/js/bootstrap.min.js.map"></script>
+    <script>
+        
+      /*For Desktop scroll to top*/
+      $('.scrollCustom').scroll(function () {
+          if ($(this).scrollTop() > 50) {
+              $('#back-to-top').fadeIn();
+              $('#back-to-top').css("display","block");
+          } else {
+              $('#back-to-top').fadeOut();
+          }
+      });
+      
+      $(document).ready(function(){
+          $('#back-to-top').click(function () {
+              $('.scrollCustom').animate({
+                  scrollTop: 0
+              }, 400);
+              return false;
+          });
+      });
+
+      /*For Mobile scroll to top*/
+      $(window).scroll(function() {
+          if ($(window).scrollTop() > 150) {
+              $('#back-to-top-mobile').fadeIn();
+              $('#back-to-top-mobile').css("display","block");
+          } else {
+              $('#back-to-top-mobile').fadeOut();
+          }
+      });
+
+      $(document).ready(function(){
+          $('#back-to-top-mobile').click(function () {
+              $('html, body').animate({
+                  scrollTop: 0
+              }, 400);
+              return false;
+          });
+      });
+
+      /* Preloader */
+      $(window).on("load", function() {
+          $("#preloader").delay(300).animate({
+              "opacity" : "0"
+              }, 500, function() {
+              $("#preloader").css("display","none");
+          });
+      });
+      
+      /* Menu */
+      $("#menu").eosMenu();
+      $("#mobile-menu").eosMenu();
+
+      $("#three-dot").click(function(){
+          $(".mobile-menu-wrapper").toggle(300);
+      });
+    </script>
   </body>
 </html>

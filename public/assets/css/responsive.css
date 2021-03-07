@@ -1,0 +1,63 @@
+
+/* Larged Layout : 15000px */
+@media only screen and (min-width:1201px) and (max-width:1500px){
+  .mobile-menu-wrapper { display: none !important; }
+}
+
+/* Medium Layout : 1280px */
+@media only screen and (min-width:992px) and (max-width:1200px){
+  .mobile-menu-wrapper { display: none !important; }
+}
+
+/* Tablet Layout : 768px */
+@media only screen and (min-width:768px) and (max-width:991px){
+  .mobile-menu-wrapper { display: none !important; }
+}
+
+/* Mobile Layout : 320px */
+@media only screen and (max-width:767px){
+  .mobile-header-login-wrapper{display: block;}
+  .online-play-tab-part ul li a {padding: 5px 10px;font-size: 14px;}
+  .customSportsTab {padding: 5px;}
+  .upcoming_match_wraper { margin-bottom: 50px;}
+  .sliderMainArea {margin-top: 160px;}
+  .left-section{ display: none;position: inherit;}
+  .middle-section{ width: 100%;height: auto;position: inherit;}
+  .right-section{ width: 100%;height: auto;position: inherit;}
+  .footer-section{ width: 100%;height: 50px; position: fixed;z-index: 9;}
+  .footer-text{ left:25%;}
+  #back-to-top-mobile {left: 39%;}
+  .eos-menu .eos-menu-title { display: block;}    
+  .eos-menu .eos-menu-content { height: auto; position: inherit; }
+  .upcoming_single_match {text-align: center;}
+      
+}
+
+/* Mobile Layout : 480px */
+@media only screen and (min-width:480px) and (max-width:767px){
+  .mobile-menu-wrapper { display: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

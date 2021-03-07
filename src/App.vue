@@ -1,28 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+      <!-- <div id="preloader"></div> -->
+      <div class="full-body">
+        <div class="main-content">
+          <left-sidebar></left-sidebar>     
+          <router-view></router-view>     
+          <right-sidebar></right-sidebar>
+        </div>    
+        <div class="footer-section">
+          <p class="footer-text">&copy; All right reserve DreamBet365 </p>
+        </div>
+        <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+    </div>    
+    <a href="#" id="back-to-top-mobile"><i class="fa fa-angle-up"></i></a>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LeftSidebar from './components/includes/LeftSidebar'
+import RightSidebar from './components/includes/RightSidebar'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    'left-sidebar': LeftSidebar,
+    'right-sidebar': RightSidebar,
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
