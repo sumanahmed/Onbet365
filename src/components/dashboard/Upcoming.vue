@@ -84,11 +84,8 @@
 
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                        
-                        <div v-for="(bets,index) in finalBets" :key="index" class="sports_single_category">
-
-                            <h4 v-for="(bet,index1) in bets" :key="index1" class="text-center"> {{ bet['sportName'] }} </h4>
-
+                        <div class="sports_single_category">
+                            <h4 class="text-center"> Cricket </h4>
                             <div  class="matchTournamentLiveWrap">
                                 <div class="matchTournamentDetailPart">
                                     <p>
@@ -119,7 +116,116 @@
 
                             <div class="choice-answer-part">
 
-                                <button @click="showModal" value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
+                                </button>
+                                
+                            </div>
+                            
+
+                            <div class="question-part">
+                                <span class="">To Win The Match </span>
+                            </div>
+
+                            <div class="choice-answer-part">
+
+                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
+                                </button>
+                                
+                            </div>
+
+                            <div class="question-part">
+                                <span class="">To Win The Match </span>
+                            </div>
+
+                            <div class="choice-answer-part">
+
+                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
+                                </button>
+                                
+                            </div>
+
+                            <div class="question-part">
+                                <span class="">To Win The Match </span>
+                            </div>
+
+                            <div class="choice-answer-part">
+
+                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
+                                </button>
+                                
+                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
+                                </button>
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="sports_single_category">
+                            <h4 class="text-center"> Football </h4>
+                            <div  class="matchTournamentLiveWrap">
+                                <div class="matchTournamentDetailPart">
+                                    <p>
+                                        India tour of australia, 2020-21 
+                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span class="time">
+                                            26 Dec 2020
+                                        </span>                                                
+                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <span class="time">
+                                            5:30 pm
+                                        </span><br/>
+                                        2nd Test- Australia VS India
+                                    </p>
+                                </div>
+                                <div class="matchTournamentLivePart">
+                                    <p class="overs-live-status">
+                                        <b class="overs">Overs: 10.5 </b>
+                                        <span class="live-status">Live</span>
+                                    </p>
+                                    <p class="match-scores">Score : 111 / 5</p>                                                    
+                                </div>
+                            </div>
+
+                            <div class="question-part">
+                                <span class="">To Win The Match </span>
+                            </div>
+
+                            <div class="choice-answer-part">
+
+                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                     <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
                                 </button>
                                 
@@ -447,11 +553,11 @@
             
         </div>
 
-        <div v-if="isModal" class="modal fade show" style="display:block" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
+        <div class="modal fade" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple modal-dialog-centered">
                 <div class="modal-content modal-custom-content">
                     <div class="modal-header modal-custom-header">
-                        <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
+                        <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="fa fa-window-close" aria-hidden="true"></span>
                         </button>
                         <h4 style="text-align:center" class="modal-title">Place a bet</h4>
@@ -489,44 +595,15 @@
     </div>
 </template>
 <script>
-import config from '../../config'
 export default {
-    name:'Home',
+    name:'Upcoming',
     data () {
         return {
-            finalBets: [],
-            isBodyHidden: false,
-            isModal: false,
+            isBodyHidden: false
         }
-    },
-    created () {
-        this.getLiveBet()
     },
     mounted (){
-       console.log('Home page moundted')
-    },
-    methods: {
-        showModal () {
-            this.isModal = true            
-        },
-        cancelModal () {
-            this.isModal = false
-        },
-        getLiveBet () {
-            config.getData('/live/data')
-            .then((response) => {    
-                console.log('response = ', response.matches)        
-                if (!response.data) {
-                    this.loader = true
-                } else {
-                    this.loader = false
-                    this.finalBets = response.matches; 
-                }     
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        }
+       console.log('Upcome page loaded')
     }
 }
 </script>

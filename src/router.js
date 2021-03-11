@@ -7,10 +7,11 @@ const routes = [
         path:'/',
         name:'home',
         component:() => import('./components/dashboard/Home'),
-        // meta: { 
-        //     hideNavigation: false,
-        //     requiresAuth:true
-        // }
+    },
+    {
+        path:'/upcoming',
+        name:'upcoming',
+        component:() => import('./components/dashboard/Home')
     }
 ];
 

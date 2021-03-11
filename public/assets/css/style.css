@@ -645,7 +645,7 @@ span.time {color: darksalmon;}
 }
 
 .mobile-menu-wrapper {
-    display: none;
+    display: block;
     top:61px;
     position: fixed;
     z-index: 999;
@@ -703,5 +703,75 @@ span.time {color: darksalmon;}
     display: inline-block;
 }
 /* ================ Profile Page Style Start =================*/
+
+
+
+/* ================ Menu Style Start =================*/
+
+/* define a fixed width for the entire menu */
+.navigation {
+    width: 100%;
+  }
+  
+  /* reset our lists to remove bullet points and padding */
+  .mainmenu, .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* make ALL links (main and submenu) have padding and background color */
+  .mainmenu a {
+    display: block;
+    background-color: #00885c;
+    text-decoration: none;
+    padding: 10px;
+    color: #fff;
+    border-bottom: 1px solid #00a06d;
+    font-size: 14px;
+  }
+  
+  /* add hover behaviour */
+  .mainmenu a:hover {
+      background-color: #01835a;
+  }
+  
+  
+  /* when hovering over a .mainmenu item,
+    display the submenu inside it.
+    we're changing the submenu's max-height from 0 to 200px;
+  */
+  
+  .mainmenu li:hover .submenu {
+    display: block;
+    max-height: 315px;
+  }
+  
+  /*
+    we now overwrite the background-color for .submenu links only.
+    CSS reads down the page, so code at the bottom will overwrite the code at the top.
+  */
+  
+  .submenu a {
+    background-color: #026646;
+    font-size: 14px;
+    padding-left: 20px;
+  }
+  
+  /* hover behaviour for links inside .submenu */
+  .submenu a:hover {
+    background-color: #01835a;
+  }
+  
+  /* this is the initial state of all submenus.
+    we set it to max-height: 0, and hide the overflowed content.
+  */
+  .submenu {
+    overflow: hidden;
+    max-height: 0;
+    -webkit-transition: all 0.5s ease-out;
+  }
+
+/* ================ Menu Style End =================*/
 
 

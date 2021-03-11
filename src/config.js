@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:8000/api/'
+const baseURL = 'https://dreambet365.uk/api/'
 //const baseURL = 'http://bahokapi.batpars.com/api/'
 
 const client = axios.create({
