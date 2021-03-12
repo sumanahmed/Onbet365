@@ -4,10 +4,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import {router} from './router'
 import moment from 'moment'
+import CxltToastr from 'cxlt-vue2-toastr'
+import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 
 Vue.config.productionTip = false
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios, CxltToastr)
 
 Vue.filter('dateformat',(arg)=> {
   return moment(arg).format("DD MMM YYYY");

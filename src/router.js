@@ -9,9 +9,14 @@ const routes = [
         component:() => import('./components/dashboard/Home'),
     },
     {
+        path:'/register',
+        name:'register',
+        component:() => import('./components/auth/Register'),
+    },
+    {
         path:'/upcoming',
         name:'upcoming',
-        component:() => import('./components/dashboard/Home')
+        component:() => import('./components/dashboard/Upcoming')
     }
 ];
 

@@ -11,7 +11,7 @@
                 <input type="text" class="form-control mt-2 mb-1" name="username" placeholder="Username"/>
                 <input type="password" class="form-control" name="username" placeholder="Password"/>
                 <input type="button" name="login" value="Login" />
-                <input type="button" name="registration" value="Join" />
+                <router-link to="/register" class="btn btn-sm btn-primary ml-1"> Join </router-link>
             </div>
 
             <!-- Profile section -->

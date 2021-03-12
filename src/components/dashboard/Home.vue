@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="choice-answer-part">
-                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
                                                 <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
@@ -386,23 +386,21 @@
                             <div v-if="isBodyHidden" class="modalCustomBody">
                                 <p class="text-warning text-center">Minimum Bet Amount 20 & Maximum 6000</p>
                                 <div class="modalQusAnsBlock">
-                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: To Win The Match</p>
-                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: Australia</p>
+                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: {{ question }}</p>
+                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: {{ betDetails.betName }}</p>
                                     <p class="text-secondary">
-                                        Bet Rate : <input type="text" name="betRate" id="betDetailRate" value="1.85" readonly/>
+                                        Bet Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
-                                    <input type="number" name="betAmount" v-model="betAmount" id="betAmount" placeholder="0" value="" min="0"/>
+                                    <input v-if="betDetails.status != 0" type="number" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0"/>
                                     <span class="text-secondary" style="font-size: 14px;">
                                     Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
                                     </span>
                                 </div>
                             </div>
                         </div>
-
                         <div style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
                             <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet" > Place Bet </button>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -416,8 +414,16 @@ export default {
     data () {
         return {
             matches: [],
-            isBodyHidden: false,
+            isBodyHidden: true,
+            isDisabled: true,
             isModal: false,
+            betDetails : '',
+            question : '',
+            processingMsg : '',
+            successMsg : '',
+            errorMsg : '',
+            betAmount : 0,
+            estimateResult : 0
         }
     },
     created () {
@@ -427,8 +433,19 @@ export default {
        console.log('Home page moundted')
     },
     methods: {
-        showModal () {
-            this.isModal = true            
+        showModal (betDetail, question) {
+            this.isModal = true 
+            this.betDetails = betDetail;
+            console.log('details = ', this.betDetails)
+            this.question = question;          
+        },
+        estimateReturn(betRate){
+            this.estimateResult = parseFloat((betRate*this.betAmount)).toFixed(2);
+            if(this.betAmount < 20 || this.betAmount > 6000){
+                this.isDisabled = true;
+            }else{
+                this.isDisabled = false;
+            }
         },
         cancelModal () {
             this.isModal = false
