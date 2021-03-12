@@ -15,7 +15,7 @@
                         <span class="badge badge-danger"> {{ match["matchDateTime"] | timeformat}}</span>
                     </p>
                     <p>
-                        {{ match["matchTitle"] }}
+                        {{ match["tournamentName"] }}
                     </p>
                 </div>
 

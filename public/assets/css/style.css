@@ -458,6 +458,9 @@ span.time {color: darksalmon;}
 .single-item:hover.single-item span b {
     color: #eaf901 !important;
 }
+.single-item-for-mobile {
+    width: 50%;
+}
  /* ========== Tab style End ==========*/
 
 

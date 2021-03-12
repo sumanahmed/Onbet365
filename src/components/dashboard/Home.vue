@@ -85,164 +85,97 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         
-                        <div v-for="(bets,index) in finalBets" :key="index" class="sports_single_category">
+                        <div v-for="(sportItems,index) in matches" :key="index" class="sports_single_category">
 
-                            <h4 v-for="(bet,index1) in bets" :key="index1" class="text-center"> {{ bet['sportName'] }} </h4>
+                            <span v-for="(matchCategory, index1) in sportItems" class="text-center" :key="index1">
+                                <h4 v-if='index1 === 0'>{{ matchCategory['sportName'] | capitalizeFirstLetter }}</h4>
+                            </span>
 
-                            <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
-                                    <p>
-                                        India tour of australia, 2020-21 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        <span class="time">
-                                            26 Dec 2020
-                                        </span>
-                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <span class="time">
-                                            5:30 pm
-                                        </span><br/>
-                                        2nd Test- Australia VS India
-                                    </p>
+                            <div v-for="(match, index2) in sportItems" :key="index2">
+                                <div  class="matchTournamentLiveWrap">
+                                    <div class="matchTournamentDetailPart">
+                                        <p>
+                                            {{ match['matchTitle'] | capitalizeFirstLetter }} 
+                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | dateformat }} 
+                                            </span>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | timeformat }} 
+                                            </span><br/>
+                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                        </p>
+                                    </div>
+                                    <div class="matchTournamentLivePart">
+                                        <p class="overs-live-status">
+                                            <b class="overs">Overs: 10.5 </b>
+                                            <span class="live-status">Live</span>
+                                        </p>
+                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                    </div>
                                 </div>
-                                <div class="matchTournamentLivePart">
-                                    <p class="overs-live-status">
-                                        <b class="overs">Overs: 10.5 </b>
-                                        <span class="live-status">Live</span>
-                                    </p>
-                                    <p class="match-scores">Score : 111 / 5</p>                                                    
-                                </div>
+
+                                <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
+                                    <div class="question-part">
+                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                    </div>
+
+                                    <div class="choice-answer-part">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                            <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
+                                            </span> 
+                                        </button>                                  
+                                    </div>
+                                </div>                                
                             </div>
-
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
-
-                            <div class="choice-answer-part">
-
-                                <button @click="showModal" value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
-                            </div>
-                            
-
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
-
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
-                            </div>
-
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
-
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
-                            </div>
-
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
-
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
-                            </div>
-
                         </div>
-
                     </div>
             
                     <div class="tab-pane fade" id="cricket" role="tabpanel" aria-labelledby="cricket-tab">
                         <div class="sports_single_category">
                             <h4 class="text-center"> Cricket </h4>
-                            <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
-                                    <p>
-                                        India tour of australia, 2020-21 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        <span class="time">
-                                            26 Dec 2020
-                                        </span>                                                
-                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <span class="time">
-                                            5:30 pm
-                                        </span><br/>
-                                        2nd Test- Australia VS India
-                                    </p>
+                            <div v-for="(match, index5) in matches[0]" :key="index5">
+                                <div  class="matchTournamentLiveWrap">
+                                    <div class="matchTournamentDetailPart">
+                                        <p>
+                                            {{ match['matchTitle'] | capitalizeFirstLetter }} 
+                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | dateformat }} 
+                                            </span>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | timeformat }} 
+                                            </span><br/>
+                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                        </p>
+                                    </div>
+                                    <div class="matchTournamentLivePart">
+                                        <p class="overs-live-status">
+                                            <b class="overs">Overs: 10.5 </b>
+                                            <span class="live-status">Live</span>
+                                        </p>
+                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                    </div>
                                 </div>
-                                <div class="matchTournamentLivePart">
-                                    <p class="overs-live-status">
-                                        <b class="overs">Overs: 10.5 </b>
-                                        <span class="live-status">Live</span>
-                                    </p>
-                                    <p class="match-scores">Score : 111 / 5</p>                                                    
-                                </div>
-                            </div>
 
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
+                                <div v-for="(matchesOption, index6) in match['matchOption']" :key="index6" class="match-options">
+                                    <div class="question-part">
+                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                    </div>
 
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
+                                    <div class="choice-answer-part">
+                                        <button v-for="(betDetail, index7) in matchesOption['betDetails']" :key="index7" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                            <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
+                                            </span> 
+                                        </button>
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -250,48 +183,45 @@
                     <div class="tab-pane fade" id="football" role="tabpanel" aria-labelledby="football-tab">
                         <div class="sports_single_category">
                             <h4 class="text-center"> Football </h4>
-                            <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
-                                    <p>
-                                        India tour of australia, 2020-21 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        <span class="time">
-                                            26 Dec 2020
-                                        </span>                                                
-                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <span class="time">
-                                            5:30 pm
-                                        </span><br/>
-                                        2nd Test- Australia VS India
-                                    </p>
+                            <div v-for="(match, index8) in matches[1]" :key="index8">
+                                <div  class="matchTournamentLiveWrap">
+                                    <div class="matchTournamentDetailPart">
+                                        <p>
+                                            {{ match['matchTitle'] | capitalizeFirstLetter }} 
+                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | dateformat }} 
+                                            </span>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | timeformat }} 
+                                            </span><br/>
+                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                        </p>
+                                    </div>
+                                    <div class="matchTournamentLivePart">
+                                        <p class="overs-live-status">
+                                            <b class="overs">Overs: 10.5 </b>
+                                            <span class="live-status">Live</span>
+                                        </p>
+                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                    </div>
                                 </div>
-                                <div class="matchTournamentLivePart">
-                                    <p class="overs-live-status">
-                                        <b class="overs">Overs: 10.5 </b>
-                                        <span class="live-status">Live</span>
-                                    </p>
-                                    <p class="match-scores">Score : 111 / 5</p>                                                    
-                                </div>
-                            </div>
 
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
+                                <div v-for="(matchesOption, index9) in match['matchOption']" :key="index9" class="match-options">
+                                    <div class="question-part">
+                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                    </div>
 
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
+                                    <div class="choice-answer-part">
+                                        <button v-for="(betDetail, index10) in matchesOption['betDetails']" :key="index10" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                            <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
+                                            </span> 
+                                        </button>                                  
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -299,48 +229,45 @@
                     <div class="tab-pane fade" id="bascketball" role="tabpanel" aria-labelledby="bascketball-tab">
                         <div class="sports_single_category">
                             <h4 class="text-center"> Basketball </h4>
-                            <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
-                                    <p>
-                                        India tour of australia, 2020-21 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        <span class="time">
-                                            26 Dec 2020
-                                        </span>                                                
-                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <span class="time">
-                                            5:30 pm
-                                        </span><br/>
-                                        2nd Test- Australia VS India
-                                    </p>
+                            <div v-for="(match, index11) in matches[2]" :key="index11">
+                                <div  class="matchTournamentLiveWrap">
+                                    <div class="matchTournamentDetailPart">
+                                        <p>
+                                            {{ match['matchTitle'] | capitalizeFirstLetter }} 
+                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | dateformat }} 
+                                            </span>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | timeformat }} 
+                                            </span><br/>
+                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                        </p>
+                                    </div>
+                                    <div class="matchTournamentLivePart">
+                                        <p class="overs-live-status">
+                                            <b class="overs">Overs: 10.5 </b>
+                                            <span class="live-status">Live</span>
+                                        </p>
+                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                    </div>
                                 </div>
-                                <div class="matchTournamentLivePart">
-                                    <p class="overs-live-status">
-                                        <b class="overs">Overs: 10.5 </b>
-                                        <span class="live-status">Live</span>
-                                    </p>
-                                    <p class="match-scores">Score : 111 / 5</p>                                                    
-                                </div>
-                            </div>
 
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
+                                <div v-for="(matchesOption, index12) in match['matchOption']" :key="index12" class="match-options">
+                                    <div class="question-part">
+                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                    </div>
 
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
+                                    <div class="choice-answer-part">
+                                        <button v-for="(betDetail, index13) in matchesOption['betDetails']" :key="index13" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                            <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
+                                            </span> 
+                                        </button>                                  
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -348,48 +275,45 @@
                     <div class="tab-pane fade" id="baseball" role="tabpanel" aria-labelledby="baseball-tab">
                         <div class="sports_single_category">
                             <h4 class="text-center"> Volleyball </h4>
-                            <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
-                                    <p>
-                                        India tour of australia, 2020-21 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        <span class="time">
-                                            26 Dec 2020
-                                        </span>                                                
-                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <span class="time">
-                                            5:30 pm
-                                        </span><br/>
-                                        2nd Test- Australia VS India
-                                    </p>
+                            <div v-for="(match, index14) in matches[3]" :key="index14">
+                                <div  class="matchTournamentLiveWrap">
+                                    <div class="matchTournamentDetailPart">
+                                        <p>
+                                            {{ match['matchTitle'] | capitalizeFirstLetter }} 
+                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | dateformat }} 
+                                            </span>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | timeformat }} 
+                                            </span><br/>
+                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                        </p>
+                                    </div>
+                                    <div class="matchTournamentLivePart">
+                                        <p class="overs-live-status">
+                                            <b class="overs">Overs: 10.5 </b>
+                                            <span class="live-status">Live</span>
+                                        </p>
+                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                    </div>
                                 </div>
-                                <div class="matchTournamentLivePart">
-                                    <p class="overs-live-status">
-                                        <b class="overs">Overs: 10.5 </b>
-                                        <span class="live-status">Live</span>
-                                    </p>
-                                    <p class="match-scores">Score : 111 / 5</p>                                                    
-                                </div>
-                            </div>
 
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
+                                <div v-for="(matchesOption, index15) in match['matchOption']" :key="index15" class="match-options">
+                                    <div class="question-part">
+                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                    </div>
 
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
+                                    <div class="choice-answer-part">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                            <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
+                                            </span> 
+                                        </button>                                  
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -397,48 +321,45 @@
                     <div class="tab-pane fade" id="tennis" role="tabpanel" aria-labelledby="tennis-tab">
                         <div class="sports_single_category">
                             <h4 class="text-center"> Tennis </h4>
-                            <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
-                                    <p>
-                                        India tour of australia, 2020-21 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
-                                        <span class="time">
-                                            26 Dec 2020
-                                        </span>                                                
-                                        &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <span class="time">
-                                            5:30 pm
-                                        </span><br/>
-                                        2nd Test- Australia VS India
-                                    </p>
+                            <div v-for="(match, index16) in matches[4]" :key="index16">
+                                <div  class="matchTournamentLiveWrap">
+                                    <div class="matchTournamentDetailPart">
+                                        <p>
+                                            {{ match['matchTitle'] | capitalizeFirstLetter }} 
+                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | dateformat }} 
+                                            </span>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <span class="time">
+                                                {{ match['matchDateTime'] | timeformat }} 
+                                            </span><br/>
+                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                        </p>
+                                    </div>
+                                    <div class="matchTournamentLivePart">
+                                        <p class="overs-live-status">
+                                            <b class="overs">Overs: 10.5 </b>
+                                            <span class="live-status">Live</span>
+                                        </p>
+                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                    </div>
                                 </div>
-                                <div class="matchTournamentLivePart">
-                                    <p class="overs-live-status">
-                                        <b class="overs">Overs: 10.5 </b>
-                                        <span class="live-status">Live</span>
-                                    </p>
-                                    <p class="match-scores">Score : 111 / 5</p>                                                    
-                                </div>
-                            </div>
 
-                            <div class="question-part">
-                                <span class="">To Win The Match </span>
-                            </div>
+                                <div v-for="(matchesOption, index17) in match['matchOption']" :key="index17" class="match-options">
+                                    <div class="question-part">
+                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                    </div>
 
-                            <div class="choice-answer-part">
-
-                                <button value="" class="single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> India &nbsp; <b class="text-primary"> 2.85 </b> </span> 
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Draw  &nbsp; <b class="text-primary"> 2.00 </b> </span>
-                                </button>
-                                
-                                <button value="" class=" single-item-for-mobile single-item  clickSingleBetDetail" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                                    <span> Australia  &nbsp; <b class="text-primary"> 2.50 </b> </span>
-                                </button>
-                                
+                                    <div class="choice-answer-part">
+                                        <button v-for="(betDetail, index18) in matchesOption['betDetails']" :key="index18" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                            <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
+                                            </span> 
+                                        </button>                                  
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -494,7 +415,7 @@ export default {
     name:'Home',
     data () {
         return {
-            finalBets: [],
+            matches: [],
             isBodyHidden: false,
             isModal: false,
         }
@@ -516,11 +437,11 @@ export default {
             config.getData('/live/data')
             .then((response) => {    
                 console.log('response = ', response.matches)        
-                if (!response.data) {
+                if (!response) {
                     this.loader = true
                 } else {
                     this.loader = false
-                    this.finalBets = response.matches; 
+                    this.matches = response.matches; 
                 }     
             })
             .catch((error) => {
