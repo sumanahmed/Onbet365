@@ -17,6 +17,11 @@ const routes = [
         path:'/upcoming',
         name:'upcoming',
         component:() => import('./components/dashboard/Upcoming')
+    },
+    {
+        path:'/single-match/:id',
+        name:'single-match',
+        component:() => import('./components/dashboard/SingleMatch')
     }
 ];
 

@@ -1,50 +1,7 @@
 <template>
     <div>
         <!-- Main Content -->
-        <div id="carouselExampleFade" class="carousel slide carousel-fade sliderMainArea " data-ride="carousel">
-
-            <div class="carousel-inner single-custom-item">
-                <div class="carousel-item active">
-                    <img class="slideImg d-block w-100 animated  zoomIn " src="assets/img/slider_image_1.jpg" alt="">
-                    <div class="custom-slider-content">
-                        <!--<p class="animated  lightSpeedIn " style="animation-delay: 2s">We Believe in Better Service</p>                                                    
-                        <a href="user/registration" target="_blank" class="btn btn-sm animated  btn-warning lightSpeedIn " style="animation-delay: 3s" >Join Now</a>-->
-                    </div>
-                </div>
-                <div class="carousel-item ">
-                    <img class="slideImg d-block w-100 animated  zoomIn " src="assets/img/slider_image_2.jpg" alt="">
-                    <div class="custom-slider-content">
-                        <!--<p class="animated  rollIn " style="animation-delay: 2s">&quot;Relations have to be built on trust&quot;</p>
-                        <a href="User /Registration" target="_blank" class="btn btn-sm animated  btn-danger rollIn " style="animation-delay: 3s" >Create New Account</a>-->
-                    </div>
-                </div>
-                <div class="carousel-item ">
-                    <img class="slideImg d-block w-100 animated   zoomIn " src="assets/img/slider_image_3.jpg" alt="">
-                    <div class="custom-slider-content">
-                        <!--<p class="animated  bounceIn " style="animation-delay: 2s">&quot;Relations have to be built on trust&quot;</p>
-                        <a href="User/registration" target="_blank" class="btn btn-sm animated  btn-info bounceIn " style="animation-delay: 3s" >Join Now</a>-->
-                    </div>
-                </div>
-            </div>
-
-            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            <ol class="carousel-indicators SlideCustomBullot">
-                <li data-target="#carouselExampleFade" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleFade" data-slide-to="1" class=""></li>
-                <li data-target="#carouselExampleFade" data-slide-to="2" class=""></li>
-            </ol>
-        </div>
-            
-        <div class="holder">
-            <div class="news">Dear Users Maximum Deposit 25000 &amp; Minimun 200, Maximum  Withdraw 20000 Minimum 400.Bet Cash Limit 20. To 6000</div>
-        </div>
+        <slider></slider>
 
         <div class="tab-section animated fadeInUp">
             <div class="online-play-tab-part">
@@ -409,8 +366,12 @@
 </template>
 <script>
 import config from '../../config'
+import Slider from './Slider'
 export default {
     name:'Home',
+    components: {
+        'slider': Slider
+    },
     data () {
         return {
             matches: [],

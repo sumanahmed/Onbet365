@@ -23,6 +23,8 @@ Vue.filter('capitalizeFirstLetter',(string)=>{
   return string.charAt(0).toUpperCase() + string.slice(1);
 })
 
+Vue.prototype.$imagePath = 'https://dreambet365.uk/';
+
 export default router;
 new Vue({
   router,
