@@ -336,9 +336,9 @@
                     </div>
                     <form>
                         <div class="modal-body modal-custom-body">
-                            <p class="text-info text-center" >Please wait bet processing</p>
-                            <!--<p class="text-danger text-center">Somthing went wrong</p>
-                            <p class="text-success text-center">Bet successfully done</p>-->
+                            <p v-if="processingMsg" class="text-info text-center" >{{ processingMsg }}</p>
+                            <p v-else-if="errorMsg" class="text-danger text-center">{{ errorMsg }}</p>
+                            <p v-else-if="successMsg" class="text-success text-center">{{ successMsg }}</p>
 
                             <div v-if="isBodyHidden" class="modalCustomBody">
                                 <p class="text-warning text-center">Minimum Bet Amount 20 & Maximum 6000</p>
@@ -348,7 +348,7 @@
                                     <p class="text-secondary">
                                         Bet Rate : <input v-if="betDetails.status != 0" type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
-                                    <input v-if="betDetails.status != 0" type="number" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0"/>
+                                    <input v-if="betDetails.status != 0" type="text" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                     <span class="text-secondary" style="font-size: 14px;">
                                     Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
                                     </span>
@@ -356,9 +356,22 @@
                             </div>
                         </div>
                         <div style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
-                            <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet"  @click="placeBetSubmit(betDetails.id,betDetails.match_id,betDetails.betoption_id,betDetails.betRate)" > Place Bet </button>
+                            <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet"  @click="placeBetSubmit(betDetails.id,betDetails.match_id,betDetails.betoption_id,betDetails.betRate)" :disabled="isDisabled"> Place Bet </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="loginFirstModal" class="modal fade show" style="display:block" id="placeBetBtn1" aria-hidden="true" aria-labelledby="placeBetBtn1" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-simple modal-dialog-centered">
+                <div class="modal-content modal-custom-content">
+                    <div class="modal-header modal-custom-header">
+                        <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
+                            <span class="fa fa-window-close" aria-hidden="true"></span>
+                        </button>
+                        <h4 style="text-align:center" class="modal-title">Please Login First !!</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -376,25 +389,39 @@ export default {
         return {
             matches: [],
             isBodyHidden: true,
-            isDisabled: true,
+            isClick: false,
             isModal: false,
+            loginFirstModal: false,
+            isDisabled : true,
             betDetails : '',
             question : '',
             processingMsg : '',
             successMsg : '',
             errorMsg : '',
             betAmount : '',
-            estimateResult : 0
+            estimateResult : 0,
         }
     },
     created () {
         this.getLiveBet()
     },
-    mounted (){
-       console.log('Home page moundted')
+    computed : {
+        isLoggedUser : function () {
+            return this.$store.state.isLoggedIn
+        }
     },
     methods: {
         showModal (betDetail, question) {
+            const isUserLoggedIn = this.$store.state.isLoggedIn
+            if (!isUserLoggedIn) {
+                this.loginFirstModal = true
+                this.isModal = false 
+                console.log('this.isModal = ', this.isModal)
+                console.log('this.loginFirstModal = ', this.loginFirstModal)
+            } else {
+                this.isModal = true 
+                this.loginFirstModal = false
+            }
             this.isModal = true 
             this.betDetails = betDetail;
             console.log('details = ', this.betDetails)
@@ -425,6 +452,40 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+        },
+        placeBetSubmit(betDetailId,matchId,betOptionId,betRate){
+            //console.log(betDetailId,matchId,betOptionId,betRate);
+            var form_data = {
+                betDetail_id  : betDetailId,
+                match_id      : matchId,
+                betoption_id  : betOptionId,
+                betDetailRate : betRate,
+                betAmount     : this.betAmount,
+                user_id : localStorage.getItem('user_id')
+            };
+            this.processingMsg = 'Bet processing take little time .....';
+            this.isDisabled = false;
+            this.betAmount = '';
+
+            config.postData('/user/store/place/bet', form_data)
+            .then((response) => {
+                this.$store.dispatch('amountUpdate', form_data.betAmount)
+                if(response.data.errorMsg){
+                    this.processingMsg = this.successMsg = '';
+                    this.errorMsg = response.data.errorMsg;
+                    this.isBodyHidden = false;
+                }
+                if(response.data.successMsg){
+                    this.processingMsg = this.errorMsg = '';
+                    this.successMsg = response.data.successMsg;
+                    this.isBodyHidden = false;
+                }
+            }).then((error) => {
+                if(error){
+                    this.processingMsg = this.errorMsg = this.successMsg = this.amount = '';
+                    this.errorMsg = 'Something went wrong';
+                }
+            })
         }
     }
 }

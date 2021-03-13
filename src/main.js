@@ -3,6 +3,7 @@ import App from './App.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import {router} from './router'
+import store from './store'
 import moment from 'moment'
 import CxltToastr from 'cxlt-vue2-toastr'
 import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
@@ -28,5 +29,6 @@ Vue.prototype.$imagePath = 'https://dreambet365.uk/';
 export default router;
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
