@@ -10,10 +10,12 @@
             <div v-if="!isLoggedIn" class="login_section p-2">
                 <form v-on:keyup.enter="signIn">
                     <input type="text" class="form-control mt-2 mb-1" v-model="form.username" placeholder="Username"/>
+                    <p style="margin-bottom:0;font-size:12px;" class="text-danger" v-if="errors.username">{{ errors.username[0] }}</p>
                     <input type="password" class="form-control" v-model="form.password" placeholder="Password"/>
+                    <p style="margin-bottom:0;font-size:12px;" class="text-danger" v-if="errors.password">{{ errors.password[0] }}</p>
                     <input type="submit" name="login" value="Login" @click.prevent="signIn" />
-                </form>
-                <router-link to="/register" class="btn btn-sm btn-primary ml-1"> Join </router-link>
+                    <router-link to="/register" class="customJoinBtn"> Join </router-link>
+                </form>                
             </div>
 
             <!-- Profile section -->
@@ -71,6 +73,7 @@ export default {
     data () {
         return {
             isLoggedIn: false,
+            errors:[],
             form : {
                 username :'',
                 password :'',
@@ -79,10 +82,8 @@ export default {
     },
     methods: {
         signIn() {
-            console.log('form value = ', this.form)
             config.postData('/user/login', this.form)
-            .then((response) => {    
-                console.log('response = ', response)  
+            .then((response) => {
                 if(response.status_code == 200){
                     localStorage.setItem('accessToken', response.access_token);
                     localStorage.setItem('user_id', response.user_id);
@@ -92,7 +93,9 @@ export default {
                 }     
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
             });
         },
         logout(){

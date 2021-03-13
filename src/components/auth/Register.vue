@@ -10,7 +10,7 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-user-circle-o">*</i>
+                                <i class="fa fa-user-circle-o"><span class="text-danger">*</span></i>
                             </div>
                         </div>                                
                         <input class="form-control" required type="text" name="username" v-model="form.username" id="username" placeholder="Username : allowed character a-b, A-B , 0-9, -, _" value="">                                                
@@ -19,7 +19,7 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-envelope">*</i>
+                                <i class="fa fa-envelope"><span class="text-danger">*</span></i>
                             </div>
                         </div>
                         <input class="form-control" required type="email" name="email" v-model="form.email" id="email" placeholder="Email" value="">
@@ -28,7 +28,7 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-key">*</i>
+                                <i class="fa fa-key"><span class="text-danger">*</span></i>
                             </div>
                         </div>
                         <input class="form-control" required type="password" name="password" v-model="form.password" id="password" placeholder="Password">
@@ -37,7 +37,7 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-key">*</i>
+                                <i class="fa fa-key"><span class="text-danger">*</span></i>
                             </div>
                         </div>
                         <input class="form-control" required type="password" name="password_confirmation" v-model="form.password_confirmation" id="password_confirmation" placeholder="Re-Password" >
@@ -46,11 +46,11 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-flag">*</i>
+                                <i class="fa fa-flag"><span class="text-danger">*</span></i>
                             </div>
                         </div>
                         <select class="form-control" required="" id="country" name="country" v-model="form.country">
-                            <option :value="0">Select Country</option>
+                            <option :value="null" disabled >Select Country</option>
                             <option v-for="(country,index) in countries" :key="index" :value="country.nicename">{{ country.nicename }}</option>
                         </select>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-phone">*</i>
+                                <i class="fa fa-phone"><span class="text-danger">*</span></i>
                             </div>
                         </div>
                         <input class="form-control" required type="number" name="phone" v-model="form.phone" id="phone" placeholder="Phone Number" value="">
@@ -76,11 +76,11 @@
                     <div class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <i class="fa fa-users">*</i>
+                                <i class="fa fa-users"><span class="text-danger">*</span></i>
                             </div>
                         </div>
-                        <select required id="club" name="club_id" v-model="form.club_id" class="form-control">
-                            <option value="0">Select Club</option>
+                        <select required id="club_id" v-model="form.club_id" class="form-control">
+                            <option :value="null" disabled>Select Club</option>
                             <option v-for="(club,index) in clubs" :value="club.id" :key="index">{{ club.clubName }}</option>
                         </select>
                     </div>
@@ -107,10 +107,10 @@ export default {
                 'email' : '',
                 'password' : '',
                 'password_confirmation' : '',
-                'country' : '',
+                'country' : null,
                 'phone' : '',
                 'sponsorName' : '',
-                'club_id' : 0,
+                'club_id' : null,
             }
         }
     },

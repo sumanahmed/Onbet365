@@ -39,13 +39,13 @@
                     </li>
                 </ul>
 
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content animated fadeInUp" id="myTabContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         
                         <div v-for="(sportItems,index) in matches" :key="index" class="sports_single_category">
 
                             <span v-for="(matchCategory, index1) in sportItems" class="text-center" :key="index1">
-                                <h4 v-if='index1 === 0'>{{ matchCategory['sportName'] | capitalizeFirstLetter }}</h4>
+                                <h4 v-if='index1 == 0'>{{ matchCategory['sportName'] | capitalizeFirstLetter }}</h4>
                             </span>
 
                             <div v-for="(match, index2) in sportItems" :key="index2">
@@ -346,7 +346,7 @@
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: {{ question }}</p>
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: {{ betDetails.betName }}</p>
                                     <p class="text-secondary">
-                                        Bet Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
+                                        Bet Rate : <input v-if="betDetails.status != 0" type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
                                     <input v-if="betDetails.status != 0" type="number" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0"/>
                                     <span class="text-secondary" style="font-size: 14px;">
@@ -356,7 +356,7 @@
                             </div>
                         </div>
                         <div style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
-                            <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet" > Place Bet </button>
+                            <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet"  @click="placeBetSubmit(betDetails.id,betDetails.match_id,betDetails.betoption_id,betDetails.betRate)" > Place Bet </button>
                         </div>
                     </form>
                 </div>
@@ -383,7 +383,7 @@ export default {
             processingMsg : '',
             successMsg : '',
             errorMsg : '',
-            betAmount : 0,
+            betAmount : '',
             estimateResult : 0
         }
     },

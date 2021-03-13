@@ -37,9 +37,19 @@ body{
     padding-bottom:5px;
 }
 
-.login_section input[type='text'] , .login_section input[type='password'], .login_section input[type='button']{
+.login_section input[type='text'] , .login_section input[type='password'], .login_section input[type='submit']{
     height: 25px;
     font-size: 12px;
+}
+.customJoinBtn{
+    font-size: 12px;
+    background: #ddd;
+    padding: 3px 10px;
+    margin-left: 2px;
+    text-decoration: none !important;
+    color: red!important;
+    font-weight: bold;
+    display: inline-block;
 }
 
 .login_section input[type='button']  {
