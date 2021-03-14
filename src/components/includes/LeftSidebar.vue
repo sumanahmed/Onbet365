@@ -89,17 +89,8 @@ export default {
     //    }
     // },
     computed : {
-        getTotalAmount : function () {
-            return this.$store.state.user.totalAmount
-        },
-        userName : function () {
-            return this.$store.state.user.totalAmount
-        },
-        isLoggedIn : function () {
-            return this.$store.state.user.loggedIn
-        },
-        userType : function () {
-            return this.$store.state.user.userType
+        getUser : function () {
+            return this.$store.state.user
         }
     },
     methods: {
