@@ -1,6 +1,6 @@
 export default {
     mutateCommonProperties (state, payload) {
-        state.commonObj = Object.assign({}, state.commonObj, payload)
+        state.user = Object.assign({}, state.user, payload)
     },
     addAmount (state, amount) {
         state.totalAmount = amount

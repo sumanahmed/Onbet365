@@ -68,8 +68,10 @@
 </template>
 <script>
 import config from '../../config'
+import UserMixin from '@/mixins/user'
 export default {
     name:'LeftSidebar',
+    mixins: [UserMixin],
     data () {
         return {
             errors:[],
@@ -88,10 +90,16 @@ export default {
     // },
     computed : {
         getTotalAmount : function () {
-            return this.$store.state.totalAmount
+            return this.$store.state.user.totalAmount
         },
-        isLoggedUser : function () {
-            return this.$store.state.isLoggedIn
+        userName : function () {
+            return this.$store.state.user.totalAmount
+        },
+        isLoggedIn : function () {
+            return this.$store.state.user.loggedIn
+        },
+        userType : function () {
+            return this.$store.state.user.userType
         }
     },
     methods: {
