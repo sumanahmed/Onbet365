@@ -37,26 +37,26 @@
                     <ul class="mainmenu">
                         <li><router-link to="/"><i class="fa fa-home" aria-hidden="true"></i> Home</router-link></li>
                         <li><router-link to="/upcoming"><i class="fa fa-history" aria-hidden="true"></i> Upcoming</router-link></li>
-                        <li v-if="isLoggedUser"><a href=""><i class="fa fa-user" aria-hidden="true"></i> Profile <i style="float: right;" class="fa fa-angle-down fa-sm " aria-hidden="true"></i></a>
+                        <li v-if="isLoggedUser"><a style="color: #fff;"><i class="fa fa-user" aria-hidden="true"></i> Profile <i style="float: right;" class="fa fa-angle-down fa-sm " aria-hidden="true"></i></a>
                             <ul class="submenu">
-                                <li><a href="">Proifle</a></li>
-                                <li><a href="">Edit Profile</a></li>
-                                <li><a href="">Change Club</a></li>
-                                <li><a href="">Club Members</a></li>
-                                <li><a href="">Change Password</a></li>
-                                <li><a href="">Sponsors</a></li>
-                                <li><a href="">Bet Details</a></li>
+                                <li><router-link to="/profile">Profile</router-link></li>
+                                <li><router-link to="/profile-edit">Edit Profile</router-link></li>
+                                <li><router-link to="/change-club">Change Club</router-link></li>
+                                <li><router-link to="/club-members">Club Members</router-link></li>
+                                <li><router-link to="/change-password">Change Password</router-link></li>
+                                <li><router-link to="/sponsors">Sponsors</router-link></li>
+                                <li><router-link to="/bet-details">Bet Details</router-link></li>
                             </ul>
                         </li>
-                        <li v-if="isLoggedUser"><a href=""><i class="fa fa-credit-card" aria-hidden="true"></i> Wallet <i style="float: right;" class="fa fa-angle-down fa-sm " aria-hidden="true"></i> </a>
+                        <li v-if="isLoggedUser"><a style="color: #fff;"><i class="fa fa-credit-card" aria-hidden="true"></i> Wallet <i style="float: right;" class="fa fa-angle-down fa-sm " aria-hidden="true"></i> </a>
                             <ul class="submenu">
-                                <li><a href="">Deposit request</a></li>
-                                <li><a href="">Deposit Details</a></li>
-                                <li><a href="">Coin Transfer</a></li>
-                                <li><a href="">Coin Transfer Details</a></li>
-                                <li><a href="">Coin Receive Details</a></li>
-                                <li><a href="">Withdraw Request</a></li>
-                                <li><a href="">Withdraw Details</a></li>
+                                <li><router-link to="/deposit-request">Deposit request</router-link></li>
+                                <li><router-link to="/deposit-details">Deposit Details</router-link></li>
+                                <li><router-link to="/coin-transfer">Coin Transfer</router-link></li>
+                                <li><router-link to="/coin-transfer-details">Coin Transfer Details</router-link></li>
+                                <li><router-link to="/coin-receive-details">Coin Receive Details</router-link></li>
+                                <li><router-link to="/withdraw-request">Withdraw Request</router-link></li>
+                                <li><router-link to="/withdraw-details">Withdraw Details</router-link></li>
                             </ul>
                         </li>
                         <li v-if="isLoggedUser"><a href="#" @click.prevent="logout"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>

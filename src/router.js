@@ -22,7 +22,78 @@ const routes = [
         path:'/single-match/:id',
         name:'single-match',
         component:() => import('./components/dashboard/SingleMatch')
-    }
+    },
+    {
+        path:'/profile',
+        name:'profile',
+        component:() => import('./components/profile/Profile'),
+    },
+    {
+        path:'/profile-edit',
+        name:'profile-edit',
+        component:() => import('./components/profile/ProfileEdit'),
+    },
+    {
+        path:'/change-club',
+        name:'change-club',
+        component:() => import('./components/profile/ChangeClub'),
+    },
+    {
+        path:'/club-members',
+        name:'club-members',
+        component:() => import('./components/profile/ClubMembers'),
+    },
+    {
+        path:'/change-password',
+        name:'change-password',
+        component:() => import('./components/profile/ChangePassword'),
+    },
+    {
+        path:'/sponsors',
+        name:'sponsors',
+        component:() => import('./components/profile/Sponsors'),
+    },
+    {
+        path:'/bet-details',
+        name:'bet-details',
+        component:() => import('./components/profile/BetDetails'),
+    },
+    
+    {
+        path:'/deposit-request',
+        name:'deposit-request',
+        component:() => import('./components/wallet/DepositRequest'),
+    },
+    {
+        path:'/deposit-details',
+        name:'deposit-details',
+        component:() => import('./components/wallet/DepositDetails'),
+    },
+    {
+        path:'/coin-transfer',
+        name:'coin-transfer',
+        component:() => import('./components/wallet/CoinTransfer'),
+    },
+    {
+        path:'/coin-transfer-details',
+        name:'coin-transfer-details',
+        component:() => import('./components/wallet/CoinTransferDetails'),
+    },
+    {
+        path:'/coin-receive-details',
+        name:'coin-receive-details',
+        component:() => import('./components/wallet/CoinReceiveDetails'),
+    },
+    {
+        path:'/withdraw-request',
+        name:'withdraw-request',
+        component:() => import('./components/wallet/WithdrawRequest'),
+    },
+    {
+        path:'/withdraw-details',
+        name:'withdraw-details',
+        component:() => import('./components/wallet/WithdrawDetails'),
+    },
 ];
 
 export const router = new VueRouter({
