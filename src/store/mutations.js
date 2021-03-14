@@ -1,15 +1,15 @@
 export default {
     mutateCommonProperties (state, payload) {
-        state.user = Object.assign({}, state.user, payload)
-    },
-    addAmount (state, amount) {
-        state.totalAmount = amount
-        state.isLoggedIn = true
+        state.commonObj = Object.assign({}, state.commonObj, payload)
     },
     amountUpdate (state, amount) {
-        state.totalAmount = (state.totalAmount - amount)
+        state.commonObj.user.totalAmount = (state.commonObj.user.totalAmount - amount)
     },
     userLogout (state, loggedInfalse) {
-        state.isLoggedIn = loggedInfalse
+        state.commonObj.user.loggedIn = loggedInfalse
+        state.commonObj = []
+    },
+    profileUpdate (state, profile) {
+        state.commonObj.profile = profile
     }
 }

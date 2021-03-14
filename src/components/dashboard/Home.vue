@@ -405,26 +405,17 @@ export default {
     created () {
         this.getLiveBet()
     },
-    computed : {
-        isLoggedUser : function () {
-            return this.$store.state.isLoggedIn
-        }
-    },
     methods: {
         showModal (betDetail, question) {
-            const isUserLoggedIn = this.$store.state.isLoggedIn
-            if (!isUserLoggedIn) {
-                this.loginFirstModal = true
-                this.isModal = false 
-                console.log('this.isModal = ', this.isModal)
-                console.log('this.loginFirstModal = ', this.loginFirstModal)
-            } else {
-                this.isModal = true 
+            const isUserLoggedIn = this.$store.state.commonObj.user.loggedIn
+            if (isUserLoggedIn !== undefined) {
                 this.loginFirstModal = false
+                this.isModal = true 
+            } else {
+                this.isModal = false 
+                this.loginFirstModal = true
             }
-            this.isModal = true 
             this.betDetails = betDetail;
-            console.log('details = ', this.betDetails)
             this.question = question;          
         },
         estimateReturn(betRate){
@@ -436,12 +427,11 @@ export default {
             }
         },
         cancelModal () {
-            this.isModal = false
+            this.isModal = this.loginFirstModal = false
         },
         getLiveBet () {
             config.getData('/live/data')
-            .then((response) => {    
-                console.log('response = ', response.matches)        
+            .then((response) => {          
                 if (!response) {
                     this.loader = true
                 } else {
@@ -461,7 +451,7 @@ export default {
                 betoption_id  : betOptionId,
                 betDetailRate : betRate,
                 betAmount     : this.betAmount,
-                user_id : localStorage.getItem('user_id')
+                user_id : this.$store.state.commonObj.user.userId
             };
             this.processingMsg = 'Bet processing take little time .....';
             this.isDisabled = false;

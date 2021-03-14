@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div>        
         <div class="left-section scrollCustom" id="style-10">
             <!-- Logo section -->
             <div class="logo_section">
@@ -82,29 +82,39 @@ export default {
             }
         }
     },
-    // created () {
-    //    const loggedUserId = localStorage.getItem('user_id')
-    //    if (loggedUserId) {
-    //        this.isLoggedIn = true
-    //    }
-    // },
+    created () {
+       console.log('user = ', this.$store.state.commonObj.user)
+    },
     computed : {
+        isLoggedUser : function () {
+            return this.$store.state.commonObj.user.loggedIn
+        },
         getUser : function () {
-            return this.$store.state.user
+            return this.$store.state.commonObj.user
+        },
+        getTotalAmount : function () {
+            return this.$store.state.commonObj.user.totalAmount
         }
     },
     methods: {
         signIn() {
+            this.$store.state.loader = true
             config.postData('/user/login', this.form)
             .then((response) => {
                 if(response.status_code == 200){
                     localStorage.setItem('accessToken', response.access_token);
                     localStorage.setItem('user_id', response.user_id);
                     localStorage.setItem('user_name', response.user_name);
-                    localStorage.setItem('totalAmount', response.totalAmount);
-                    this.loggedUserName = response.user_name
-                    this.$store.dispatch('addAmount', response.totalAmount)
-                   // this.$toast.success('Loggedin successfully') 
+                    this.$router.go()
+                    this.$store.state.loader = false
+                    // localStorage.setItem('totalAmount', response.totalAmount);
+                    // this.loggedUserName = response.user_name
+                    // this.$store.dispatch('addAmount', response.totalAmount)
+                    this.$toast.success({
+                        title: 'Success',
+                        message: 'Loggedin Successfully',
+                        color: '#D6E09B'
+                    })
                 }     
             })
             .catch((error) => {
@@ -119,8 +129,13 @@ export default {
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('user_id');
                 localStorage.removeItem('user_name');
-                localStorage.removeItem('totalAmount');
                 this.$store.dispatch('userLogout', false)
+                this.$router.push('/')
+                this.$toast.success({
+                    title: 'Success',
+                    message: 'Logout Successfully',
+                    color: '#D6E09B'
+                })
             })      
         }
     }

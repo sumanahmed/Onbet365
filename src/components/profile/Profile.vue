@@ -12,7 +12,7 @@
                     <tbody>
                         <tr>
                             <td>Username</td>
-                            <td> Akash7 </td>
+                            <td> {{ loggedUser.username }} </td>
                         </tr>
                         <tr>
                             <td>Club</td>
@@ -20,23 +20,23 @@
                         </tr>
                         <tr>
                             <td>Sponsor</td>
-                            <td> Not Given </td>
+                            <td> {{ loggedUser.sponsorName != null ? loggedUser.sponsorName : '' }} </td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>Akash7@gmail.com</td>
+                            <td>{{ loggedUser.email }}</td>
                         </tr>
                         <tr>
                             <td>Phone</td>
-                            <td>01812147485</td>
+                            <td>{{ loggedUser.phone }}</td>
                         </tr>
                         <tr>
                             <td> Join Date </td>
-                            <td> 12 Jul 2020 08:37:22 PM </td>
+                            <td> {{ loggedUser.created_at | dateformat }} </td>
                         </tr>
                         <tr>
                             <td>Status</td>
-                            <td><span class="badge badge-pill badge-success">Active</span> </td>
+                            <td><span v-if="loggedUser.status" class="badge badge-pill badge-success">Active</span> </td>
                         </tr>
                     </tbody>
                 </table>
@@ -44,3 +44,17 @@
         </div>
     </div>
 </template>
+<script>
+export default {
+    name:'Profile',
+    data () {
+        return {
+        }
+    },
+    computed : {
+        loggedUser : function () {
+            return this.$store.state.commonObj.profile
+        }
+    }
+}
+</script>

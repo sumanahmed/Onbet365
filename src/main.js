@@ -10,7 +10,8 @@ import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 
 Vue.config.productionTip = false
 
-Vue.use(VueAxios, axios, CxltToastr)
+Vue.use(VueAxios, axios)
+Vue.use(CxltToastr)
 
 Vue.filter('dateformat',(arg)=> {
   return moment(arg).format("DD MMM YYYY");

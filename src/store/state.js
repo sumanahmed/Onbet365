@@ -1,5 +1,8 @@
 export default {
-    user: [],
-    totalAmount: '',
-    isLoggedIn: false,
+    commonObj: {
+        user: [],
+        profile: [],
+        country: []
+    },
+    loader: true,
 }

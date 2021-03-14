@@ -1,6 +1,6 @@
 <template>
   <div>
-      <!-- <div id="preloader"></div> -->
+      <div v-if="loader" id="preloader"></div>
       <div class="full-body">
         <div class="main-content">
           <left-sidebar></left-sidebar>  
@@ -30,6 +30,11 @@ export default {
     'mobile-nav': MobileNav,
     'left-sidebar': LeftSidebar,
     'right-sidebar': RightSidebar,
+  },
+  computed : {
+    loader : function () {
+      return this.$store.state.loader
+    }
   }
 }
 </script>

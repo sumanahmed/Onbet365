@@ -120,14 +120,23 @@ export default {
     },
     methods: {
         async storeUser () {
-            console.log('user = ', this.form)
             await config.postData('/user/registation', this.form)
             .then((response) => {
                 console.log('response.status = ', response.status)
                 if (response.status) {
-                    this.$toast.success(response.message)
+                    this.$toast.success({
+                        title: 'Success',
+                        message: response.message,
+                        color: '#D6E09B'
+                    })
+                    this.form = '' 
+                    this.country = this.club_id = null
                 } else {
-                    this.$toast.error(response.message)
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        color: '#ff3300'
+                    }) 
                 }
             })
             .catch((error) => {
@@ -140,10 +149,8 @@ export default {
         async getClubList () {
             await config.getData('/club/list')
             .then((response) => {
-                console.log('response = ', response)
                 if (response.status_code == 200) {
                     this.clubs = response.clubs
-                    console.log('clubs = ', this.clubs)
                 } else {
                     //this.$toast.error('Sorry, something went wrong') 
                     console.log('err')
@@ -160,7 +167,7 @@ export default {
                 if (response.status_code == 200) {
                     this.countries = response.countries
                 } else {
-                    //this.$toast.error('Sorry, something went wrong') 
+                    //this.$toast.error('Sorry, something went wrong')                    
                     console.log('err')
                 }
             })
