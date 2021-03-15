@@ -21,7 +21,11 @@ window.Echo = new Echo({
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
-Vue.use(CxltToastr)
+var toastrConfigs = {
+  position: 'top center',
+  showDuration: 5000
+}
+Vue.use(CxltToastr,toastrConfigs)
 
 Vue.filter('dateformat',(arg)=> {
   return moment(arg).format("DD MMM YYYY");

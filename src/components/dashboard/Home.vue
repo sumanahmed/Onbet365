@@ -81,7 +81,7 @@
                                     <div class="choice-answer-part">
                                         <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                             </span> 
                                         </button>                                  
@@ -322,10 +322,9 @@
                     </div>
                 </div>
             </div>
-            
         </div>
 
-        <div v-if="isModal" class="modal fade show" style="display:block" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
+        <div v-if="isModal && betDetails.status != 0" class="modal fade show" style="display:block" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple modal-dialog-centered">
                 <div class="modal-content modal-custom-content">
                     <div class="modal-header modal-custom-header">
@@ -345,12 +344,12 @@
                                 <div class="modalQusAnsBlock">
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: {{ question }}</p>
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: {{ betDetails.betName }}</p>
-                                    <p class="text-secondary">
-                                        Bet Rate : <input v-if="betDetails.status != 0" type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
+                                    <p class="text-secondary" v-if="betDetails.status != 0">
+                                        Bet Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
                                     <input v-if="betDetails.status != 0" type="text" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
-                                    <span class="text-secondary" style="font-size: 14px;">
-                                    Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
+                                    <span class="text-secondary" style="font-size: 14px;" v-if="betDetails.status != 0">
+                                        Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
                                     </span>
                                 </div>
                             </div>
@@ -366,7 +365,7 @@
         <div v-if="loginFirstModal" class="modal fade show" style="display:block" id="placeBetBtn1" aria-hidden="true" aria-labelledby="placeBetBtn1" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple modal-dialog-centered">
                 <div class="modal-content modal-custom-content">
-                    <div class="modal-header modal-custom-header">
+                    <div class="modal-header modal-custom-header-notLogin">
                         <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
                             <span class="fa fa-window-close" aria-hidden="true"></span>
                         </button>

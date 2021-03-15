@@ -113,7 +113,7 @@ export default {
                     this.$toast.success({
                         title: 'Success',
                         message: 'Loggedin Successfully',
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                 }     
             })
@@ -134,7 +134,7 @@ export default {
                 this.$toast.success({
                     title: 'Success',
                     message: 'Logout Successfully',
-                    color: '#D6E09B'
+                    type: 'success'
                 })
             })      
         }

@@ -483,6 +483,15 @@ span.time {color: darksalmon;}
 }
 
 .modal-custom-header {
+    padding: 5px;
+    display: block;
+    background:#047565;
+    border:0px;
+    border-radius: 0;
+    color:#fff;
+}
+
+.modal-custom-header-notLogin {
     padding: 0px;
     display: block;
     background:#7b0000;
