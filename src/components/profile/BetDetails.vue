@@ -9,7 +9,7 @@
             <table id="example" class="text-center table table-sm table-responsive-lg table-responsive-md table-responsive-sm table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Team</th>
+                        <th>Match Title</th>
                         <th>Bet Title</th>
                         <th>Bet On</th>
                         <th>Bet Rate</th>
@@ -20,16 +20,16 @@
                 </thead>
                 <tbody>
                     <tr v-for="(bet,index) in bets.data" :key="index">
-                        <td>Multan Sultans vs Karachi Kings</td>
-                        <td>1st Ball Runs Of 1st Innings</td>
-                        <td>wide Ball</td>
-                        <td>3.00</td>
-                        <td>20</td>
+                        <td>{{ bet.matchTitle }}</td>
+                        <td>{{ bet.betOptionName }}</td>
+                        <td>{{ bet.betName }}</td>
+                        <td>{{ bet.betRate }}</td>
+                        <td>{{ bet.betAmount }}</td>
                         <td>
-                            <span class="badge badge-warning">Lost</span>
+                            <span class="badge badge-primary">{{ bet.winLost }}</span>
                         </td>
                         <td>
-                            19 Oct 2020 05:44:50 PM                                                                    
+                            {{ bet.created_at | dateformat }} at {{ bet.created_at | timeformat }}                                                                                                                                                                    
                         </td>
                     </tr>
                 </tbody>
@@ -58,16 +58,17 @@ export default {
         }
     },
     created () {
-        this.getSponsors()
+        this.getBetDetails()
         this.getResults()
     },
     methods: {
-        getSponsors () {   
+        getBetDetails () {   
             this.$store.state.loader = true         
             config.getData('/user/bet/history/', this.username)
             .then((response) => {
                 this.$store.state.loader = false
-                this.bets = response.data
+                this.bets = response.betHistories
+                console.log('this.bets = ', this.bets)
             })
             .catch((error) => {
                 console.log('error = ', error)
@@ -81,7 +82,8 @@ export default {
                     this.loader = true
                 } else {
                     this.loader = false
-                    this.bets = response.data 
+                    this.bets = response.betHistories 
+                    console.log('this.bets = ', this.bets)
                 }
             });
         }
