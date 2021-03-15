@@ -370,7 +370,7 @@
                         <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
                             <span class="fa fa-window-close" aria-hidden="true"></span>
                         </button>
-                        <h4 style="text-align:center" class="modal-title">Please Login First !!</h4>
+                        <h6 style="text-align:center;margin-top:5px" class="modal-title"> Please login your account </h6>
                     </div>
                 </div>
             </div>
@@ -400,7 +400,18 @@ export default {
             errorMsg : '',
             betAmount : '',
             estimateResult : 0,
+            reloadComponent : false
         }
+    },
+    mounted(){
+        window.Echo.channel('betUpdatenew')
+        .listen('betdetailUpdateEvent', (e) => {
+            if(e.message == 1){
+                this.reloadComponent = true;
+                this.getLiveBet()
+                this.reloadComponent = false;
+            }
+        });
     },
     created () {
         this.getLiveBet()

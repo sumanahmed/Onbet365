@@ -8,6 +8,16 @@ import moment from 'moment'
 import CxltToastr from 'cxlt-vue2-toastr'
 import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
 
+import Echo from 'laravel-echo';
+window.Pusher = require('pusher-js');
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '41c2725027b60bdff76d',
+    cluster: 'ap1',
+    encrypted: true
+});
+
+
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)

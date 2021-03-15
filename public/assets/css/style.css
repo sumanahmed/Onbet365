@@ -483,9 +483,9 @@ span.time {color: darksalmon;}
 }
 
 .modal-custom-header {
-    padding: 5px;
+    padding: 0px;
     display: block;
-    background:#047565;
+    background:#7b0000;
     border:0px;
     border-radius: 0;
     color:#fff;
