@@ -2,7 +2,8 @@ export default {
     commonObj: {
         user: [],
         profile: [],
-        country: []
+        country: [],
+        clubs: []
     },
     loader: true,
 }

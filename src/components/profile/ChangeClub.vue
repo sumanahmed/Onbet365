@@ -9,10 +9,12 @@
                 <div class="form-group">
                     <label for="club_id" style="display: block;text-align: left;">Select club <span class="text-danger">*</span></label>
                     <select id="club_id" v-model="form.club_id" name="club_id" class="form-control" tabindex="-1">                                                                                                                                            
-                        <option v-for="(club, index) in clubList" :key="index" :value="club.id">{{ club.name }}</option>                                                                                                                            
+                        <option v-for="(club, index) in clubList" :key="index" :value="club.id">{{ club.clubName }}</option>                                                                                                                            
                     </select>
+                    <span class="text-danger" v-if="errors.club_id">{{ errors.club_id[0] }}</span>
                     <label for="password" style="display: block;text-align: left;">Password <span class="text-danger">*</span></label>
                     <input required="" class="form-control" type="password" v-model="form.password" id="password" name="password" placeholder="Password">
+                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" value="Change Club" @click.prevent="clubChange">
@@ -29,7 +31,8 @@ export default {
         return {
             errors: [],
             form: {
-                club_id: '',
+                username: this.$store.state.commonObj.user.user_name,
+                club_id: this.$store.state.commonObj.profile.club_id,
                 password: ''
             }
         }
@@ -42,16 +45,23 @@ export default {
     methods: {
         clubChange() {
             this.$store.state.loader = true
-            config.postData('/user/update/password', this.form)
+            config.postData('/user/update/club', this.form)
             .then((response) => {
                 this.$store.state.loader = false
-                if(response.status_code == 200){                  
+                if(response.status_code == 200){    
+                    this.$store.state.commonObj.profile.club_id = this.form.club_id              
                     this.$toast.success({
                         title: 'Success',
-                        message: 'Password Changed Successfully',
+                        message: 'Club Changed Successfully',
                         color: '#D6E09B'
                     })
-                }     
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
             })
             .catch((error) => {
                 if (error.response.status === 422) {

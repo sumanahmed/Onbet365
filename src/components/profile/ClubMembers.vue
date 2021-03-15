@@ -17,39 +17,67 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(member, index) in members" :key="index">
-                        <td>{{ member.name }}</td>
+                    <tr v-for="(member, index) in members.data" :key="index">
+                        <td>{{ member.username }}</td>
                         <td>{{ member.phone }}</td>
                         <td>
                             {{ member.created_at | dateformat }} at {{ member.created_at | timeformat }}                                                                                                    
                         </td>
-                        <td> <span v-if="member.status" class="badge badge-pill badge-success">Active</span> </td>
+                        <td> 
+                            <span v-if="member.status" class="badge badge-pill badge-success">Active</span>
+                            <span v-else class="badge badge-pill badge-danger">Active</span>
+                         </td>
                     </tr>
                 </tbody>
-            </table>                    
+            </table>   
+            <div class="mt-3">
+                <pagiantion :data="members" @pagination-change-page="getResults">
+                    <span slot="prev-nav">&lt;</span>
+                    <span slot="next-nav">&gt;</span>
+                </pagiantion>
+            </div>           
         </div>
     </div>
 </template>
 <script>
+import config from '../../config'
+import pagiantion from 'laravel-vue-pagination'
 export default {
     name:'ClubMembers',
+    components:{
+        pagiantion:pagiantion
+    },
     data () {
         return {
-            members: []
+            members: [],
+            username: this.$store.state.commonObj.user.user_name
         }
     },
     created () {
-        this.getClubMember
+        this.getClubMember()
+        this.getResults()
     },
-    methods: {
+    methods: {        
         getClubMember () {
-            const username = this.$store.state.commonObj.profile.username
-            config.postData('/user/get/sponsor/demo/', username)
+            this.$store.state.loader = true
+            config.getData('/user/follower/'+ this.username)
             .then((response) => {
-                this.members = response
+                this.$store.state.loader = false
+                this.members = response.data
             })
             .catch((error) => {
                 console.log('error = ', error)
+            });
+        },
+        getResults(page = 1) {
+            config.getData('user/follower/'+ this.username +'?page=' + page)
+            .then(response => {
+                if(!response.data) {
+                    this.loader = true
+                } else {
+                    this.loader = false
+                    this.members = response.data 
+                }
             });
         }
     }

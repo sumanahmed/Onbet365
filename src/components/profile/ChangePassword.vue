@@ -12,13 +12,13 @@
                     <input required="" class="form-control" type="password" v-model="form.oldPassword" name="oldPassword" placeholder="Old Password">
                     <span class="text-danger" v-if="errors.oldPassword">{{ errors.oldPassword[0] }}</span>
 
-                    <label for="newPassword" style="display: block;text-align: left;">New Password <span class="text-danger">*</span></label>
-                    <input required="" class="form-control" type="password" v-model="form.newPassword" id="newPassword" name="password" placeholder="New Password">
-                    <span class="text-danger" v-if="errors.newPassword">{{ errors.newPassword[0] }}</span>
+                    <label for="password" style="display: block;text-align: left;">New Password <span class="text-danger">*</span></label>
+                    <input required="" class="form-control" type="password" v-model="form.password" id="password" name="password" placeholder="New Password">
+                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
 
-                    <label for="confirmPassword" style="display: block;text-align: left;">Confirm Password <span class="text-danger">*</span></label>
-                    <input required="" class="form-control" id="confirmPassword" v-model="form.confirmPassword" type="password" name="password_confirmation" placeholder="Confirm Password">
-                    <span class="text-danger" v-if="errors.confirmPassword">{{ errors.confirmPassword[0] }}</span>
+                    <label for="password_confirmation" style="display: block;text-align: left;">Confirm Password <span class="text-danger">*</span></label>
+                    <input required="" class="form-control" id="password_confirmation" v-model="form.password_confirmation" type="password" name="password_confirmation" placeholder="Confirm Password">
+                    <span class="text-danger" v-if="errors.password_confirmation">{{ errors.password_confirmation[0] }}</span>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" value="Update Password" @click.prevent="updatePassword">
@@ -35,9 +35,10 @@ export default {
         return {
             errors: [],
             form: {
+                username: this.$store.state.commonObj.user.user_name,
                 oldPassword: '',
-                newPassword: '',
-                confirmPassword: '',
+                password: '',
+                password_confirmation: '',
             }
         }
     },
@@ -52,15 +53,23 @@ export default {
             config.postData('/user/update/password', this.form)
             .then((response) => {
                 this.$store.state.loader = false
-                if(response.status_code == 200){                  
+                if(response.status_code == 200){    
+                    this.form = ''              
                     this.$toast.success({
                         title: 'Success',
                         message: 'Password Changed Successfully',
                         color: '#D6E09B'
                     })
-                }     
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
             })
             .catch((error) => {
+                console.log('erorr = ', error)
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }

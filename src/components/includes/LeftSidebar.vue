@@ -131,6 +131,7 @@ export default {
                 localStorage.removeItem('user_name');
                 this.$store.dispatch('userLogout', false)
                 this.$router.push('/')
+                this.$router.go()
                 this.$toast.success({
                     title: 'Success',
                     message: 'Logout Successfully',

@@ -14,38 +14,64 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(sponsor,index) in sponsors" :key="index">
-                        <td>{{ sponsor.name }}</td>
-                        <td>{{ sponsor.bonus }}</td>
+                    <tr v-for="(sponsor,index) in sponsors.data" :key="index">
+                        <td>{{ sponsor.username }}</td>
+                        <td>{{ sponsor.sponsorRate }}</td>
                         <td>
                             {{ sponsor.created_at | dateformat }} at {{ sponsor.created_at | timeformat }}                                                                                                    
                         </td>
                     </tr>
                 </tbody>
-            </table>                    
+            </table>                      
+            <div class="mt-3">
+                <pagiantion :data="sponsors" @pagination-change-page="getResults">
+                    <span slot="prev-nav">&lt;</span>
+                    <span slot="next-nav">&gt;</span>
+                </pagiantion>
+            </div>            
         </div>
     </div>
 </template>
 <script>
+import config from '../../config'
+import pagiantion from 'laravel-vue-pagination'
 export default {
     name:'Sponsors',
+    components:{
+        pagiantion:pagiantion
+    },
     data () {
         return {
-            sponsors: []
+            sponsors: [],
+            username: this.$store.state.commonObj.user.user_name
         }
     },
     created () {
-        this.getSponsors
+        this.getSponsors()
+        this.getResults()
     },
     methods: {
-        getSponsors () {
-            const username = this.$store.state.commonObj.profile.username
-            config.postData('/user/get/sponsor/demo/', username)
+        getSponsors () {   
+            this.$store.state.loader = true         
+            config.getData('/user/get/sponsor/', this.username)
             .then((response) => {
-                this.sponsors = response
+                this.$store.state.loader = false
+                this.sponsors = response.data
             })
             .catch((error) => {
                 console.log('error = ', error)
+            });
+        },
+        getResults(page = 1) {
+            this.$store.state.loader = true  
+            config.getData('user/get/sponsor/'+ this.username +'?page=' + page)
+            .then(response => {
+                if(!response.data) {
+                    this.loader = true
+                } else {
+                    this.loader = false
+                    this.sponsors = response.data 
+                }
             });
         }
     }

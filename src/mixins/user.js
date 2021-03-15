@@ -11,7 +11,8 @@ export default {
                   this.$store.commit('mutateCommonProperties', {
                     user: response.user,
                     profile: response.profile,
-                    country: response.country
+                    country: response.country,
+                    club: response.clubs
                   })
                 }
             })
