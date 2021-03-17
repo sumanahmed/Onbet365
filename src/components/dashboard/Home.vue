@@ -44,32 +44,27 @@
                         
                         <div v-for="(sportItems,index) in matches" :key="index" class="sports_single_category">
 
-                            <span v-for="(matchCategory, index1) in sportItems" class="text-center" :key="index1">
-                                <h4 v-if='index1 == 0'>{{ matchCategory['sportName'] | capitalizeFirstLetter }}</h4>
-                            </span>
-
                             <div v-for="(match, index2) in sportItems" :key="index2">
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
-                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
                                             &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
-                                            </span><br/>
-                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
                                         <p class="overs-live-status">
-                                            <b class="overs">Overs: 10.5 </b>
-                                            <span class="live-status">Live</span>
+                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
+                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
                                         </p>
-                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
@@ -331,30 +326,29 @@
                         <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
                             <span class="fa fa-window-close" aria-hidden="true"></span>
                         </button>
-                        <h4 style="text-align:center" class="modal-title">Place a bet</h4>
+                        <h4 v-if="isBodyHidden" style="text-align:center" class="modal-title">Place a bet</h4>
+                        <p v-else-if="successMsg" class="text-white text-center mb-0">{{ successMsg }}</p>
                     </div>
                     <form>
-                        <div class="modal-body modal-custom-body">
-                            <p v-if="processingMsg" class="text-info text-center" >{{ processingMsg }}</p>
-                            <p v-else-if="errorMsg" class="text-danger text-center">{{ errorMsg }}</p>
-                            <p v-else-if="successMsg" class="text-success text-center">{{ successMsg }}</p>
-
-                            <div v-if="isBodyHidden" class="modalCustomBody">
-                                <p class="text-warning text-center">Minimum Bet Amount 20 & Maximum 6000</p>
+                        <div v-if="isBodyHidden" class="modal-body modal-custom-body">
+                            <div class="modalCustomBody">
+                                <p class="text-warning text-center">Minimum Bet Amount 20 & Maximum 6000</p>                                
+                                <p v-if="processingMsg" class="text-info text-center" >{{ processingMsg }}</p>
+                                <p v-else-if="errorMsg" class="text-danger text-center">{{ errorMsg }}</p>
                                 <div class="modalQusAnsBlock">
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: {{ question }}</p>
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: {{ betDetails.betName }}</p>
                                     <p class="text-secondary" v-if="betDetails.status != 0">
                                         Bet Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
-                                    <input v-if="betDetails.status != 0" type="text" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                    <input autocomplete="off" v-if="betDetails.status != 0" type="text" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                     <span class="text-secondary" style="font-size: 14px;" v-if="betDetails.status != 0">
                                         Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
+                        <div v-if="isBodyHidden" style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
                             <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet"  @click="placeBetSubmit(betDetails.id,betDetails.match_id,betDetails.betoption_id,betDetails.betRate)" :disabled="isDisabled"> Place Bet </button>
                         </div>
                     </form>
@@ -437,7 +431,10 @@ export default {
             }
         },
         cancelModal () {
-            this.isModal = this.loginFirstModal = false
+            this.isModal = this.loginFirstModal = false,
+            this.isBodyHidden = true,
+            this.errorMsg = false
+
         },
         getLiveBet () {
             config.getData('/live/data')
@@ -454,30 +451,29 @@ export default {
             });
         },
         placeBetSubmit(betDetailId,matchId,betOptionId,betRate){
-            //console.log(betDetailId,matchId,betOptionId,betRate);
             var form_data = {
                 betDetail_id  : betDetailId,
                 match_id      : matchId,
                 betoption_id  : betOptionId,
                 betDetailRate : betRate,
                 betAmount     : this.betAmount,
-                user_id : this.$store.state.commonObj.user.userId
+                user_id       : this.$store.state.commonObj.user.user_id
             };
-            this.processingMsg = 'Bet processing take little time .....';
+            this.processingMsg = 'Bet processing wait for confirmation ...';
             this.isDisabled = false;
             this.betAmount = '';
-
             config.postData('/user/store/place/bet', form_data)
             .then((response) => {
                 this.$store.dispatch('amountUpdate', form_data.betAmount)
-                if(response.data.errorMsg){
+                if(response.errorMsg){
+                    console.log("error",response)
                     this.processingMsg = this.successMsg = '';
-                    this.errorMsg = response.data.errorMsg;
-                    this.isBodyHidden = false;
+                    this.errorMsg = response.errorMsg;
                 }
-                if(response.data.successMsg){
+                if(response.successMsg){
+                    console.log("success",response)
                     this.processingMsg = this.errorMsg = '';
-                    this.successMsg = response.data.successMsg;
+                    this.successMsg = response.successMsg;
                     this.isBodyHidden = false;
                 }
             }).then((error) => {
