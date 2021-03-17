@@ -21,10 +21,14 @@ window.Echo = new Echo({
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
+
 var toastrConfigs = {
-  position: 'top center',
-  showDuration: 5000
+  position: 'top right',
+  progressBar: true,
+  closeButton: true,
+  showDuration: 200
 }
+
 Vue.use(CxltToastr,toastrConfigs)
 
 Vue.filter('dateformat',(arg)=> {

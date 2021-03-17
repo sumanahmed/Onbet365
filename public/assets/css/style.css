@@ -336,7 +336,7 @@ span.time {color: darksalmon;}
     height: 100vh;
     z-index: 99999;
     overflow: visible;
-    background: #000000 url(../img/preloader.gif) no-repeat center center;
+    background: rgb(130 128 128 / 62%) url(../img/preloader.gif) no-repeat center center;
  }
  /*========== Preloader Style End ===========*/
 

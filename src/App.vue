@@ -34,6 +34,9 @@ export default {
   computed : {
     loader : function () {
       return this.$store.state.loader
+    },
+    loginLoader : function () {
+      return this.$store.state.loginLoader
     }
   }
 }

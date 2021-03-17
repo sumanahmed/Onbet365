@@ -20,11 +20,11 @@
                                                 
                     <label for="withdrawPaymentType" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
                     <select v-model="form.withdrawPaymentType" required="" id="withdrawPaymentType" name="withdrawPaymentType" class="form-control">
-                        <option value="">Select Payment Method</option>
-                        <option :value="bkash_agent">Bkash Agent</option>
-                        <option :value="bkash_personal">Bkash Personal</option>
-                        <option :value="Nagad_agent" disabled="">Nagad Agent</option>
-                        <option :value="Nagad_personal" disabled="">Nagad Personal</option>
+                        <option :value="null">Select Payment Method</option>
+                        <option :value="1">Bkash Agent</option>
+                        <option :value="2">Bkash Personal</option>
+                        <option :value="3">Nagad Agent</option>
+                        <option :value="4">Nagad Personal</option>
                     </select>
                     <span class="text-danger" v-if="errors.withdrawPaymentType">{{ errors.withdrawPaymentType[0] }}</span>
 
@@ -50,7 +50,7 @@ export default {
             form: {
                 withdrawAmount: '',
                 withdrawNumber: '',
-                withdrawPaymentType: '',
+                withdrawPaymentType: null,
                 password: ''
             }
         }
@@ -64,15 +64,15 @@ export default {
         withdrawRequest() {
             this.$store.state.loader = true
             Object.assign(this.form , { 'user_id': this.getUser.user_id})
-            console.log('this.form = ', this.form)
-            config.postData('/user/store/coin/transfer', this.form)
+            config.postData('/user/withdraw/store', this.form)
             .then((response) => {  
                 this.$store.state.loader = false              
-                if(response.status_code){  
+                if(response.status_code){ 
+                    this.$store.dispatch('amountUpdate', this.form.withdrawAmount)  
                     this.$toast.success({
                         title: 'Success',
-                        message: 'Club Changed Successfully',
-                        color: '#D6E09B'
+                        message: 'Request Send Successfully',
+                        type: 'success'
                     })
                 } else {
                     this.$toast.error({
@@ -85,6 +85,7 @@ export default {
             .catch((error) => {
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
+                    this.$store.state.loader = false 
                 }
             });
         },

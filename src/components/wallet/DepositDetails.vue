@@ -79,9 +79,9 @@ export default {
             config.getData('user/deposit/history/'+ this.userId +'?page=' + page)
             .then(response => {
                 if(!response.data) {
-                    this.loader = true
+                    this.$store.state.loader = true
                 } else {
-                    this.loader = false
+                    this.$store.state.loader = false
                     this.deposits = response.data 
                 }
             });

@@ -11,14 +11,14 @@
                 <input type="hidden" name="" value="">                                    
                 <div class="form-group">
                     <label for="paymentMethod" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
-                    <select required="" id="paymentMethod" v-model="form.paymentMethodType" name="paymentMethodType" class="form-control">
+                    <select v-model="form.paymentMethodType" :disabled="1" required="" id="paymentMethod" name="paymentMethodType" class="form-control">
                         <option :value="0"> Select method </option>
                         <option :value="1">Bkash</option>
-                        <option :value="nagad" disabled="">Nagad</option>
-                        <option :value="skrill" disabled="">Skrill</option>
-                        <option :value="paypal" disabled="">Paypal</option>
-                        <option :value="stripe" disabled="">Stripe</option>
-                        <option :value="neteller" disabled="">Neteller</option>
+                        <option :value="2">Nagad</option>
+                        <option :value="3">Rocket</option>
+                        <option :value="4">Paypal</option>
+                        <option :value="5">Stripe</option>
+                        <option :value="6">Neteller</option>
                     </select>
                     <span class="text-danger" v-if="errors.paymentMethodType">{{ errors.paymentMethodType[0] }}</span>
 
@@ -30,31 +30,31 @@
                     <input required="" id="phoneForm" v-model="form.phoneForm" class="form-control" type="number" min="0" name="phoneForm" placeholder="Phone Form" value="">
                     <span class="text-danger" v-if="errors.phoneForm">{{ errors.phoneForm[0] }}</span>
                     
-                    <div class="input-group input-group-icon mt-2 mb-2">
+                    <div v-if="form.paymentMethodType == 1" class="input-group input-group-icon mt-2 mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <img src="https://www.bkash.com/sites/all/themes/bkash/logo.png?87980" width="50"/>
                             </div>
                         </div>
-                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
+                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="">
                     </div>
 
-                    <div class="input-group input-group-icon mb-2">
+                    <div v-if="form.paymentMethodType == 2" class="input-group input-group-icon mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <img src="https://nagad.com.bd/wp-content/uploads/2019/04/Nagad_Logo_for_web__128x53.svg" width="50"/>
                             </div>
                         </div>
-                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
+                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="">
                     </div>
 
-                    <div class="input-group input-group-icon">
+                    <div v-if="form.paymentMethodType == 3" class="input-group input-group-icon">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <img src="https://www.dutchbanglabank.com/img/mlogo.png" width="50"/>
                             </div>
                         </div>
-                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
+                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="">
                     </div>
 
                     <label for="password" style="display: block;text-align: left;">Password<span class="text-danger">*</span></label>
@@ -90,21 +90,22 @@ export default {
             return this.$store.state.commonObj.user
         }
     },
+    created() {
+        this.getLiveDepositNumber()
+    },
     methods: {
         depositRequest() {
             this.$store.state.loader = true
             Object.assign(this.form , { 'user_id': this.getUser.user_id})
             config.postData('/user/online/deposit', this.form)
-            console.log('form = ', this.form)
             .then((response) => {
                 this.$store.state.loader = false
-                if(response.status_code){  
-                    this.$store.dispatch('amountUpdate', this.form.depositAmount)   
+                if(response.status_code){    
                     this.form = ''           
                     this.$toast.success({
                         title: 'Success',
                         message: 'Request Send Successfully',
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                 } else {
                     this.$toast.error({
@@ -120,6 +121,25 @@ export default {
                 }
             });
         },
+        getLiveDepositNumber () {
+            config.getData('/live/deposit/number')
+            .then((response) => {
+                if(response.status_code){  
+                    this.form.paymentMethodType = response.data.paymentMethodType
+                    this.form.phoneTo = response.data.number
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        type: 'warning'
+                    })
+                }   
+            })
+            .catch((error) => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
+            });
+        }
     }
 }
 </script>
