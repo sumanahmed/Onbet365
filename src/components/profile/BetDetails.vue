@@ -15,7 +15,7 @@
                         <th>Bet Rate</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Date</th>
+                        <th style="width:20%">Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,8 +53,10 @@ export default {
     },
     data () {
         return {
-            bets: [],
-            username: this.$store.state.commonObj.user.user_name
+            bets: {
+                data: []
+            },
+            userId: this.$store.state.commonObj.user.user_id
         }
     },
     created () {
@@ -64,11 +66,10 @@ export default {
     methods: {
         getBetDetails () {   
             this.$store.state.loader = true         
-            config.getData('/user/bet/history/', this.username)
+            config.getData('/user/bet/history/'+ this.userId)
             .then((response) => {
                 this.$store.state.loader = false
                 this.bets = response.betHistories
-                console.log('this.bets = ', this.bets)
             })
             .catch((error) => {
                 console.log('error = ', error)
@@ -76,14 +77,13 @@ export default {
         },
         getResults(page = 1) {
             this.$store.state.loader = true  
-            config.getData('user/bet/history/'+ this.username +'?page=' + page)
+            config.getData('user/bet/history/'+ this.userId +'?page=' + page)
             .then(response => {
-                if(!response.data) {
-                    this.loader = true
+                if(!response.betHistories) {
+                    this.$store.state.loader = true
                 } else {
-                    this.loader = false
+                    this.$store.state.loader = false
                     this.bets = response.betHistories 
-                    console.log('this.bets = ', this.bets)
                 }
             });
         }

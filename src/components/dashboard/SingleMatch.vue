@@ -150,8 +150,6 @@ export default {
                     this.$store.state.loader = false
                     this.singleMatch = response.match
                     this.matches = response.optionBetDetails;
-                    console.log('this.singleMatch = ', this.singleMatch[0].matchTitle) 
-                    console.log('this.matches = ', this.matches) 
                 }     
             })
             .catch((error) => {

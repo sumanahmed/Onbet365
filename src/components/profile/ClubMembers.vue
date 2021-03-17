@@ -49,7 +49,9 @@ export default {
     },
     data () {
         return {
-            members: [],
+            members: {
+                data: []
+            },
             username: this.$store.state.commonObj.user.user_name
         }
     },

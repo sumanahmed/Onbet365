@@ -53,7 +53,9 @@ export default {
     },
     data () {
         return {
-            deposits: [],
+            deposits: {
+                data: []
+            },
             userId: this.$store.state.commonObj.user.user_id
         }
     },
@@ -63,7 +65,6 @@ export default {
     },
     methods: {        
         getDepositDetails () {
-            console.log('user id = ', this.userId)
             this.$store.state.loader = true
             config.getData('/user/deposit/history/'+ this.userId)
             .then((response) => {

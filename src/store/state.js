@@ -5,5 +5,7 @@ export default {
         country: [],
         clubs: []
     },
+    userId: '',
+    loggedIn: false,
     loader: true,
 }

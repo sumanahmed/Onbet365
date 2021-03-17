@@ -96,11 +96,9 @@ export default {
     },
     methods: {        
         getCoinTransfers () {
-            console.log('method called')
             this.$store.state.loader = true
             config.getData('/user/withdraw/history/'+ this.getUser.user_id)
             .then((response) => {
-                console.log('response.data = ', response.data)
                 this.$store.state.loader = false
                 this.withdraws = response.data
             })
@@ -109,6 +107,7 @@ export default {
             });
         },
         getResults(page = 1) {
+            this.$store.state.loader = true
             config.getData('user/withdraw/history/'+ this.getUser.user_id +'?page=' + page)
             .then(response => {
                 if(!response.data) {

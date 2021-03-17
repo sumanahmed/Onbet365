@@ -5,7 +5,7 @@
         <div class="main-content">
           <left-sidebar></left-sidebar>  
           <div class="middle-section scrollCustom" id="style-10"> 
-            <mobile-nav></mobile-nav>
+              <mobile-nav></mobile-nav>
               <router-view></router-view>
           </div> 
           <right-sidebar></right-sidebar> 

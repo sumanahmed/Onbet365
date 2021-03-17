@@ -8,8 +8,14 @@ export default {
     userLogout (state, loggedInfalse) {
         state.commonObj.user.loggedIn = loggedInfalse
         state.commonObj = []
+        state.userId = ''
+        state.loggedIn = false
     },
     profileUpdate (state, profile) {
         state.commonObj.profile = profile
+    },
+    addUserId (state, user_id) {
+        state.userId = user_id
+        state.loggedIn = true
     }
 }

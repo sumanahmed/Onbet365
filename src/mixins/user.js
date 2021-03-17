@@ -1,8 +1,7 @@
 import config from '../config'
 export default {
     created () {
-        const userId = localStorage.getItem('user_id')
-        console.log('userId = ', userId)
+        const userId = this.$store.state.userId
         if (userId != null) {
             config.getData('/user/detail/' + userId)
             .then(response => {

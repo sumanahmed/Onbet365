@@ -11,4 +11,7 @@ export default {
     profileUpdate ({commit}, payload) {
         commit('profileUpdate', payload)
     },
+    addUserId ({commit}, payload) {
+        commit('addUserId', payload)
+    }
 }

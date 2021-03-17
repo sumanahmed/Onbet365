@@ -42,7 +42,9 @@ export default {
     },
     data () {
         return {
-            sponsors: [],
+            sponsors: {
+                data: []
+            },
             username: this.$store.state.commonObj.user.user_name
         }
     },
@@ -53,7 +55,7 @@ export default {
     methods: {
         getSponsors () {   
             this.$store.state.loader = true         
-            config.getData('/user/get/sponsor/', this.username)
+            config.getData('/user/get/sponsor/'+ this.username)
             .then((response) => {
                 this.$store.state.loader = false
                 this.sponsors = response.data
@@ -67,9 +69,9 @@ export default {
             config.getData('user/get/sponsor/'+ this.username +'?page=' + page)
             .then(response => {
                 if(!response.data) {
-                    this.loader = true
+                    this.$store.state.loader = true
                 } else {
-                    this.loader = false
+                    this.$store.state.loader = false
                     this.sponsors = response.data 
                 }
             });

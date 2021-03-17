@@ -22,10 +22,10 @@
             <div v-if="isLoggedUser" class="profile_section">
                 <div class="single-profile">
                     <div class="avater-image">
-                        <p>{{ loggedUserName.substring(0,1) | capitalizeFirstLetter }}</p>
+                        <p>{{ getUser.user_name.substring(0,1) | capitalizeFirstLetter }}</p>
                     </div>
                     <div class="welcome-text-coin">
-                        <p class="text-blck m-0"><b>Welcome</b> : {{ loggedUserName }} </p>
+                        <p class="text-blck m-0"><b>Welcome</b> : {{ getUser.user_name }} </p>
                         <i class="fa fa-bitcoin"></i> <b class="text-black">{{ getTotalAmount }}</b>
                     </div>
                 </div>                    
@@ -75,19 +75,15 @@ export default {
     data () {
         return {
             errors:[],
-            loggedUserName : localStorage.getItem('user_name'),
             form : {
                 username :'',
                 password :'',
             }
         }
     },
-    created () {
-       console.log('user = ', this.$store.state.commonObj.user)
-    },
     computed : {
         isLoggedUser : function () {
-            return this.$store.state.commonObj.user.loggedIn
+            return this.$store.state.loggedIn
         },
         getUser : function () {
             return this.$store.state.commonObj.user
@@ -103,13 +99,10 @@ export default {
             .then((response) => {
                 if(response.status_code == 200){
                     localStorage.setItem('accessToken', response.access_token);
-                    localStorage.setItem('user_id', response.user_id);
-                    localStorage.setItem('user_name', response.user_name);
+                    localStorage.setItem('accountType', response.user_type);
                     this.$router.go()
                     this.$store.state.loader = false
-                    // localStorage.setItem('totalAmount', response.totalAmount);
-                    // this.loggedUserName = response.user_name
-                    // this.$store.dispatch('addAmount', response.totalAmount)
+                    this.$store.dispatch('addUserId',  response.user_id)
                     this.$toast.success({
                         title: 'Success',
                         message: 'Loggedin Successfully',
@@ -127,8 +120,6 @@ export default {
             config.postData('/user/logout')
             .then(() => {
                 localStorage.removeItem('accessToken');
-                localStorage.removeItem('user_id');
-                localStorage.removeItem('user_name');
                 this.$store.dispatch('userLogout', false)
                 this.$router.push('/')
                 this.$router.go()

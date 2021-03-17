@@ -466,12 +466,10 @@ export default {
             .then((response) => {
                 this.$store.dispatch('amountUpdate', form_data.betAmount)
                 if(response.errorMsg){
-                    console.log("error",response)
                     this.processingMsg = this.successMsg = '';
                     this.errorMsg = response.errorMsg;
                 }
                 if(response.successMsg){
-                    console.log("success",response)
                     this.processingMsg = this.errorMsg = '';
                     this.successMsg = response.successMsg;
                     this.isBodyHidden = false;

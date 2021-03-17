@@ -51,7 +51,9 @@ export default {
     },
     data () {
         return {
-            coins: [],
+            coins: {
+                data: []
+            },
             userId: this.$store.state.commonObj.user.user_id
         }
     },
