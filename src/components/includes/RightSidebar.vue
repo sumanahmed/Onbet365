@@ -3,7 +3,7 @@
         <div class="right-section scrollCustom" id="style-10">                
             <!-- Advance section -->
             <div class="advance_section">
-                <h4 class="">Upcomming Match</h4>
+                <h4 class="">Upcoming Match</h4>
                 <div class="upcoming_match_wraper">
                     <span v-for="(matche, index) in upcomingMatches" :key="index" href="" class="upcoming_single_match">
                         <router-link :to="{ path: '/single-match/' + matche.id }">
