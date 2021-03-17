@@ -28,7 +28,7 @@
                         <td>
                             <span v-if="withdraw.status" class="badge badge-success">Approve</span>
                             <span v-else class="badge badge-warning">Pending</span>
-                            <a onclick="return confirm('Are you sure cancel withdraw?');" class="btn btn-sm btn-danger" href="">Refund</a>
+                            <span @click="showModal(withdraw.id, index)" class="badge badge-danger" href="">Refund</span>
                         </td>
                     </tr>                    
                 </tbody>
@@ -39,6 +39,28 @@
                     <span slot="next-nav">&gt;</span>
                 </pagiantion>
             </div> 
+        </div>
+
+        <div v-if="refundModal" class="modal fade show" style="display:block" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-simple modal-dialog-centered">
+                <div class="modal-content modal-custom-content">
+                    <div class="modal-header modal-custom-header">
+                        <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
+                            <span class="fa fa-window-close" aria-hidden="true"></span>
+                        </button>
+                        <h6 style="text-align:center" class="modal-title">Submit Refund</h6>
+                    </div>
+                    <form>
+                        <div class="modal-body modal-custom-body">
+                            <p class="text-info text-center">Are you sure to refund ??</p>
+                        </div>
+                        <div style="display:block;margin:10px 0;padding:0px;border:none" class="modal-footer text-center">
+                            <button class="btn btn-sm btn-success" type="button" @click="submitRefund"> Submit </button>
+                            <button class="btn btn-sm btn-danger" type="button" @click="cancelModal"> Cancel </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -52,19 +74,33 @@ export default {
     },
     data () {
         return {
-            withdraws: [],
-            userId: this.$store.state.commonObj.user.user_id
+            withdraws: {
+                data: []
+            },
+            refundModal: false,
+            id: '',
+            key: ''
         }
     },
-    created () {
+    async created () {
         this.getCoinTransfers()
         this.getResults()
     },
+    computed : {
+        loader: function () {
+            return this.$store.state.loader
+        },
+        getUser : function () {
+            return this.$store.state.commonObj.user
+        }
+    },
     methods: {        
         getCoinTransfers () {
+            console.log('method called')
             this.$store.state.loader = true
-            config.getData('/user/withdraw/history/'+ this.userId)
+            config.getData('/user/withdraw/history/'+ this.getUser.user_id)
             .then((response) => {
+                console.log('response.data = ', response.data)
                 this.$store.state.loader = false
                 this.withdraws = response.data
             })
@@ -73,15 +109,48 @@ export default {
             });
         },
         getResults(page = 1) {
-            config.getData('user/withdraw/history/'+ this.userId +'?page=' + page)
+            config.getData('user/withdraw/history/'+ this.getUser.user_id +'?page=' + page)
             .then(response => {
                 if(!response.data) {
-                    this.loader = true
+                    this.$store.state.loader = true
                 } else {
-                    this.loader = false
+                    this.$store.state.loader = false
                     this.withdraws = response.data 
                 }
             });
+        },
+        showModal (id, key) {            
+            this.refundModal = true
+            this.key= key
+            this.id= id
+        },
+        submitRefund() {
+            config.getData('/user/withdraw/cancel/'+ this.id)
+            .then((response) => {  
+                 this.withdraws.data.splice(this.key, 1)           
+                if(response.status_code){  
+                    this.$toast.success({
+                        title: 'Success',
+                        message: 'Club Changed Successfully',
+                        color: '#D6E09B'
+                    })
+                    this.refundModal = false
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
+            })
+            .catch((error) => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
+            });
+        },
+        cancelModal () {
+            this.refundModal = false
         }
     }
 }

@@ -54,10 +54,16 @@ export default {
                 password: ''
             }
         }
+    },   
+    computed : {
+        getUser : function () {
+            return this.$store.state.commonObj.user
+        }
     },
     methods: {
         withdrawRequest() {
             this.$store.state.loader = true
+            Object.assign(this.form , { 'user_id': this.getUser.user_id})
             console.log('this.form = ', this.form)
             config.postData('/user/store/coin/transfer', this.form)
             .then((response) => {  

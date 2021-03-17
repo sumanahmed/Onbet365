@@ -434,15 +434,15 @@ export default {
             this.isModal = this.loginFirstModal = false,
             this.isBodyHidden = true,
             this.errorMsg = false
-
         },
         getLiveBet () {
+            this.$store.state.loader = true
             config.getData('/live/data')
             .then((response) => {          
                 if (!response) {
-                    this.loader = true
+                    this.$store.state.loader = true
                 } else {
-                    this.loader = false
+                    this.$store.state.loader = false
                     this.matches = response.matches; 
                 }     
             })

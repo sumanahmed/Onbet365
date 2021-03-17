@@ -13,7 +13,7 @@
                     <label for="paymentMethod" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
                     <select required="" id="paymentMethod" v-model="form.paymentMethodType" name="paymentMethodType" class="form-control">
                         <option :value="0"> Select method </option>
-                        <option :value="bkash">Bkash</option>
+                        <option :value="1">Bkash</option>
                         <option :value="nagad" disabled="">Nagad</option>
                         <option :value="skrill" disabled="">Skrill</option>
                         <option :value="paypal" disabled="">Paypal</option>
@@ -77,23 +77,29 @@ export default {
         return {
             errors: [],
             form: {
-                username: this.$store.state.commonObj.user.user_name,
-                paymentMethodType: null,
+                paymentMethodType: 0,
                 depositAmount: '',
                 phoneForm: '',
                 phoneTo: '',
                 password: ''
             }
         }
+    },    
+    computed : {
+        getUser : function () {
+            return this.$store.state.commonObj.user
+        }
     },
     methods: {
         depositRequest() {
             this.$store.state.loader = true
-            console.log('this.form = ', this.form)
+            Object.assign(this.form , { 'user_id': this.getUser.user_id})
             config.postData('/user/online/deposit', this.form)
+            console.log('form = ', this.form)
             .then((response) => {
                 this.$store.state.loader = false
-                if(response.status_code == 200){    
+                if(response.status_code){  
+                    this.$store.dispatch('amountUpdate', this.form.depositAmount)   
                     this.form = ''           
                     this.$toast.success({
                         title: 'Success',

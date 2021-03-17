@@ -112,8 +112,15 @@ export default {
             matchId: this.$route.params.id
         }
     },
+    watch: {
+        '$route.params.id': function (newVal, oldVal) {
+            this.getSingleMatch(newVal)
+            console.log('oldVal = ', oldVal)
+        }
+    },
     created () {
-        this.getSingleMatch()
+        this.getSingleMatch(this.$route.params.id)
+        console.log('this.$route = ', this.$route.query)
     },
     methods: {
         showModal (betDetail, question) {
@@ -132,14 +139,15 @@ export default {
         cancelModal () {
             this.isModal = false
         },
-        getSingleMatch () {
-            config.getData('/single/match/details/' + this.matchId)
+        getSingleMatch (matchId) {
+            this.$store.state.loader =true
+            config.getData('/single/match/details/' + matchId)
             .then((response) => {    
                 console.log('response = ', response)  
                 if (!response) {
-                    this.loader = true
+                    this.$store.state.loader = true
                 } else {
-                    this.loader = false
+                    this.$store.state.loader = false
                     this.singleMatch = response.match
                     this.matches = response.optionBetDetails;
                     console.log('this.singleMatch = ', this.singleMatch[0].matchTitle) 

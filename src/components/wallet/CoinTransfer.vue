@@ -43,17 +43,24 @@ export default {
             }
         }
     },
+    computed : {
+        getUser : function () {
+            return this.$store.state.commonObj.user
+        }
+    },
     methods: {
         coinTransfer() {
             this.$store.state.loader = true
-            console.log('this.form = ', this.form)
+            Object.assign(this.form , { 'user_id': this.getUser.user_id})
             config.postData('/user/store/coin/transfer', this.form)
             .then((response) => {  
                 this.$store.state.loader = false              
-                if(response.status_code){  
+                if(response.status_code){ 
+                    this.$store.dispatch('amountUpdate', this.form.transferAmount) 
+                    this.form = ''
                     this.$toast.success({
                         title: 'Success',
-                        message: 'Club Changed Successfully',
+                        message: 'Coin Transfer Successfully',
                         color: '#D6E09B'
                     })
                 } else {
