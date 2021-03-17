@@ -6,7 +6,7 @@
 
         <div class="profile-wrapper" style="padding-bottom:38px;">
             <h5 class="page-heading">Coin Transfer </h5>
-            <form v-on:keyup.enter="coinTransfer">
+            <form>
                 <input type="hidden" name="_token" value="">                                            
                 <div class="form-group">
                     <label for="username" style="display: block;text-align: left;">Username<span class="text-danger">*</span></label>
@@ -23,7 +23,7 @@
                     
                 </div>
                 <div class="form-group">
-                    <input id="submit" type="submit" class="btn btn-success" value="Transfer" @click.prevent="coinTransfer">
+                    <button type="button" class="btn btn-success"  @click.prevent="coinTransfer">Transfer</button>
                 </div>
             </form>
         </div>
@@ -58,10 +58,11 @@ export default {
                 if(response.status_code){ 
                     this.$store.dispatch('amountUpdate', this.form.transferAmount) 
                     this.form = ''
+                    this.errors = ''
                     this.$toast.success({
                         title: 'Success',
                         message: 'Coin Transfer Successfully',
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                 } else {
                     this.$toast.error({
@@ -72,6 +73,7 @@ export default {
                 }   
             })
             .catch((error) => {
+                this.$store.state.loader = false
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }

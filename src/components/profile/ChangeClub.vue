@@ -1,11 +1,10 @@
 <template>
     <div>
         <div class="page-title-custom">
-            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> chanage password </span></p>
+            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> chanage club </span></p>
         </div>
         <div class="profile-wrapper" style="padding-bottom:38px;">
-            <h5 class="page-heading">Change password</h5>
-            <form v-on:keyup.enter="clubChange">
+            <form>
                 <div class="form-group">
                     <label for="club_id" style="display: block;text-align: left;">Select club <span class="text-danger">*</span></label>
                     <select id="club_id" v-model="form.club_id" name="club_id" class="form-control" tabindex="-1">                                                                                                                                            
@@ -17,7 +16,7 @@
                     <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success" value="Change Club" @click.prevent="clubChange">
+                    <button type="submit" class="btn btn-success" @click.prevent="clubChange">Change Club</button>
                 </div>
             </form>
         </div>
@@ -49,13 +48,15 @@ export default {
             .then((response) => {
                 this.$store.state.loader = false
                 if(response.status_code == 200){    
-                    this.$store.state.commonObj.profile.club_id = this.form.club_id              
+                    this.$store.state.commonObj.profile.club_id = this.form.club_id
+                    this.form.password = '' 
                     this.$toast.success({
                         title: 'Success',
                         message: 'Club Changed Successfully',
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                 } else {
+                    this.form.password = ''
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,
@@ -64,6 +65,7 @@ export default {
                 }   
             })
             .catch((error) => {
+                this.$store.state.loader = false
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }

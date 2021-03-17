@@ -21,7 +21,12 @@
                 <tbody>                    
                     <tr v-for="(withdraw, index) in withdraws.data" :key="index">
                         <td>{{ withdraw.username }}</td>
-                        <td>{{ withdraw.withdrawPaymentType }}</td>
+                        <td v-if="withdraw.withdrawPaymentType == 1"> Bkash Personal </td>
+                        <td v-if="withdraw.withdrawPaymentType == 2"> Bkash Agent </td>
+                        <td v-if="withdraw.withdrawPaymentType == 3"> Bkash Personal </td>
+                        <td v-if="withdraw.withdrawPaymentType == 4"> Bkash Agent </td>
+                        <td v-if="withdraw.withdrawPaymentType == 5"> Rocket Personal </td>
+                        <td v-if="withdraw.withdrawPaymentType == 6"> Rocket Agent </td>
                         <td>{{ withdraw.withdrawAmount }}</td>
                         <td>{{ withdraw.reference }}</td>
                         <td>{{ withdraw.created_at | dateformat }} at {{ withdraw.created_at | timeformat }}</td>

@@ -94,40 +94,39 @@
                                     <div class="matchTournamentDetailPart">
                                         <p>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
-                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
                                             &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
-                                            </span><br/>
-                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
                                         <p class="overs-live-status">
-                                            <b class="overs">Overs: 10.5 </b>
-                                            <span class="live-status">Live</span>
+                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
+                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
                                         </p>
-                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
-                                <div v-for="(matchesOption, index6) in match['matchOption']" :key="index6" class="match-options">
+                                <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
                                         <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                     </div>
 
                                     <div class="choice-answer-part">
-                                        <button v-for="(betDetail, index7) in matchesOption['betDetails']" :key="index7" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                             </span> 
-                                        </button>
+                                        </button>                                  
                                     </div>
-                                </div>                                
+                                </div>                               
                             </div>
                         </div>
                     </div>
@@ -140,40 +139,39 @@
                                     <div class="matchTournamentDetailPart">
                                         <p>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
-                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
                                             &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
-                                            </span><br/>
-                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
                                         <p class="overs-live-status">
-                                            <b class="overs">Overs: 10.5 </b>
-                                            <span class="live-status">Live</span>
+                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
+                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
                                         </p>
-                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
-                                <div v-for="(matchesOption, index9) in match['matchOption']" :key="index9" class="match-options">
+                                <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
                                         <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                     </div>
 
                                     <div class="choice-answer-part">
-                                        <button v-for="(betDetail, index10) in matchesOption['betDetails']" :key="index10" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                             </span> 
                                         </button>                                  
                                     </div>
-                                </div>                                
+                                </div>                               
                             </div>
                         </div>
                     </div>
@@ -186,40 +184,39 @@
                                     <div class="matchTournamentDetailPart">
                                         <p>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
-                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
                                             &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
-                                            </span><br/>
-                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
                                         <p class="overs-live-status">
-                                            <b class="overs">Overs: 10.5 </b>
-                                            <span class="live-status">Live</span>
+                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
+                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
                                         </p>
-                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
-                                <div v-for="(matchesOption, index12) in match['matchOption']" :key="index12" class="match-options">
+                                <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
                                         <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                     </div>
 
                                     <div class="choice-answer-part">
-                                        <button v-for="(betDetail, index13) in matchesOption['betDetails']" :key="index13" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                             </span> 
                                         </button>                                  
                                     </div>
-                                </div>                                
+                                </div>                               
                             </div>
                         </div>
                     </div>
@@ -232,40 +229,39 @@
                                     <div class="matchTournamentDetailPart">
                                         <p>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
-                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
                                             &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
-                                            </span><br/>
-                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
                                         <p class="overs-live-status">
-                                            <b class="overs">Overs: 10.5 </b>
-                                            <span class="live-status">Live</span>
+                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
+                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
                                         </p>
-                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
-                                <div v-for="(matchesOption, index15) in match['matchOption']" :key="index15" class="match-options">
+                                <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
                                         <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                     </div>
 
                                     <div class="choice-answer-part">
-                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                             </span> 
                                         </button>                                  
                                     </div>
-                                </div>                                
+                                </div>                           
                             </div>
                         </div>
                     </div>
@@ -278,35 +274,34 @@
                                     <div class="matchTournamentDetailPart">
                                         <p>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
-                                            &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
                                             &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
-                                            </span><br/>
-                                            {{ match['tournamentName'] | capitalizeFirstLetter }} 
+                                            </span>
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
                                         <p class="overs-live-status">
-                                            <b class="overs">Overs: 10.5 </b>
-                                            <span class="live-status">Live</span>
+                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
+                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
                                         </p>
-                                        <p class="match-scores">Score : 111 / 5</p>                                                    
+                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
-                                <div v-for="(matchesOption, index17) in match['matchOption']" :key="index17" class="match-options">
+                                <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
                                         <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                     </div>
 
                                     <div class="choice-answer-part">
-                                        <button v-for="(betDetail, index18) in matchesOption['betDetails']" :key="index18" @click="showModal" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                        <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                                <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                                <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                                 <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                             </span> 
                                         </button>                                  
@@ -392,22 +387,17 @@ export default {
             successMsg : '',
             errorMsg : '',
             betAmount : '',
-            estimateResult : 0,
-            reloadComponent : false
+            estimateResult : 0
         }
-    },
-    mounted(){
-        window.Echo.channel('betUpdatenew')
-        .listen('betdetailUpdateEvent', (e) => {
-            if(e.message == 1){
-                this.reloadComponent = true;
-                this.getLiveBet()
-                this.reloadComponent = false;
-            }
-        });
     },
     created () {
         this.getLiveBet()
+        window.Echo.channel('betUpdatenew')
+        .listen('betdetailUpdateEvent', (e) => {
+            if(e.message){     
+                this.getLiveBet()
+            }
+        });
     },
     methods: {
         showModal (betDetail, question) {
@@ -438,7 +428,7 @@ export default {
         getLiveBet () {
             this.$store.state.loader = true
             config.getData('/live/data')
-            .then((response) => {          
+            .then((response) => { 
                 if (!response) {
                     this.$store.state.loader = true
                 } else {
@@ -464,12 +454,13 @@ export default {
             this.betAmount = '';
             config.postData('/user/store/place/bet', form_data)
             .then((response) => {
-                this.$store.dispatch('amountUpdate', form_data.betAmount)
                 if(response.errorMsg){
+                    this.isDisabled = true;
                     this.processingMsg = this.successMsg = '';
                     this.errorMsg = response.errorMsg;
                 }
                 if(response.successMsg){
+                    this.$store.dispatch('amountUpdate', form_data.betAmount)
                     this.processingMsg = this.errorMsg = '';
                     this.successMsg = response.successMsg;
                     this.isBodyHidden = false;

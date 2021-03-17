@@ -4,11 +4,9 @@
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> deposit request </span></p>
         </div>
         <div class="profile-wrapper">
-            <h5 class="page-heading">Deposit Request</h5>
-            <h6 class="text-center text-warning mt-2 mb-3">User deposit Time at 9:00 AM To 10:00 PM</h6>
+            <h6 class="text-center text-danger mt-2 mb-3">Notice : User deposit Time at 9:00 AM To 10:00 PM</h6>
 
-            <form v-on:keyup.enter="depositRequest">
-                <input type="hidden" name="" value="">                                    
+            <form>                                  
                 <div class="form-group">
                     <label for="paymentMethod" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
                     <select v-model="form.paymentMethodType" :disabled="1" required="" id="paymentMethod" name="paymentMethodType" class="form-control">
@@ -33,25 +31,25 @@
                     <div v-if="form.paymentMethodType == 1" class="input-group input-group-icon mt-2 mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <img src="https://www.bkash.com/sites/all/themes/bkash/logo.png?87980" width="50"/>
+                                <img :src="'/assets/img/bkash.png'" alt="bkash"/>
                             </div>
                         </div>
                         <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="">
                     </div>
 
-                    <div v-if="form.paymentMethodType == 2" class="input-group input-group-icon mb-2">
+                    <div v-if="form.paymentMethodType == 2" class="input-group input-group-icon mb-2 mt-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <img src="https://nagad.com.bd/wp-content/uploads/2019/04/Nagad_Logo_for_web__128x53.svg" width="50"/>
+                                <img :src="'/assets/img/nagad.png'" alt="nogod"/>
                             </div>
                         </div>
                         <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="">
                     </div>
 
-                    <div v-if="form.paymentMethodType == 3" class="input-group input-group-icon">
+                    <div v-if="form.paymentMethodType == 3" class="input-group input-group-icon mb-2 mt-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <img src="https://www.dutchbanglabank.com/img/mlogo.png" width="50"/>
+                                <img :src="'/assets/img/roket.png'" alt="roket"/>
                             </div>
                         </div>
                         <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="">
@@ -63,7 +61,7 @@
                     
                 </div>
                 <div class="form-group">
-                    <input id="submit" type="submit" class="btn btn-success" value="Deposit Request" @click.prevent="depositRequest">
+                    <button type="button" class="btn btn-success" @click.prevent="depositRequest">Deposit Request</button>
                 </div>
             </form>
         </div>
@@ -101,7 +99,10 @@ export default {
             .then((response) => {
                 this.$store.state.loader = false
                 if(response.status_code){    
-                    this.form = ''           
+                    this.form.depositAmount = '' 
+                    this.form.phoneForm = ''
+                    this.form.password = '' 
+                    this.errors = ''          
                     this.$toast.success({
                         title: 'Success',
                         message: 'Request Send Successfully',
@@ -116,15 +117,18 @@ export default {
                 }   
             })
             .catch((error) => {
+                this.$store.state.loader = false
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }
             });
         },
         getLiveDepositNumber () {
+            this.$store.state.loader = true
             config.getData('/live/deposit/number')
             .then((response) => {
                 if(response.status_code){  
+                    this.$store.state.loader = false
                     this.form.paymentMethodType = response.data.paymentMethodType
                     this.form.phoneTo = response.data.number
                 } else {

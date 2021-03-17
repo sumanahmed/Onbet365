@@ -5,8 +5,7 @@
         </div>
 
         <div class="profile-wrapper">
-            <form v-on:keyup.enter="updatePassword">
-                <input type="hidden" name="" value="">                                            
+            <form>
                 <div class="form-group">
                     <label for="oldPassword" style="display: block;text-align: left;">Old Password <span class="text-danger">*</span></label>
                     <input required="" class="form-control" type="password" v-model="form.oldPassword" name="oldPassword" placeholder="Old Password">
@@ -54,13 +53,14 @@ export default {
             .then((response) => {
                 this.$store.state.loader = false
                 if(response.status_code == 200){    
-                    this.form = ''              
+                    this.form = ''        
                     this.$toast.success({
                         title: 'Success',
                         message: 'Password Changed Successfully',
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                 } else {
+                    this.form = ''
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,
@@ -69,7 +69,7 @@ export default {
                 }   
             })
             .catch((error) => {
-                console.log('erorr = ', error)
+                this.$store.state.loader = false
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }

@@ -5,7 +5,6 @@
         </div>
 
         <div class="profile-wrapper" style="padding-bottom:38px;">
-            <h5 class="page-heading"> Club Members </h5>
 
             <table id="example" class="table table-sm table-striped table-bordered table-responsive-lg table-responsive-md table-responsive-sm " style="width:100%">
                 <thead>

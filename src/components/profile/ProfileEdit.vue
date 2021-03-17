@@ -5,8 +5,7 @@
         </div>
 
         <div class="profile-wrapper">
-            <form action="" method="POST">
-                <input type="hidden" name="_token" value="">                                            
+            <form>                                         
                 <div class="form-group">
                     <label for="namename" style="display: block;text-align: left;">Username <span class="text-danger">*</span></label>
                     <input id="namename" class="form-control" type="text" name="namename" v-model="form_edit.username" placeholder="Name" readonly="">                
@@ -22,7 +21,7 @@
                     <span class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success" value="Update" @click.prevent="update">
+                    <button type="button" class="btn btn-success" @click.prevent="update">Update</button>
                 </div>
             </form>
         </div>
@@ -54,11 +53,12 @@ export default {
                     this.$toast.success({
                         title: 'Success',
                         message: 'Profile Update Successfully',
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                 }     
             })
             .catch((error) => {
+                this.$store.state.loader = false
                 if (error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }
