@@ -7,32 +7,81 @@
         <div class="profile-wrapper">
             <h5 class="page-heading"> Withdrawal Request</h5>
             
-            <form action="" method="POST">
+            <form v-on:keyup.enter="withdrawRequest">
                 <input type="hidden" name="" value="">                                        
                 <div class="form-group">
                     <label for="withdrawAmount" style="display: block;text-align: left;">Withdrawal Amount (400 - 20000) <span class="text-danger">*</span></label>
-                    <input required="" id="withdrawAmount" class="form-control" type="number" name="withdrawAmount" placeholder="(400 - 20000)">
+                    <input v-model="form.withdrawAmount" required="" id="withdrawAmount" class="form-control" type="number" name="withdrawAmount" placeholder="(400 - 20000)">
+                    <span class="text-danger" v-if="errors.withdrawAmount">{{ errors.withdrawAmount[0] }}</span>
                                                 
                     <label for="withdrawNumber" style="display: block;text-align: left;">Phone Number <span class="text-danger">*</span></label>
-                    <input required="" id="withdrawNumber" class="form-control" type="number" name="withdrawNumber" placeholder="018XXXXXXXX">
+                    <input v-model="form.withdrawNumber" required="" id="withdrawNumber" class="form-control" type="number" name="withdrawNumber" placeholder="018XXXXXXXX">
+                    <span class="text-danger" v-if="errors.withdrawNumber">{{ errors.withdrawNumber[0] }}</span>
                                                 
                     <label for="withdrawPaymentType" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
-                    <select required="" id="withdrawPaymentType" name="withdrawPaymentType" class="form-control">
+                    <select v-model="form.withdrawPaymentType" required="" id="withdrawPaymentType" name="withdrawPaymentType" class="form-control">
                         <option value="">Select Payment Method</option>
-                        <option value="bkash agent">Bkash Agent</option>
-                        <option value="bkash personal">Bkash Personal</option>
-                        <option value="Nagad agent" disabled="">Nagad Agent</option>
-                        <option value="Nagad personal" disabled="">Nagad Personal</option>
+                        <option :value="bkash_agent">Bkash Agent</option>
+                        <option :value="bkash_personal">Bkash Personal</option>
+                        <option :value="Nagad_agent" disabled="">Nagad Agent</option>
+                        <option :value="Nagad_personal" disabled="">Nagad Personal</option>
                     </select>
+                    <span class="text-danger" v-if="errors.withdrawPaymentType">{{ errors.withdrawPaymentType[0] }}</span>
 
                     <label for="password" style="display: block;text-align: left;">Password<span class="text-danger">*</span></label>
-                    <input required="" id="password" class="form-control" type="password" name="password" placeholder="Password">
+                    <input v-model="form.password" required="" id="password" class="form-control" type="password" name="password" placeholder="Password">
+                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                     
                 </div>
                 <div class="form-group">
-                    <input id="submit" type="submit" class="btn btn-success" value="Withdrawal Request">
+                    <input id="submit" type="submit" class="btn btn-success" value="Withdrawal Request" @click.prevent="withdrawRequest">
                 </div>
             </form>
         </div>
     </div>
 </template>
+<script>
+import config from '../../config'
+export default {
+    name:'WithdrawRequest',
+    data () {
+        return {
+            errors: [],
+            form: {
+                withdrawAmount: '',
+                withdrawNumber: '',
+                withdrawPaymentType: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        withdrawRequest() {
+            this.$store.state.loader = true
+            console.log('this.form = ', this.form)
+            config.postData('/user/store/coin/transfer', this.form)
+            .then((response) => {  
+                this.$store.state.loader = false              
+                if(response.status_code){  
+                    this.$toast.success({
+                        title: 'Success',
+                        message: 'Club Changed Successfully',
+                        color: '#D6E09B'
+                    })
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
+            })
+            .catch((error) => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
+            });
+        },
+    }
+}
+</script>

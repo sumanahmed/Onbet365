@@ -6,23 +6,70 @@
 
         <div class="profile-wrapper" style="padding-bottom:38px;">
             <h5 class="page-heading">Coin Transfer </h5>
-            <form action="" method="POST">
+            <form v-on:keyup.enter="coinTransfer">
                 <input type="hidden" name="_token" value="">                                            
                 <div class="form-group">
                     <label for="username" style="display: block;text-align: left;">Username<span class="text-danger">*</span></label>
-                    <input required="" autofocus="" id="username" class="form-control" type="text" name="username" placeholder="Username" value="">
+                    <input required="" autofocus="" id="username" v-model="form.username" class="form-control" type="text" name="username" placeholder="Username" value="">
+                    <span class="text-danger" v-if="errors.username">{{ errors.username[0] }}</span>
                     
                     <label for="transferAmount" style="display: block;text-align: left;">Number of Coins (20-5000)<span class="text-danger">*</span></label>
-                    <input required="" id="transferAmount" class="form-control" type="number" min="0" name="transferAmount" placeholder="(20-5000)" value="">
+                    <input required="" id="transferAmount" v-model="form.transferAmount" class="form-control" type="number" min="0" name="transferAmount" placeholder="(20-5000)" value="">
+                    <span class="text-danger" v-if="errors.transferAmount">{{ errors.transferAmount[0] }}</span>
                     
                     <label for="password" style="display: block;text-align: left;">Password<span class="text-danger">*</span></label>
-                    <input required="" id="password" class="form-control" type="password" name="password" placeholder="Password">
+                    <input required="" id="password" v-model="form.password" class="form-control" type="password" name="password" placeholder="Password">
+                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                     
                 </div>
                 <div class="form-group">
-                    <input id="submit" type="submit" class="btn btn-success" value="Transfer">
+                    <input id="submit" type="submit" class="btn btn-success" value="Transfer" @click.prevent="coinTransfer">
                 </div>
             </form>
         </div>
     </div>
 </template>
+<script>
+import config from '../../config'
+export default {
+    name:'CoinTransfer',
+    data () {
+        return {
+            errors: [],
+            form: {
+                username: '',
+                transferAmount: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        coinTransfer() {
+            this.$store.state.loader = true
+            console.log('this.form = ', this.form)
+            config.postData('/user/store/coin/transfer', this.form)
+            .then((response) => {  
+                this.$store.state.loader = false              
+                if(response.status_code){  
+                    this.$toast.success({
+                        title: 'Success',
+                        message: 'Club Changed Successfully',
+                        color: '#D6E09B'
+                    })
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
+            })
+            .catch((error) => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
+            });
+        },
+    }
+}
+</script>

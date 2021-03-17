@@ -19,20 +19,72 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>sourov43</td>
-                        <td>19500.00</td>
-                        <td>01882433064</td>
-                        <td>01609677451</td>
+                    <tr v-for="(deposit, index) in deposits.data" :key="index">
+                        <td>{{ deposit.username }}</td>
+                        <td>{{ deposit.depositAmount }}</td>
+                        <td>{{ deposit.phoneForm }}</td>
+                        <td>{{ deposit.phoneTo }}</td>
                         <td>
-                            <span class="badge badge-pill badge-danger p-2"> Unpaid </span>
+                            <span v-if="deposit.status" class="badge badge-pill badge-success p-2"> Paid </span>
+                            <span v-else class="badge badge-pill badge-danger p-2"> Unpaid </span>
                         </td>
                         <td>
-                            06 Dec 2020 04:45:23 PM                                                                    
+                            {{ deposit.created_at | dateformat }} at {{ deposit.created_at | timeformat }}                                                                 
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="mt-3">
+                <pagiantion :data="deposits" @pagination-change-page="getResults">
+                    <span slot="prev-nav">&lt;</span>
+                    <span slot="next-nav">&gt;</span>
+                </pagiantion>
+            </div>   
         </div>    
     </div>
 </template>
+<script>
+import config from '../../config'
+import pagiantion from 'laravel-vue-pagination'
+export default {
+    name:'DepositDetails',
+    components:{
+        pagiantion:pagiantion
+    },
+    data () {
+        return {
+            deposits: [],
+            userId: this.$store.state.commonObj.user.user_id
+        }
+    },
+    created () {
+        this.getDepositDetails()
+        this.getResults()
+    },
+    methods: {        
+        getDepositDetails () {
+            console.log('user id = ', this.userId)
+            this.$store.state.loader = true
+            config.getData('/user/deposit/history/'+ this.userId)
+            .then((response) => {
+                this.$store.state.loader = false
+                this.deposits = response.data
+            })
+            .catch((error) => {
+                console.log('error = ', error)
+            });
+        },
+        getResults(page = 1) {
+            config.getData('user/deposit/history/'+ this.userId +'?page=' + page)
+            .then(response => {
+                if(!response.data) {
+                    this.loader = true
+                } else {
+                    this.loader = false
+                    this.deposits = response.data 
+                }
+            });
+        }
+    }
+}
+</script>

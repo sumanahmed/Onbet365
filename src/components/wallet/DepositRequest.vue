@@ -1,30 +1,34 @@
 <template>
     <div>
-<div class="page-title-custom">
+        <div class="page-title-custom">
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> deposit request </span></p>
         </div>
-
         <div class="profile-wrapper">
             <h5 class="page-heading">Deposit Request</h5>
             <h6 class="text-center text-warning mt-2 mb-3">User deposit Time at 9:00 AM To 10:00 PM</h6>
-            <form action="" method="POST">
+
+            <form v-on:keyup.enter="depositRequest">
                 <input type="hidden" name="" value="">                                    
                 <div class="form-group">
                     <label for="paymentMethod" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
-                    <select required="" id="paymentMethod" name="paymentMethodType" class="form-control">
-                        <option value=""> Select method </option>
-                        <option value="bkash">Bkash</option>
-                        <option value="nagad" disabled="">Nagad</option>
-                        <option value="skrill" disabled="">Skrill</option>
-                        <option value="paypal" disabled="">Paypal</option>
-                        <option value="stripe" disabled="">Stripe</option>
-                        <option value="neteller" disabled="">Neteller</option>
+                    <select required="" id="paymentMethod" v-model="form.paymentMethodType" name="paymentMethodType" class="form-control">
+                        <option :value="0"> Select method </option>
+                        <option :value="bkash">Bkash</option>
+                        <option :value="nagad" disabled="">Nagad</option>
+                        <option :value="skrill" disabled="">Skrill</option>
+                        <option :value="paypal" disabled="">Paypal</option>
+                        <option :value="stripe" disabled="">Stripe</option>
+                        <option :value="neteller" disabled="">Neteller</option>
                     </select>
+                    <span class="text-danger" v-if="errors.paymentMethodType">{{ errors.paymentMethodType[0] }}</span>
+
                     <label for="depositAmount" style="display: block;text-align: left;">Number of Coins (200-25000) <span class="text-danger">*</span></label>
-                    <input required="" id="depositAmount" class="form-control" type="number" min="0" name="depositAmount" placeholder="(200-25000)" value="">
+                    <input required="" id="depositAmount" v-model="form.depositAmount" class="form-control" type="number" min="0" name="depositAmount" placeholder="(200-25000)" value="">
+                    <span class="text-danger" v-if="errors.depositAmount">{{ errors.depositAmount[0] }}</span>
                     
                     <label for="phoneForm" style="display: block;text-align: left;">Phone From <span class="text-danger">*</span></label>
-                    <input required="" id="phoneForm" class="form-control" type="number" min="0" name="phoneForm" placeholder="Phone Form" value="">
+                    <input required="" id="phoneForm" v-model="form.phoneForm" class="form-control" type="number" min="0" name="phoneForm" placeholder="Phone Form" value="">
+                    <span class="text-danger" v-if="errors.phoneForm">{{ errors.phoneForm[0] }}</span>
                     
                     <div class="input-group input-group-icon mt-2 mb-2">
                         <div class="input-group-prepend">
@@ -32,7 +36,7 @@
                                 <img src="https://www.bkash.com/sites/all/themes/bkash/logo.png?87980" width="50"/>
                             </div>
                         </div>
-                        <input required="" id="phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
+                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
                     </div>
 
                     <div class="input-group input-group-icon mb-2">
@@ -41,7 +45,7 @@
                                 <img src="https://nagad.com.bd/wp-content/uploads/2019/04/Nagad_Logo_for_web__128x53.svg" width="50"/>
                             </div>
                         </div>
-                        <input required="" id="phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
+                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
                     </div>
 
                     <div class="input-group input-group-icon">
@@ -50,17 +54,66 @@
                                 <img src="https://www.dutchbanglabank.com/img/mlogo.png" width="50"/>
                             </div>
                         </div>
-                        <input required="" id="phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
+                        <input required="" id="phoneTo" v-model="form.phoneTo" class="form-control" type="text" name="phoneTo" readonly="" value="01826451236">
                     </div>
 
                     <label for="password" style="display: block;text-align: left;">Password<span class="text-danger">*</span></label>
-                    <input required="" id="password" class="form-control" type="password" name="password" placeholder="Password">
+                    <input required="" id="password" v-model="form.password" class="form-control" type="password" name="password" placeholder="Password">
+                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                     
                 </div>
                 <div class="form-group">
-                    <input id="submit" type="submit" class="btn btn-success" value="Deposit Request">
+                    <input id="submit" type="submit" class="btn btn-success" value="Deposit Request" @click.prevent="depositRequest">
                 </div>
             </form>
         </div>
     </div>
 </template>
+<script>
+import config from '../../config'
+export default {
+    name:'DepositRequest',
+    data () {
+        return {
+            errors: [],
+            form: {
+                username: this.$store.state.commonObj.user.user_name,
+                paymentMethodType: null,
+                depositAmount: '',
+                phoneForm: '',
+                phoneTo: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        depositRequest() {
+            this.$store.state.loader = true
+            console.log('this.form = ', this.form)
+            config.postData('/user/online/deposit', this.form)
+            .then((response) => {
+                this.$store.state.loader = false
+                if(response.status_code == 200){    
+                    this.form = ''           
+                    this.$toast.success({
+                        title: 'Success',
+                        message: 'Request Send Successfully',
+                        color: '#D6E09B'
+                    })
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
+            })
+            .catch((error) => {
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }
+            });
+        },
+    }
+}
+</script>
