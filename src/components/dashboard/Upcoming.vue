@@ -2,6 +2,9 @@
     <div>
         
         <slider></slider>
+        <div class="page-title-upcoming">
+            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Upcoming match </span></p>
+        </div>
 
         <div class="tab-section animated fadeInUp">
             <div class="online-play-tab-part">
@@ -41,9 +44,8 @@
 
                 <div class="tab-content animated fadeInUp" id="myTabContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                        
+                        <h4 class="text-center tabHeading"> All Sports </h4>
                         <div v-for="(sportItems,index) in matches" :key="index" class="sports_single_category">
-
                             <div v-for="(match, index2) in sportItems" :key="index2">
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
@@ -59,20 +61,16 @@
                                             </span>
                                         </p>
                                     </div>
-                                    <div class="matchTournamentLivePart">
-                                        <p class="overs-live-status">
-                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
-                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
+                                    <div class="matchTournamentLivePart">                                        
+                                        <p class="overs-upcomming-status">
+                                            <span class="upcomming-status">Upcoming</span>
                                         </p>
-                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
-
                                 <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
                                         <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                     </div>
-
                                     <div class="choice-answer-part">
                                         <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                             <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
@@ -389,9 +387,6 @@ export default {
             betAmount : '',
             estimateResult : 0
         }
-    },
-    mounted (){
-       console.log('Upcome page loaded')
     },
     created () {
         this.getLiveBet()

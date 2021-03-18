@@ -49,7 +49,8 @@ export default {
             .then((response) => {
                 this.$store.state.loader = false
                 if(response.status_code == 200){
-                    this.$store.dispatch('profileUpdate', this.form_edit)                    
+                    this.$store.dispatch('profileUpdate', this.form_edit)
+                    this.errors = ''
                     this.$toast.success({
                         title: 'Success',
                         message: 'Profile Update Successfully',

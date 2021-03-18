@@ -4,8 +4,7 @@
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> deposit request </span></p>
         </div>
         <div class="profile-wrapper">
-            <h6 class="text-center text-danger mt-2 mb-3">Notice : User deposit Time at 9:00 AM To 10:00 PM</h6>
-
+            <h6 class="text-center text-danger mt-2 mb-3">Notice : User deposit Time at 9:00 AM To 10:00 PM </h6>
             <form>                                  
                 <div class="form-group">
                     <label for="paymentMethod" style="display: block;text-align: left;">Payment Method<span class="text-danger">*</span></label>
@@ -109,6 +108,7 @@ export default {
                         type: 'success'
                     })
                 } else {
+                    this.errors = ''  
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,

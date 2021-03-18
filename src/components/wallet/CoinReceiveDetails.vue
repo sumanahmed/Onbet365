@@ -4,9 +4,7 @@
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> coin receive details</span></p>
         </div>
 
-        <div class="profile-wrapper">
-            <h5 class="page-heading">Coin Receive Details</h5>
-            
+        <div class="profile-wrapper">            
             <table id="example" class="text-center table table-sm table-striped table-bordered table-responsive-lg table-responsive-md table-responsive-sm" style="width:100%">
                 <thead>
                     <tr>

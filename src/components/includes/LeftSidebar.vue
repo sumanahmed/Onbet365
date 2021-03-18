@@ -8,12 +8,12 @@
 
             <!-- Login section -->
             <div v-if="!isLoggedUser" class="login_section p-2">
-                <form v-on:keyup.enter="signIn">
+                <form>
                     <input type="text" class="form-control mt-2 mb-1" v-model="form.username" placeholder="Username"/>
                     <p style="margin-bottom:0;font-size:12px;" class="text-danger" v-if="errors.username">{{ errors.username[0] }}</p>
                     <input type="password" class="form-control" v-model="form.password" placeholder="Password"/>
                     <p style="margin-bottom:0;font-size:12px;" class="text-danger" v-if="errors.password">{{ errors.password[0] }}</p>
-                    <input type="submit" name="login" value="Login" @click.prevent="signIn" />
+                    <button type="button" @click.prevent="signIn" class="customLoginBtn">Login</button>
                     <router-link to="/register" class="customJoinBtn"> Join </router-link>
                 </form>                
             </div>
@@ -100,6 +100,7 @@ export default {
                 if(response.status_code == 200){
                     localStorage.setItem('accessToken', response.access_token);
                     localStorage.setItem('accountType', response.user_type);
+                    this.$router.replace('/')
                     this.$router.go()
                     this.$store.state.loader = false
                     this.$store.dispatch('addUserId',  response.user_id)
@@ -121,8 +122,7 @@ export default {
             .then(() => {
                 localStorage.removeItem('accessToken');
                 this.$store.dispatch('userLogout', false)
-                this.$router.push('/')
-                this.$router.go()
+                this.$router.replace('/')
                 this.$toast.success({
                     title: 'Success',
                     message: 'Logout Successfully',

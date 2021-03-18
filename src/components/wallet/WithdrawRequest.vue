@@ -3,10 +3,7 @@
         <div class="page-title-custom">
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> withdrawal request</span></p>
         </div>
-
-        <div class="profile-wrapper">
-            <h5 class="page-heading"> Withdrawal Request</h5>
-            
+        <div class="profile-wrapper">            
             <form>                                     
                 <div class="form-group">
                     <label for="withdrawAmount" style="display: block;text-align: left;">Withdrawal Amount (400 - 20000) <span class="text-danger">*</span></label>
@@ -69,19 +66,19 @@ export default {
             .then((response) => {  
                 this.$store.state.loader = false
                 if(response.status_code){ 
-
+                    this.$store.dispatch('amountUpdate', this.form.withdrawAmount)
                     this.form.withdrawAmount = ''
                     this.form.withdrawNumber = ''
                     this.form.password = ''
                     this.errors = ''
 
-                    this.$store.dispatch('amountUpdate', this.form.withdrawAmount)  
                     this.$toast.success({
                         title: 'Success',
                         message: 'Request Send Successfully',
                         type: 'success'
                     })
                 } else {
+                    this.errors = ''
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,

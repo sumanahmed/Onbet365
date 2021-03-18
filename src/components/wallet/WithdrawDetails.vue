@@ -5,8 +5,6 @@
         </div>
 
         <div class="profile-wrapper">
-            <h5 class="page-heading">Withdrawal Details</h5>
-            
             <table id="example" class="text-center table table-sm table-responsive-lg table-responsive-md table-responsive-sm table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
@@ -31,9 +29,9 @@
                         <td>{{ withdraw.reference }}</td>
                         <td>{{ withdraw.created_at | dateformat }} at {{ withdraw.created_at | timeformat }}</td>
                         <td>
-                            <span v-if="withdraw.status" class="badge badge-success">Approve</span>
-                            <span v-else class="badge badge-warning">Pending</span>
-                            <span @click="showModal(withdraw.id, index)" class="badge badge-danger" href="">Refund</span>
+                            <span v-if="withdraw.status == 0" class="badge badge-warning">Pending</span>
+                            <span v-if="withdraw.status == 1" class="badge badge-success">Approve</span>                            
+                            <span @click="showModal(withdraw.id, index)" class="badge badge-danger" style="cursor: pointer;">Refund</span>
                         </td>
                     </tr>                    
                 </tbody>
@@ -135,8 +133,8 @@ export default {
                 if(response.status_code){  
                     this.$toast.success({
                         title: 'Success',
-                        message: 'Club Changed Successfully',
-                        color: '#D6E09B'
+                        message: response.message,
+                        type: 'success'
                     })
                     this.refundModal = false
                 } else {

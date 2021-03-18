@@ -4,7 +4,6 @@
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Sponsors </span></p>
         </div>        
         <div class="profile-wrapper" style="padding-bottom:38px;">
-            <h5 class="page-heading">Sponsors</h5>
             <table id="example" class="text-center table table-sm table-striped table-bordered table-responsive-lg table-responsive-md table-responsive-sm text-center" style="width:100%">
                 <thead>
                     <tr>

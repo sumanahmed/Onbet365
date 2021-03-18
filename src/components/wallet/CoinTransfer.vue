@@ -5,9 +5,7 @@
         </div>
 
         <div class="profile-wrapper" style="padding-bottom:38px;">
-            <h5 class="page-heading">Coin Transfer </h5>
-            <form>
-                <input type="hidden" name="_token" value="">                                            
+            <form>                                           
                 <div class="form-group">
                     <label for="username" style="display: block;text-align: left;">Username<span class="text-danger">*</span></label>
                     <input required="" autofocus="" id="username" v-model="form.username" class="form-control" type="text" name="username" placeholder="Username" value="">
@@ -65,6 +63,7 @@ export default {
                         type: 'success'
                     })
                 } else {
+                    this.errors = ''
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,

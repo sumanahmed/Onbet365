@@ -5,8 +5,6 @@
         </div>
 
         <div class="profile-wrapper">
-            <h5 class="page-heading">Coin Transfer Details</h5>
-            
             <table id="example" class="text-center table table-sm table-striped table-bordered table-responsive-lg table-responsive-md table-responsive-sm" style="width:100%">
                 <thead>
                     <tr>

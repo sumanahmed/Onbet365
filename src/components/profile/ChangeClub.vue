@@ -16,7 +16,7 @@
                     <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success" @click.prevent="clubChange">Change Club</button>
+                    <button type="button" class="btn btn-success" @click.prevent="clubChange">Change Club</button>
                 </div>
             </form>
         </div>

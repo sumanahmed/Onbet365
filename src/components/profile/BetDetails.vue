@@ -5,7 +5,6 @@
         </div>
 
         <div class="profile-wrapper" style="padding-bottom:38px;">
-            <h5 class="page-heading">Bet details</h5>
             <table id="example" class="text-center table table-sm table-responsive-lg table-responsive-md table-responsive-sm table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>

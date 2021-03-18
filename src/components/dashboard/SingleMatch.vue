@@ -27,65 +27,75 @@
                                 <div class="matchTournamentLivePart">
                                     <p class="overs-upcomming-status">
                                         <span class="upcomming-status">upcomming</span>
-                                    </p>                                                
+                                    </p>
                                 </div>
                             </div>
 
                             <div v-for="(matchesOption, index6) in matches" :key="index6" class="match-options">
-                                <div class="question-part">
+                                 <div class="question-part">
                                     <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
                                 </div>
-
                                 <div class="choice-answer-part">
-                                    <button v-for="(betDetail, index7) in matchesOption['betDetails']" :key="index7" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                                    <button v-for="(betDetail, index4) in matchesOption['betDetails']" :key="index4" @click="showModal(betDetail, matchesOption['matchOption'])" value="" :class="[(matchesOption['betDetails'].length == 2) ? 'single-item-for-mobile clickSingleBetDetail' : 'single-item clickSingleBetDetail']" data-target="#placeBetBtn" data-toggle="modal" data-backdrop="static" data-keyboard="false">
                                         <span> {{ betDetail['betName'] | capitalizeFirstLetter }} &nbsp;
-                                            <b class="text-primary" v-if="betDetail['status'] == 0"> $</b>
+                                            <b class="text-primary" v-if="betDetail['status'] == 0"> <i class="fa fa-lock" aria-hidden="true"></i></b>
                                             <b class="text-primary" v-else> {{ betDetail['betRate'] }}</b>
                                         </span> 
-                                    </button>
+                                    </button>                                  
                                 </div>
-                            </div>    
-
+                            </div> 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div v-if="isModal" class="modal fade show" style="display:block" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
+        <div v-if="isModal && betDetails.status != 0" class="modal fade show" style="display:block" id="placeBetBtn" aria-hidden="true" aria-labelledby="placeBetBtn" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple modal-dialog-centered">
                 <div class="modal-content modal-custom-content">
                     <div class="modal-header modal-custom-header">
                         <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
                             <span class="fa fa-window-close" aria-hidden="true"></span>
                         </button>
-                        <h4 style="text-align:center" class="modal-title">Place a bet</h4>
+                        <h4 v-if="isBodyHidden" style="text-align:center" class="modal-title">Place a bet</h4>
+                        <p v-else-if="successMsg" class="text-white text-center mb-0">{{ successMsg }}</p>
                     </div>
                     <form>
-                        <div class="modal-body modal-custom-body">
-                            <p class="text-info text-center" >Please wait bet processing</p>
-                            <!--<p class="text-danger text-center">Somthing went wrong</p>
-                            <p class="text-success text-center">Bet successfully done</p>-->
-
-                            <div v-if="isBodyHidden" class="modalCustomBody">
-                                <p class="text-warning text-center">Minimum Bet Amount 20 & Maximum 6000</p>
+                        <div v-if="isBodyHidden" class="modal-body modal-custom-body">
+                            <div class="modalCustomBody">
+                                <p class="text-warning text-center">Minimum Bet Amount 20 & Maximum 6000</p>                                
+                                <p v-if="processingMsg" class="text-info text-center" >{{ processingMsg }}</p>
+                                <p v-else-if="errorMsg" class="text-danger text-center">{{ errorMsg }}</p>
                                 <div class="modalQusAnsBlock">
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: {{ question }}</p>
                                     <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: {{ betDetails.betName }}</p>
-                                    <p class="text-secondary">
+                                    <p class="text-secondary" v-if="betDetails.status != 0">
                                         Bet Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
-                                    <input v-if="betDetails.status != 0" type="number" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0"/>
-                                    <span class="text-secondary" style="font-size: 14px;">
-                                    Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
+                                    <input autocomplete="off" v-if="betDetails.status != 0" type="text" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                    <span class="text-secondary" style="font-size: 14px;" v-if="betDetails.status != 0">
+                                        Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
-                            <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet" > Place Bet </button>
+                        <div v-if="isBodyHidden" style="display:block;background:#eee" class="modal-footer  text-center modal-custom-footer">
+                            <button class="btn btn-block btn-secondary" id="" type="button" name="placeBet"  @click="placeBetSubmit(betDetails.id,betDetails.match_id,betDetails.betoption_id,betDetails.betRate)" :disabled="isDisabled"> Place Bet </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="loginFirstModal" class="modal fade show" style="display:block" id="placeBetBtn1" aria-hidden="true" aria-labelledby="placeBetBtn1" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-simple modal-dialog-centered">
+                <div class="modal-content modal-custom-content">
+                    <div class="modal-header modal-custom-header-notLogin">
+                        <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
+                            <span class="fa fa-window-close" aria-hidden="true"></span>
+                        </button>
+                        <h6 style="text-align:center;margin-top:5px" class="modal-title"> Please login your account </h6>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,14 +110,16 @@ export default {
             singleMatch: '',
             matches: [],
             isBodyHidden: true,
-            isDisabled: true,
+            isClick: false,
             isModal: false,
+            loginFirstModal: false,
+            isDisabled : true,
             betDetails : '',
             question : '',
             processingMsg : '',
             successMsg : '',
             errorMsg : '',
-            betAmount : 0,
+            betAmount : '',
             estimateResult : 0,
             matchId: this.$route.params.id
         }
@@ -124,7 +136,14 @@ export default {
     },
     methods: {
         showModal (betDetail, question) {
-            this.isModal = true 
+            const isUserLoggedIn = this.$store.state.commonObj.user.loggedIn
+            if (isUserLoggedIn !== undefined) {
+                this.loginFirstModal = false
+                this.isModal = true 
+            } else {
+                this.isModal = false 
+                this.loginFirstModal = true
+            }
             this.betDetails = betDetail;
             this.question = question;          
         },
@@ -137,7 +156,9 @@ export default {
             }
         },
         cancelModal () {
-            this.isModal = false
+            this.isModal = this.loginFirstModal = false,
+            this.isBodyHidden = true,
+            this.errorMsg = false
         },
         getSingleMatch (matchId) {
             this.$store.state.loader =true
@@ -155,6 +176,38 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+        },        
+        placeBetSubmit(betDetailId,matchId,betOptionId,betRate){
+            var form_data = {
+                betDetail_id  : betDetailId,
+                match_id      : matchId,
+                betoption_id  : betOptionId,
+                betDetailRate : betRate,
+                betAmount     : this.betAmount,
+                user_id       : this.$store.state.commonObj.user.user_id
+            };
+            this.processingMsg = 'Bet processing wait for confirmation ...';
+            this.isDisabled = false;
+            this.betAmount = '';
+            config.postData('/user/store/place/bet', form_data)
+            .then((response) => {
+                if(response.errorMsg){
+                    this.isDisabled = true;
+                    this.processingMsg = this.successMsg = '';
+                    this.errorMsg = response.errorMsg;
+                }
+                if(response.successMsg){
+                    this.$store.dispatch('amountUpdate', form_data.betAmount)
+                    this.processingMsg = this.errorMsg = '';
+                    this.successMsg = response.successMsg;
+                    this.isBodyHidden = false;
+                }
+            }).then((error) => {
+                if(error){
+                    this.processingMsg = this.errorMsg = this.successMsg = this.amount = '';
+                    this.errorMsg = 'Something went wrong';
+                }
+            })
         }
     }
 }

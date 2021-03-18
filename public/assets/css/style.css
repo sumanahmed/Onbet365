@@ -51,6 +51,16 @@ body{
     font-weight: bold;
     display: inline-block;
 }
+.customLoginBtn{
+    font-size: 12px;
+    background: #ddd;
+    padding: 3px 10px;
+    margin-left: 2px;
+    text-decoration: none !important;
+    color: rgb(0, 0, 0)!important;
+    font-weight: bold;
+    display: inline-block;
+}
 
 .login_section input[type='button']  {
     margin-top: 0;
@@ -376,6 +386,11 @@ span.time {color: darksalmon;}
     padding: 5px 0px;
     background: #047565;
 }
+.tabHeading {
+    font-size: 20px;
+    padding: 5px 0px;
+    background: #047565;
+}
 
 .matchTournamentLiveWrap {
     display: table;
@@ -420,7 +435,7 @@ span.time {color: darksalmon;}
 .overs-upcomming-status span {
     float: right;
     padding-right: 4px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: #fff;
     font-style: italic;
@@ -684,6 +699,15 @@ span.time {color: darksalmon;}
 }
 
 .page-title-custom p {
+    margin-bottom: 0;
+}
+.page-title-upcoming {
+    background: #00885c;
+    color: #fff;
+    padding: 10px;
+}
+
+.page-title-upcoming p {
     margin-bottom: 0;
 }
 /* ================ Bradecumbe Style Start =================*/

@@ -41,7 +41,7 @@
 
                 <div class="tab-content animated fadeInUp" id="myTabContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                        
+                        <h4 class="text-center tabHeading"> All Sports </h4>
                         <div v-for="(sportItems,index) in matches" :key="index" class="sports_single_category">
 
                             <div v-for="(match, index2) in sportItems" :key="index2">
@@ -363,6 +363,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 <script>
@@ -400,8 +401,8 @@ export default {
         });
     },
     methods: {
-        showModal (betDetail, question) {
-            const isUserLoggedIn = this.$store.state.commonObj.user.loggedIn
+        showModal(betDetail, question) {
+            const isUserLoggedIn = this.$store.state.loggedIn
             if (isUserLoggedIn !== undefined) {
                 this.loginFirstModal = false
                 this.isModal = true 

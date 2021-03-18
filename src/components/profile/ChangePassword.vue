@@ -20,7 +20,7 @@
                     <span class="text-danger" v-if="errors.password_confirmation">{{ errors.password_confirmation[0] }}</span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success" value="Update Password" @click.prevent="updatePassword">
+                    <button type="button" class="btn btn-success" @click.prevent="updatePassword">Update Password</button>
                 </div>
             </form>
         </div>
@@ -53,14 +53,18 @@ export default {
             .then((response) => {
                 this.$store.state.loader = false
                 if(response.status_code == 200){    
-                    this.form = ''        
+                    this.form.oldPassword = ''
+                    this.form.password = ''
+                    this.form.password_confirmation = ''
+                    this.errors = ''
                     this.$toast.success({
                         title: 'Success',
                         message: 'Password Changed Successfully',
                         type: 'success'
                     })
                 } else {
-                    this.form = ''
+                    this.form.oldPassword = ''
+                    this.errors = ''
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,

@@ -4,7 +4,8 @@
 
             <div class="mobile-header">
                 <router-link to="/"><img :src="'./assets/img/logo.jpg'" alt="mobile logo"></router-link>
-                <span @click="mobileNavToggle" id="three-dot" class="fa fa-bars"></span>
+                <span v-if="isMobileNavOn" @click="mobileNavToggle" id="three-dot" class="fa fa-bars"></span>
+                <span v-if="!isMobileNavOn" @click="mobileNavClose" id="three-dot" class="fa fa-times"></span>
             </div>
 
             <div v-if="!isLoggedUser" class="mobile-login">
@@ -30,7 +31,7 @@
 
         </div>
         <!-- Mobile Menu -->
-        <div class="mobile-menu-wrapper" v-if="isMobileNavOn">                    
+        <div class="mobile-menu-wrapper" v-if="isMenuShow">                    
             <div class="menu_section">
                 <nav class="navigation">
                     <ul class="mainmenu">
@@ -73,7 +74,8 @@ export default {
     mixins: [UserMixin],
     data () {
         return {
-            isMobileNavOn: false,
+            isMobileNavOn: true,
+            isMenuShow: false,
             errors:[],
             form : {
                 username :'',
@@ -95,8 +97,15 @@ export default {
     methods: {
 	
         mobileNavToggle () {
-            this.isMobileNavOn = true
+            this.isMobileNavOn = false
+            this.isMenuShow = true
         },
+	
+        mobileNavClose () {
+            this.isMobileNavOn = true
+            this.isMenuShow = false
+        },
+
         signIn() {
             this.$store.state.loader = true
             config.postData('/user/login', this.form)
@@ -104,6 +113,7 @@ export default {
                 if(response.status_code == 200){
                     localStorage.setItem('accessToken', response.access_token);
                     localStorage.setItem('accountType', response.user_type);
+                    this.$router.replace('/')
                     this.$router.go()
                     this.$store.state.loader = false
                     this.$store.dispatch('addUserId',  response.user_id)
@@ -123,11 +133,13 @@ export default {
         },
         logout(){
             config.postData('/user/logout')
-            .then(() => {
+            .then(() => {                
+                this.isMobileNavOn = true
+                this.isMenuShow = false
                 localStorage.removeItem('accessToken');
                 this.$store.dispatch('userLogout', false)
                 this.$router.push('/')
-                this.$router.go()
+                this.$router.replace('/')
                 this.$toast.success({
                     title: 'Success',
                     message: 'Logout Successfully',
