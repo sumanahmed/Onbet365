@@ -5,6 +5,9 @@ export default {
     amountUpdate (state, amount) {
         state.commonObj.user.totalAmount = parseFloat(state.commonObj.user.totalAmount - amount)
     },
+    addAmount (state, amount) {
+        state.commonObj.user.totalAmount = parseFloat(state.commonObj.user.totalAmount + amount)
+    },
     userLogout (state, loggedInfalse) {
         state.commonObj.user.loggedIn = loggedInfalse
         state.commonObj = []

@@ -5,6 +5,9 @@ export default {
     amountUpdate ({commit}, payload) {
         commit('amountUpdate', payload)
     },
+    addAmount ({commit}, payload) {
+        commit('addAmount', payload)
+    },
     userLogout ({commit}, payload) {
         commit('userLogout', payload)
     },

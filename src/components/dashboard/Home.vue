@@ -403,7 +403,7 @@ export default {
     methods: {
         showModal(betDetail, question) {
             const isUserLoggedIn = this.$store.state.loggedIn
-            if (isUserLoggedIn !== undefined) {
+            if (isUserLoggedIn) {
                 this.loginFirstModal = false
                 this.isModal = true 
             } else {

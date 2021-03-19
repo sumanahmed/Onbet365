@@ -4,21 +4,19 @@
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> chanage club </span></p>
         </div>
         <div class="profile-wrapper" style="padding-bottom:38px;">
-            <form>
-                <div class="form-group">
-                    <label for="club_id" style="display: block;text-align: left;">Select club <span class="text-danger">*</span></label>
-                    <select id="club_id" v-model="form.club_id" name="club_id" class="form-control" tabindex="-1">                                                                                                                                            
-                        <option v-for="(club, index) in clubList" :key="index" :value="club.id">{{ club.clubName }}</option>                                                                                                                            
-                    </select>
-                    <span class="text-danger" v-if="errors.club_id">{{ errors.club_id[0] }}</span>
-                    <label for="password" style="display: block;text-align: left;">Password <span class="text-danger">*</span></label>
-                    <input required="" class="form-control" type="password" v-model="form.password" id="password" name="password" placeholder="Password">
-                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
-                </div>
-                <div class="form-group">
-                    <button type="button" class="btn btn-success" @click.prevent="clubChange">Change Club</button>
-                </div>
-            </form>
+            <div class="form-group">
+                <label for="club_id" style="display: block;text-align: left;">Select club <span class="text-danger">*</span></label>
+                <select id="club_id" v-model="form.club_id" name="club_id" class="form-control" tabindex="-1">                                                                                                                                            
+                    <option v-for="(club, index) in clubList" :key="index" :value="club.id">{{ club.clubName }}</option>                                                                                                                            
+                </select>
+                <span class="text-danger" v-if="errors.club_id">{{ errors.club_id[0] }}</span>
+                <label for="password" style="display: block;text-align: left;">Password <span class="text-danger">*</span></label>
+                <input required="" class="form-control" type="password" v-model="form.password" id="password" name="password" placeholder="Password">
+                <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-success" @click="clubChange">Change Club</button>
+            </div>
         </div>
     </div>
 </template>

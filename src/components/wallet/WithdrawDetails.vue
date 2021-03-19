@@ -31,7 +31,7 @@
                         <td>
                             <span v-if="withdraw.status == 0" class="badge badge-warning">Pending</span>
                             <span v-if="withdraw.status == 1" class="badge badge-success">Approve</span>                            
-                            <span @click="showModal(withdraw.id, index)" class="badge badge-danger" style="cursor: pointer;">Refund</span>
+                            <span @click="showModal(withdraw.id, index, withdraw.withdrawAmount)" class="badge badge-danger" style="cursor: pointer;">Refund</span>
                         </td>
                     </tr>                    
                 </tbody>
@@ -82,7 +82,8 @@ export default {
             },
             refundModal: false,
             id: '',
-            key: ''
+            key: '',
+            refundAmount: ''
         }
     },
     async created () {
@@ -121,16 +122,18 @@ export default {
                 }
             });
         },
-        showModal (id, key) {            
+        showModal (id, key, amount) {            
             this.refundModal = true
             this.key= key
             this.id= id
+            this.refundAmount = amount
         },
         submitRefund() {
             config.getData('/user/withdraw/cancel/'+ this.id)
-            .then((response) => {  
-                 this.withdraws.data.splice(this.key, 1)           
+            .then((response) => {            
                 if(response.status_code){  
+                    this.$store.dispatch('addAmount',  this.refundAmount)
+                    this.withdraws.data.splice(this.key, 1) 
                     this.$toast.success({
                         title: 'Success',
                         message: response.message,

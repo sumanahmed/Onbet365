@@ -94,6 +94,11 @@ const routes = [
         name:'withdraw-details',
         component:() => import('./components/wallet/WithdrawDetails'),
     },
+    {
+        path: '*',
+        component: () => import('./components/NotFoundPage'),
+        meta: { hideNavigation: true }
+    }
 ];
 
 export const router = new VueRouter({
