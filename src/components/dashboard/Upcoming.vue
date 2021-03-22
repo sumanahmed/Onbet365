@@ -390,6 +390,7 @@ export default {
     },
     created () {
         this.getLiveBet()
+        this.$store.dispatch('toggleMobileMenu', 1)
     },
     methods: {
         showModal (betDetail, question) {

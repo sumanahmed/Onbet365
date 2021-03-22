@@ -132,7 +132,7 @@ export default {
     },
     created () {
         this.getSingleMatch(this.$route.params.id)
-        console.log('this.$route = ', this.$route.query)
+        this.$store.dispatch('toggleMobileMenu', 1)
     },
     methods: {
         showModal (betDetail, question) {

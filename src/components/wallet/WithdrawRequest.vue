@@ -52,7 +52,10 @@ export default {
                 password: ''
             }
         }
-    },   
+    }, 
+    created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
+    },
     computed : {
         getUser : function () {
             return this.$store.state.commonObj.user

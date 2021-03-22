@@ -46,6 +46,9 @@ export default {
             return this.$store.state.commonObj.user
         }
     },
+    created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
+    },
     methods: {
         coinTransfer() {
             this.$store.state.loader = true

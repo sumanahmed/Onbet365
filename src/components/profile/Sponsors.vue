@@ -48,6 +48,7 @@ export default {
         }
     },
     created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
         this.getSponsors()
         this.getResults()
     },

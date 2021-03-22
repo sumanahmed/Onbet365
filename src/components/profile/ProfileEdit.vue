@@ -37,6 +37,9 @@ export default {
             form_edit: this.$store.state.commonObj.profile
         }
     },
+    created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
+    },
     computed : {
         countryList : function () {
             return this.$store.state.commonObj.country

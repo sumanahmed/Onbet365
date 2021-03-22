@@ -8,4 +8,8 @@ export default {
     userId: '',
     loggedIn: false,
     loader: true,
+    mobileNav: {
+        icon: true,
+        menu: false
+    }
 }

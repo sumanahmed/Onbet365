@@ -39,6 +39,9 @@ export default {
             return this.$store.state.commonObj.club
         }
     },
+    created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
+    },
     methods: {
         clubChange() {
             this.$store.state.loader = true

@@ -29,9 +29,9 @@
                         <td>{{ withdraw.reference }}</td>
                         <td>{{ withdraw.created_at | dateformat }} at {{ withdraw.created_at | timeformat }}</td>
                         <td>
-                            <span v-if="withdraw.status == 0" class="badge badge-warning">Pending</span>
-                            <span v-if="withdraw.status == 1" class="badge badge-success">Approve</span>                            
-                            <span @click="showModal(withdraw.id, index, withdraw.withdrawAmount)" class="badge badge-danger" style="cursor: pointer;">Refund</span>
+                            <span v-if="withdraw.status == 0" class="badge badge-warning mr-1">Pending</span>
+                            <span v-if="withdraw.status == 1" class="badge badge-success">Approved</span>                            
+                            <span v-if="withdraw.status == 0" @click="showModal(withdraw.id, index, withdraw.withdrawAmount)" class="badge badge-danger" style="cursor: pointer;">Refund</span>
                         </td>
                     </tr>                    
                 </tbody>
@@ -83,10 +83,11 @@ export default {
             refundModal: false,
             id: '',
             key: '',
-            refundAmount: ''
+            refundAmount: 0
         }
     },
     async created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
         this.getCoinTransfers()
         this.getResults()
     },
@@ -122,7 +123,7 @@ export default {
                 }
             });
         },
-        showModal (id, key, amount) {            
+        showModal (id, key, amount) {  
             this.refundModal = true
             this.key= key
             this.id= id
@@ -132,7 +133,7 @@ export default {
             config.getData('/user/withdraw/cancel/'+ this.id)
             .then((response) => {            
                 if(response.status_code){  
-                    this.$store.dispatch('addAmount',  this.refundAmount)
+                    this.$store.dispatch('addAmount', this.refundAmount)
                     this.withdraws.data.splice(this.key, 1) 
                     this.$toast.success({
                         title: 'Success',

@@ -16,5 +16,8 @@ export default {
     },
     addUserId ({commit}, payload) {
         commit('addUserId', payload)
+    },
+    toggleMobileMenu ({commit}, payload) {
+        commit('toggleMobileMenu', payload)
     }
 }

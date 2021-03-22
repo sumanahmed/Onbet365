@@ -30,7 +30,7 @@ export default {
     'mobile-nav': MobileNav,
     'left-sidebar': LeftSidebar,
     'right-sidebar': RightSidebar,
-  },
+  },  
   computed : {
     loader : function () {
       return this.$store.state.loader

@@ -392,6 +392,7 @@ export default {
         }
     },
     created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
         this.getLiveBet()
         window.Echo.channel('betUpdatenew')
         .listen('betdetailUpdateEvent', (e) => {

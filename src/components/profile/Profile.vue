@@ -51,6 +51,9 @@ export default {
         return {
         }
     },
+    created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
+    },
     computed : {
         loggedUser : function () {
             return this.$store.state.commonObj.profile

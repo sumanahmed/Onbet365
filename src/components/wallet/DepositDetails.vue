@@ -58,6 +58,7 @@ export default {
         }
     },
     created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
         this.getDepositDetails()
         this.getResults()
     },

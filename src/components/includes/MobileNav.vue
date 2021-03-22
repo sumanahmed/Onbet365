@@ -4,8 +4,8 @@
 
             <div class="mobile-header">
                 <router-link to="/"><img :src="'./assets/img/logo.jpg'" alt="mobile logo"></router-link>
-                <span v-if="isMobileNavOn" @click="mobileNavToggle" id="three-dot" class="fa fa-bars"></span>
-                <span v-if="!isMobileNavOn" @click="mobileNavClose" id="three-dot" class="fa fa-times"></span>
+                <span v-if="mobileNav.icon" @click="mobileNavToggle(0)" id="three-dot" class="fa fa-bars"></span>
+                <span v-if="!mobileNav.icon" @click="mobileNavToggle(1)" id="three-dot" class="fa fa-times"></span>
             </div>
 
             <div v-if="!isLoggedUser" class="mobile-login">
@@ -31,7 +31,7 @@
 
         </div>
         <!-- Mobile Menu -->
-        <div class="mobile-menu-wrapper" v-if="isMenuShow">                    
+        <div class="mobile-menu-wrapper" v-if="mobileNav.menu">                    
             <div class="menu_section">
                 <nav class="navigation">
                     <ul class="mainmenu">
@@ -68,14 +68,10 @@
 </template>
 <script>
 import config from '../../config'
-import UserMixin from '@/mixins/user'
 export default {
     name: 'MobileNav',
-    mixins: [UserMixin],
     data () {
         return {
-            isMobileNavOn: true,
-            isMenuShow: false,
             errors:[],
             form : {
                 username :'',
@@ -92,20 +88,19 @@ export default {
         },
         getTotalAmount : function () {
             return this.$store.state.commonObj.user.totalAmount
+        },
+        mobileNav : function () {
+            return this.$store.state.mobileNav
         }
     },
-    methods: {
-	
-        mobileNavToggle () {
-            this.isMobileNavOn = false
-            this.isMenuShow = true
+    methods: {	
+        mobileNavToggle (status) {
+            if (status != 1) {
+                this.$store.dispatch('toggleMobileMenu', status)
+            } else {
+                this.$store.dispatch('toggleMobileMenu', status)
+            }
         },
-	
-        mobileNavClose () {
-            this.isMobileNavOn = true
-            this.isMenuShow = false
-        },
-
         signIn() {
             this.$store.state.loader = true
             config.postData('/user/login', this.form)
@@ -137,8 +132,8 @@ export default {
                 this.isMobileNavOn = true
                 this.isMenuShow = false
                 localStorage.removeItem('accessToken');
+                this.$store.dispatch('toggleMobileMenu', 1)
                 this.$store.dispatch('userLogout', false)
-                this.$router.push('/')
                 this.$router.replace('/')
                 this.$toast.success({
                     title: 'Success',

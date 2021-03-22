@@ -56,6 +56,7 @@ export default {
         }
     },
     created () {
+        this.$store.dispatch('toggleMobileMenu', 1)
         this.getCoinTransfers()
         this.getResults()
     },

@@ -88,6 +88,7 @@ export default {
         }
     },
     created() {
+        this.$store.dispatch('toggleMobileMenu', 1)
         this.getLiveDepositNumber()
     },
     methods: {
