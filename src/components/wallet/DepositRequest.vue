@@ -91,6 +91,12 @@ export default {
     created() {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getLiveDepositNumber()
+        window.Echo.channel('depositNumberUpdate')
+        .listen('depositNumberUpdateEvent', (e) => {
+            if(e.deposit){
+                this.getLiveDepositNumber()
+            }
+        });
     },
     methods: {
         depositRequest() {
