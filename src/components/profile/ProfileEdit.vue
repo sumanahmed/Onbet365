@@ -17,7 +17,7 @@
                     </select>
                     <span class="text-danger" v-if="errors.country">{{ errors.country[0] }}</span>
                     <label for="phone" style="display: block;text-align: left;">Phone <span class="text-danger">*</span></label>
-                    <input required="" id="phone" class="form-control" type="text" name="phone" v-model="form_edit.phone" >
+                    <input required="" id="phone" class="form-control" type="number" name="phone" v-model="form_edit.phone" placeholder="11 digit phone number">
                     <span class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</span>
                 </div>
                 <div class="form-group">

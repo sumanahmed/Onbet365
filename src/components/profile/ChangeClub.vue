@@ -50,6 +50,7 @@ export default {
                 this.$store.state.loader = false
                 if(response.status_code == 200){    
                     this.$store.state.commonObj.profile.club_id = this.form.club_id
+                    this.errors = ''
                     this.form.password = '' 
                     this.$toast.success({
                         title: 'Success',
@@ -57,6 +58,7 @@ export default {
                         type: 'success'
                     })
                 } else {
+                    this.errors = ''
                     this.form.password = ''
                     this.$toast.error({
                         title: 'Error',

@@ -58,7 +58,9 @@ export default {
                 this.$store.state.loader = false              
                 if(response.status_code){ 
                     this.$store.dispatch('amountUpdate', this.form.transferAmount) 
-                    this.form = ''
+                    this.form.username = ''
+                    this.form.transferAmount = ''
+                    this.form.password = ''
                     this.errors = ''
                     this.$toast.success({
                         title: 'Success',
