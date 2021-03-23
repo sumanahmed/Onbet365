@@ -127,7 +127,7 @@ export default {
                     this.$toast.success({
                         title: 'Success',
                         message: response.message,
-                        color: '#D6E09B'
+                        type: 'success'
                     })
                     this.form = '' 
                     this.country = this.club_id = null
@@ -135,7 +135,7 @@ export default {
                     this.$toast.error({
                         title: 'Error',
                         message: response.message,
-                        color: '#ff3300'
+                        type: 'warning'
                     }) 
                 }
             })
