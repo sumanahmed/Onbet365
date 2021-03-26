@@ -1,8 +1,8 @@
 import config from '../config'
 export default {
     created () {      
-        const isUserLoggedIn = this.$store.state.loggedIn        
-        if (isUserLoggedIn !== undefined) {
+        const isUserLoggedIn = this.$store.state.loggedIn   
+        if (isUserLoggedIn) {
           const userId = this.$store.state.userId
             config.getData('/user/detail/' + userId)
             .then(response => {

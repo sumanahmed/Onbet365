@@ -388,18 +388,27 @@ export default {
             successMsg : '',
             errorMsg : '',
             betAmount : '',
-            estimateResult : 0
+            estimateResult : 0,
+            isPusherCall: false
         }
     },
     created () {
-        this.$store.dispatch('toggleMobileMenu', 1)
-        this.getLiveBet()
+        this.$store.dispatch('toggleMobileMenu', 1)    
         window.Echo.channel('betUpdatenew')
         .listen('betdetailUpdateEvent', (e) => {
-            if(e.message){     
+            if(e.message == 1){     
+                this.isPusherCall = true
                 this.getLiveBet()
+            } else if(e.message == 2){ 
+                this.$router.go()
+            } else {
+                this.isPusherCall = false
             }
         });
+        
+        if (!this.isPusherCall) {
+            this.getLiveBet()
+        }
     },
     methods: {
         showModal(betDetail, question) {
@@ -428,7 +437,7 @@ export default {
             this.errorMsg = false
         },
         getLiveBet () {
-            this.$store.state.loader = true
+            this.$store.state.loader = this.isPusherCall ? false : true
             config.getData('/live/data')
             .then((response) => { 
                 if (!response) {

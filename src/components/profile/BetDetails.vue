@@ -25,7 +25,8 @@
                         <td>{{ bet.betRate }}</td>
                         <td>{{ bet.betAmount }}</td>
                         <td>
-                            <span class="badge badge-primary">{{ bet.winLost }}</span>
+                            <span v-if="bet.status != 5" class="badge badge-primary">{{ bet.winLost }}</span>
+                            <span v-else class="badge badge-danger">{{ bet.winLost }}</span>
                         </td>
                         <td>
                             {{ bet.created_at | dateformat }} at {{ bet.created_at | timeformat }}                                                                                                                                                                    

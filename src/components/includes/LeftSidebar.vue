@@ -22,10 +22,10 @@
             <div v-if="isLoggedUser" class="profile_section">
                 <div class="single-profile">
                     <div class="avater-image">
-                        <p>{{ getUser.user_name.substring(0,1) | capitalizeFirstLetter }}</p>
+                        <p v-if="getUser">{{ getUser.user_name.substring(0,1) | capitalizeFirstLetter }}</p>
                     </div>
                     <div class="welcome-text-coin">
-                        <p class="text-blck m-0"><b>Welcome</b> : {{ getUser.user_name }} </p>
+                        <p v-if="getUser" class="text-blck m-0"><b>Welcome</b> : {{ getUser.user_name }} </p>
                         <i class="fa fa-bitcoin"></i> <b class="text-black">{{ getTotalAmount }}</b>
                     </div>
                 </div>                    
@@ -109,7 +109,14 @@ export default {
                         message: 'Loggedin Successfully',
                         type: 'success'
                     })
-                }     
+                }  else {
+                    this.$store.state.loader = false
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }   
             })
             .catch((error) => {
                 if (error.response.status === 422) {

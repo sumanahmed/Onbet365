@@ -112,7 +112,7 @@ const routes = [
     {
         path: '*',
         component: () => import('./components/NotFoundPage'),
-        meta: { hideNavigation: true }
+        meta: { hideNavigation: true } 
     }
 ];
 
@@ -128,7 +128,7 @@ router.beforeEach((to, from, next) => {
         const token = localStorage.getItem('accessToken');
         if (!token) {
             next({
-                path: '/login',
+                path: '/',
                 query: { redirect: to.fullPath }
             })
         } else {

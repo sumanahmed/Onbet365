@@ -16,7 +16,7 @@
                         </tr>
                         <tr>
                             <td>Club</td>
-                            <td> dream11 </td>
+                            <td> {{ loggedUser.club.username }} </td>
                         </tr>
                         <tr>
                             <td>Sponsor</td>

@@ -27,7 +27,7 @@
                     <input required="" id="phoneForm" v-model="form.phoneForm" class="form-control" type="number" min="0" name="phoneForm" placeholder="11 digit phone number" value="">
                     <span class="text-danger" v-if="errors.phoneForm">{{ errors.phoneForm[0] }}</span>
                     
-                    <label for="phoneTo" style="display: block;text-align: left;">Phone To <span class="text-danger">*</span></label>
+                    <label v-if="form.paymentMethodType != 0" for="phoneTo" style="display: block;text-align: left;">Phone To <span class="text-danger">*</span></label>
                     <div v-if="form.paymentMethodType == 1" class="input-group input-group-icon mt-2 mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
@@ -79,7 +79,8 @@ export default {
                 depositAmount: '',
                 phoneForm: '',
                 phoneTo: '',
-                password: ''
+                password: '',
+                isPusherCall: false
             }
         }
     },    
@@ -90,13 +91,20 @@ export default {
     },
     created() {
         this.$store.dispatch('toggleMobileMenu', 1)
-        this.getLiveDepositNumber()
         window.Echo.channel('depositNumberUpdate')
         .listen('depositNumberUpdateEvent', (e) => {
             if(e.deposit){
+                this.isPusherCall = true
                 this.getLiveDepositNumber()
+            } else {    
+                this.isPusherCall = false
             }
         });
+
+        if (!this.isPusherCall) {
+            console.log('pusher not called')
+            this.getLiveDepositNumber()
+        }
     },
     methods: {
         depositRequest() {
@@ -132,25 +140,25 @@ export default {
             });
         },
         getLiveDepositNumber () {
-            this.$store.state.loader = true
+            this.$store.state.loader = this.isPusherCall ? false : true
             config.getData('/live/deposit/number')
             .then((response) => {
-                if(response.status_code){  
+                if(response.status_code == 1){  
                     this.$store.state.loader = false
                     this.form.paymentMethodType = response.data.paymentMethodType
                     this.form.phoneTo = response.data.number
+                } else if(response.status_code == 2){  
+                    this.$store.state.loader = false
+                    this.form.paymentMethodType = 0
+                    this.form.phoneTo = ''
                 } else {
                     this.$toast.error({
                         title: 'Error',
+                        message: response.message,
                         type: 'warning'
                     })
                 }   
             })
-            .catch((error) => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                }
-            });
         }
     }
 }
