@@ -98,11 +98,6 @@ const routes = [
         path: '*',
         component: () => import('./components/NotFoundPage'),
         meta: { hideNavigation: true }
-    },
-    {
-        path: 'club/login',
-        name: 'Login',
-        component: () => import('./components/club/auth/Login'),
     }
 ];
 
