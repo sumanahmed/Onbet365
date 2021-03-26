@@ -6,7 +6,6 @@ export default {
           const userId = this.$store.state.userId
             config.getData('/user/detail/' + userId)
             .then(response => {
-                console.log('response of user = ', response)
                 if (response.status_code === 200) {
                   this.$store.commit('mutateCommonProperties', {
                     user: response.user,

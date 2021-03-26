@@ -24,9 +24,10 @@
                     <span class="text-danger" v-if="errors.depositAmount">{{ errors.depositAmount[0] }}</span>
                     
                     <label for="phoneForm" style="display: block;text-align: left;">Phone From <span class="text-danger">*</span></label>
-                    <input required="" id="phoneForm" v-model="form.phoneForm" class="form-control" type="number" min="0" name="phoneForm" placeholder="Phone Form" value="">
+                    <input required="" id="phoneForm" v-model="form.phoneForm" class="form-control" type="number" min="0" name="phoneForm" placeholder="11 digit phone number" value="">
                     <span class="text-danger" v-if="errors.phoneForm">{{ errors.phoneForm[0] }}</span>
                     
+                    <label for="phoneTo" style="display: block;text-align: left;">Phone To <span class="text-danger">*</span></label>
                     <div v-if="form.paymentMethodType == 1" class="input-group input-group-icon mt-2 mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
@@ -90,6 +91,12 @@ export default {
     created() {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getLiveDepositNumber()
+        window.Echo.channel('depositNumberUpdate')
+        .listen('depositNumberUpdateEvent', (e) => {
+            if(e.deposit){
+                this.getLiveDepositNumber()
+            }
+        });
     },
     methods: {
         depositRequest() {
@@ -98,7 +105,7 @@ export default {
             config.postData('/user/online/deposit', this.form)
             .then((response) => {
                 this.$store.state.loader = false
-                if(response.status_code){    
+                if(response.status_code){
                     this.form.depositAmount = '' 
                     this.form.phoneForm = ''
                     this.form.password = '' 
@@ -148,3 +155,11 @@ export default {
     }
 }
 </script>
+<style scoped>
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+</style>

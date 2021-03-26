@@ -12,6 +12,7 @@
                         <th>Amount</th>
                         <th>From</th>
                         <th>To</th>
+                        <th>Method</th>
                         <th>Status</th>
                         <th>Date</th>
                     </tr>
@@ -23,8 +24,14 @@
                         <td>{{ deposit.phoneForm }}</td>
                         <td>{{ deposit.phoneTo }}</td>
                         <td>
-                            <span v-if="deposit.status" class="badge badge-pill badge-success p-2"> Paid </span>
-                            <span v-else class="badge badge-pill badge-danger p-2"> Unpaid </span>
+                            <span v-if="deposit.status == 0" class="badge badge-pill badge-warning p-2"> Pending </span>
+                            <span v-else-if="deposit.status == 1" class="badge badge-pill badge-success p-2"> Accepted </span>
+                            <span v-else-if="deposit.status == 2" class="badge badge-pill badge-danger p-2"> Unpaid </span>
+                        </td>
+                        <td>
+                            <span v-if="deposit.paymentMethodType == 1" class="badge badge-pill badge-success p-2"> Bkash </span>
+                            <span v-else-if="deposit.paymentMethodType == 2" class="badge badge-pill badge-success p-2"> Nogad </span>
+                            <span v-else-if="deposit.paymentMethodType == 3" class="badge badge-pill badge-success p-2"> Rocket </span>
                         </td>
                         <td>
                             {{ deposit.created_at | dateformat }} at {{ deposit.created_at | timeformat }}                                                                 
