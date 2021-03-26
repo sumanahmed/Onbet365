@@ -48,11 +48,15 @@ export default {
                     this.sliders = response.sliders
                     this.news = response.config.siteNotice
                 } else {
-                    console.log('err')
+                    this.sliders = []
                 }
             })
             .catch((error) => {
-                console.log(error);
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         }
     }

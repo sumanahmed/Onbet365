@@ -439,7 +439,11 @@ export default {
                 }     
             })
             .catch((error) => {
-                console.log(error);
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         },
         placeBetSubmit(betDetailId,matchId,betOptionId,betRate){

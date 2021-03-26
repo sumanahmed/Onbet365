@@ -122,7 +122,6 @@ export default {
         async storeUser () {
             await config.postData('/user/registation', this.form)
             .then((response) => {
-                console.log('response.status = ', response.status)
                 if (response.status) {
                     this.$toast.success({
                         title: 'Success',
@@ -152,27 +151,32 @@ export default {
                 if (response.status_code == 200) {
                     this.clubs = response.clubs
                 } else {
-                    //this.$toast.error('Sorry, something went wrong') 
-                    console.log('err')
+                    this.$toast.error('Sorry, something went wrong') 
                 }
             })
             .catch((error) => {
-                console.log(error);
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         },
         async getCountryList () {
             await config.getData('/country/list')
             .then((response) => {
-                console.log('response = ', response)
                 if (response.status_code == 200) {
                     this.countries = response.countries
                 } else {
-                    //this.$toast.error('Sorry, something went wrong')                    
-                    console.log('err')
+                    this.$toast.error('Sorry, something went wrong')
                 }
             })
             .catch((error) => {
-                console.log(error);
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         }
     }

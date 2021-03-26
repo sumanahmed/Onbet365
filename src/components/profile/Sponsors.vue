@@ -61,7 +61,11 @@ export default {
                 this.sponsors = response.data
             })
             .catch((error) => {
-                console.log('error = ', error)
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         },
         getResults(page = 1) {

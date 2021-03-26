@@ -6,7 +6,7 @@
                 <h4 class="">Upcoming Match</h4>
                 <div class="upcoming_match_wraper">
                     <span v-for="(matche, index) in upcomingMatches" :key="index" href="" class="upcoming_single_match">
-                        <router-link :to="{ path: '/single-match/' + matche.id }">
+                        <router-link :to="{ path: '/single-match?id=' + matche.id }">
                             <h5 class="upcomming-match-tournament">{{ matche.sportName | capitalizeFirstLetter }}</h5>
                             <p class="both-team"><b>{{ matche.teamOne | capitalizeFirstLetter }}</b> <span> vs </span> <b> {{ matche.teamTwo | capitalizeFirstLetter }}</b></p>
                             <p class="date-time"><span class="date">Date : {{ matche.matchDateTime | dateformat }} </span> <span class="time">Time : {{ matche.matchDateTime | timeformat }} </span></p>
@@ -36,11 +36,15 @@ export default {
                 if (response.status_code == 200) {
                     this.upcomingMatches = response.upcomingMatches
                 } else {
-                    console.log('err')
+                    this.upcomingMatches = []
                 }
             })
             .catch((error) => {
-                console.log(error);
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         }
     }

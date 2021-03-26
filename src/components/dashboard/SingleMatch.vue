@@ -125,13 +125,14 @@ export default {
         }
     },
     watch: {
-        '$route.params.id': function (newVal, oldVal) {
-            this.getSingleMatch(newVal)
-            console.log('oldVal = ', oldVal)
+        '$route.query.id': function (newVal, oldVal) {
+            if(newVal != oldVal) {
+                this.getSingleMatch(newVal)
+            }
         }
     },
     created () {
-        this.getSingleMatch(this.$route.params.id)
+        this.getSingleMatch(this.$route.query.id)
         this.$store.dispatch('toggleMobileMenu', 1)
     },
     methods: {
@@ -164,7 +165,6 @@ export default {
             this.$store.state.loader =true
             config.getData('/single/match/details/' + matchId)
             .then((response) => {    
-                console.log('response = ', response)  
                 if (!response) {
                     this.$store.state.loader = true
                 } else {
@@ -174,7 +174,11 @@ export default {
                 }     
             })
             .catch((error) => {
-                console.log(error);
+                this.$toast.error({
+                    title: 'Error',
+                    message: error,
+                    type: 'warning'
+                })
             });
         },        
         placeBetSubmit(betDetailId,matchId,betOptionId,betRate){
