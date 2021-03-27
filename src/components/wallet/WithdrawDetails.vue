@@ -30,10 +30,11 @@
                         <td>{{ withdraw.vueDateTime | dateformat }} at {{ withdraw.vueDateTime | timeformat }}</td>
                         <td>
                             <span v-if="withdraw.status == 0" class="badge badge-warning mr-1">Pending</span>
-                            <span v-if="withdraw.status == 1" class="badge badge-success">Approved</span>                            
+                            <span v-if="withdraw.status == 3" class="badge badge-primary mr-1">Withdrawal Processing</span>
+                            <span v-if="withdraw.status == 1" class="badge badge-success">Paid</span>                            
                             <span v-if="withdraw.status == 0" @click="showModal(withdraw.id, index, withdraw.withdrawAmount)" class="badge badge-danger" style="cursor: pointer;">Refund</span>
                         </td>
-                    </tr>                    
+                    </tr>
                 </tbody>
             </table> 
             <div class="mt-3">

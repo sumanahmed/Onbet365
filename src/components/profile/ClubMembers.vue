@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-title-custom">
-            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Club members </span></p>
+            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Sponsor members </span></p>
         </div>
 
         <div class="profile-wrapper" style="padding-bottom:38px;">

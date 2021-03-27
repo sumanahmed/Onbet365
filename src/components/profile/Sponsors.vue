@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-title-custom">
-            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Sponsors </span></p>
+            <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Sponsors Income</span></p>
         </div>        
         <div class="profile-wrapper" style="padding-bottom:38px;">
             <table id="example" class="text-center table table-sm table-striped table-bordered table-responsive-lg table-responsive-md table-responsive-sm text-center" style="width:100%">
