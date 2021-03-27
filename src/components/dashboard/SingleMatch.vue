@@ -8,9 +8,9 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         <div class="sports_single_category">
-                            <h4 class="text-center"> {{ singleMatch[0].sportName | capitalizeFirstLetter }} </h4>
+                            <h4 v-if="singleMatch" class="text-center"> {{ singleMatch[0].sportName | capitalizeFirstLetter }} </h4>
                             <div  class="matchTournamentLiveWrap">
-                                <div class="matchTournamentDetailPart">
+                                <div v-if="singleMatch" class="matchTournamentDetailPart">
                                     <p>
                                         {{ singleMatch[0].matchTitle | capitalizeFirstLetter }} 
                                         &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>

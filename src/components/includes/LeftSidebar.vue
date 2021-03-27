@@ -19,7 +19,7 @@
             </div>
 
             <!-- Profile section -->
-            <div v-if="isLoggedUser" class="profile_section">
+            <div v-if="isLoggedUser && getUser" class="profile_section">
                 <div class="single-profile">
                     <div class="avater-image">
                         <p v-if="getUser">{{ getUser.user_name.substring(0,1) | capitalizeFirstLetter }}</p>
@@ -129,7 +129,9 @@ export default {
             .then(() => {
                 localStorage.removeItem('accessToken');
                 this.$store.dispatch('userLogout', false)
-                this.$router.replace('/')
+                if (this.$route.name != 'home') {
+                    this.$router.push('/')
+                }
                 this.$toast.success({
                     title: 'Success',
                     message: 'Logout Successfully',

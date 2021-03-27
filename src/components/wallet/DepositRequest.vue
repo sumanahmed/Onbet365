@@ -102,7 +102,6 @@ export default {
         });
 
         if (!this.isPusherCall) {
-            console.log('pusher not called')
             this.getLiveDepositNumber()
         }
     },

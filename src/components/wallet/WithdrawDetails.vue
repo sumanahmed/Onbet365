@@ -137,14 +137,13 @@ export default {
             config.getData('/user/withdraw/cancel/'+ this.id)
             .then((response) => {            
                 if(response.status_code){  
+                    this.$router.go()
                     this.$store.dispatch('addAmount', this.refundAmount)
-                    this.withdraws.data.splice(this.key, 1) 
                     this.$toast.success({
                         title: 'Success',
                         message: response.message,
                         type: 'success'
                     })
-                    this.refundModal = false
                 } else {
                     this.$toast.error({
                         title: 'Error',

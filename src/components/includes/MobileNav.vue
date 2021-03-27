@@ -17,7 +17,7 @@
             </div>
 
             <!-- Mobile Profile section -->
-            <div v-if="isLoggedUser" class="profile_section_mobile">
+            <div v-if="isLoggedUser && getUser" class="profile_section_mobile">
                 <div class="single-profile-mobile">
                     <div class="avater-image-mobile">
                         <p>{{ getUser.user_name.substring(0,1) | capitalizeFirstLetter }}</p>
