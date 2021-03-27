@@ -119,7 +119,7 @@ export default {
                     this.errors = ''          
                     this.$toast.success({
                         title: 'Success',
-                        message: 'Request Send Successfully',
+                        message: response.message,
                         type: 'success'
                     })
                 } else {

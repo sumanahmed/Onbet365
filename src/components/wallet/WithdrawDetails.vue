@@ -27,7 +27,7 @@
                         <td v-if="withdraw.withdrawPaymentType == 6"> Rocket Agent </td>
                         <td>{{ withdraw.withdrawAmount }}</td>
                         <td>{{ withdraw.reference }}</td>
-                        <td>{{ withdraw.created_at | dateformat }} at {{ withdraw.created_at | timeformat }}</td>
+                        <td>{{ withdraw.vueDateTime | dateformat }} at {{ withdraw.vueDateTime | timeformat }}</td>
                         <td>
                             <span v-if="withdraw.status == 0" class="badge badge-warning mr-1">Pending</span>
                             <span v-if="withdraw.status == 1" class="badge badge-success">Approved</span>                            

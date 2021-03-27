@@ -128,8 +128,14 @@ export default {
                         message: response.message,
                         type: 'success'
                     })
-                    this.form = '' 
-                    this.country = this.club_id = null
+                    this.form.username = ''
+                    this.form.email = ''
+                    this.form.password = ''
+                    this.form.password_confirmation = ''
+                    this.form.country = null
+                    this.form.phone = ''
+                    this.form.sponsorName = ''
+                    this.form.club_id = null
                 } else {
                     this.$toast.error({
                         title: 'Error',

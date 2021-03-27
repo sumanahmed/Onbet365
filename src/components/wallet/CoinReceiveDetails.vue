@@ -21,7 +21,7 @@
                         <td>{{ coin.sendUsername }}</td>
                         <td>{{ coin.transferAmount }}</td>
                         <td>
-                            {{ coin.created_at | dateformat }} at {{ coin.created_at | timeformat }}                                                                                  
+                            {{ coin.vueDateTime | dateformat }} at {{ coin.vueDateTime | timeformat }}                                                                                  
                         </td>
                         <td>
                             <span v-if="coin.status" class="badge badge-success">Received</span>

@@ -15,9 +15,9 @@
                 <tbody>
                     <tr v-for="(sponsor,index) in sponsors.data" :key="index">
                         <td>{{ sponsor.username }}</td>
-                        <td>{{ sponsor.sponsorRate }}</td>
+                        <td>{{ sponsor.sponsorGet }}</td>
                         <td>
-                            {{ sponsor.created_at | dateformat }} at {{ sponsor.created_at | timeformat }}                                                                                                    
+                            {{ sponsor.vueDateTime | dateformat }} at {{ sponsor.vueDateTime | timeformat }}                                                                                                    
                         </td>
                     </tr>
                 </tbody>

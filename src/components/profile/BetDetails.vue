@@ -29,7 +29,7 @@
                             <span v-else class="badge badge-danger">{{ bet.winLost }}</span>
                         </td>
                         <td>
-                            {{ bet.created_at | dateformat }} at {{ bet.created_at | timeformat }}                                                                                                                                                                    
+                            {{ bet.vueDateTime | dateformat }} at {{ bet.vueDateTime | timeformat }}
                         </td>
                     </tr>
                 </tbody>

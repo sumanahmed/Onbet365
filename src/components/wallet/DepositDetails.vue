@@ -34,7 +34,7 @@
                             <span v-else-if="deposit.paymentMethodType == 3" class="badge badge-pill badge-success p-2"> Rocket </span>
                         </td>
                         <td>
-                            {{ deposit.created_at | dateformat }} at {{ deposit.created_at | timeformat }}                                                                 
+                            {{ deposit.vueDateTime | dateformat }} at {{ deposit.vueDateTime | timeformat }}                                                                 
                         </td>
                     </tr>
                 </tbody>

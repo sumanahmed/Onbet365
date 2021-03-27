@@ -42,9 +42,9 @@
                                 <li><router-link to="/profile">Profile</router-link></li>
                                 <li><router-link to="/profile-edit">Edit Profile</router-link></li>
                                 <li><router-link to="/change-club">Change Club</router-link></li>
-                                <li><router-link to="/club-members">Club Members</router-link></li>
                                 <li><router-link to="/change-password">Change Password</router-link></li>
-                                <li><router-link to="/sponsors">Sponsors</router-link></li>
+                                <li><router-link to="/club-members">Sponsor Members</router-link></li>
+                                <li><router-link to="/sponsors">Sponsors Income</router-link></li>
                                 <li><router-link to="/bet-details">Bet Details</router-link></li>
                             </ul>
                         </li>
