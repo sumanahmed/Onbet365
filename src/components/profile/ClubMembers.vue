@@ -20,7 +20,7 @@
                         <td>{{ member.username }}</td>
                         <td>{{ member.phone }}</td>
                         <td>
-                            {{ member.created_at | dateformat }} at {{ member.created_at | timeformat }}                                                                                                    
+                            {{ member.vueDateTime | dateformat }} at {{ member.vueDateTime | timeformat }}                                                                                                    
                         </td>
                         <td> 
                             <span v-if="member.status" class="badge badge-pill badge-success">Active</span>
