@@ -9,14 +9,14 @@
             <p><i class="fa fa-user-o"></i></p>
             <div class="profile">
                 <table class="table table-bordered">
-                    <tbody>
+                    <tbody v-if="loggedUser">
                         <tr>
                             <td>Username</td>
                             <td> {{ loggedUser.username }} </td>
                         </tr>
                         <tr>
                             <td>Club</td>
-                            <td> {{ loggedUser.club.username }} </td>
+                            <td> {{ loggedUser.clubUsername }} </td>
                         </tr>
                         <tr>
                             <td>Sponsor</td>

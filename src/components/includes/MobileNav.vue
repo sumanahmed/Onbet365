@@ -105,19 +105,25 @@ export default {
             this.$store.state.loader = true
             config.postData('/user/login', this.form)
             .then((response) => {
+                this.$store.state.loader = false
                 if(response.status_code == 200){
                     localStorage.setItem('accessToken', response.access_token);
                     localStorage.setItem('accountType', response.user_type);
                     this.$router.replace('/')
                     this.$router.go()
-                    this.$store.state.loader = false
                     this.$store.dispatch('addUserId',  response.user_id)
                     this.$toast.success({
                         title: 'Success',
                         message: 'Loggedin Successfully',
                         type: 'success'
                     })
-                }     
+                } else {
+                    this.$toast.error({
+                        title: 'Error',
+                        message: response.message,
+                        type: 'warning'
+                    })
+                }  
             })
             .catch((error) => {
                 this.$store.state.loader = false
