@@ -7,11 +7,7 @@ import store from './store'
 import moment from 'moment'
 import CxltToastr from 'cxlt-vue2-toastr'
 import 'cxlt-vue2-toastr/dist/css/cxlt-vue2-toastr.css'
-import VueAnalytics from 'vue-analytics';
-
-Vue.use(VueAnalytics, {
-  id: 'UA-xxxxxxxxx-x'
-});
+import VueGtag from "vue-gtag";
 
 import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');
@@ -21,9 +17,6 @@ window.Echo = new Echo({
     cluster: 'ap1',
     encrypted: true
 });
-
-
-Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
 
@@ -51,6 +44,11 @@ Vue.filter('capitalizeFirstLetter',(string)=>{
 Vue.prototype.$imagePath = 'https://dreambet365.uk/';
 
 export default router;
+
+Vue.use(VueGtag, {
+  config: { id: "G-ND0555EY0C" }
+}, router);
+
 new Vue({
   router,
   store,

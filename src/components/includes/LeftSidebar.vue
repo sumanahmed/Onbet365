@@ -109,7 +109,7 @@ export default {
                         message: 'Loggedin Successfully',
                         type: 'success'
                     })
-                }  else {
+                } else {
                     this.$store.state.loader = false
                     this.$toast.error({
                         title: 'Error',
