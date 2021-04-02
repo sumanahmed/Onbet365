@@ -4,9 +4,8 @@
             <p> <b> Home </b> <i class="fa fa-angle-right"></i> <span class="text-warning"> Sponsor members </span></p>
         </div>
 
-        <div class="profile-wrapper" style="padding-bottom:38px;">
-
-            <table id="example" class="table table-sm table-striped table-bordered table-responsive-lg table-responsive-md table-responsive-sm " style="width:100%">
+         <div class="profile-wrapper table-responsive" style="padding-bottom:38px;">
+            <table id="example" class="text-center table table-sm table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Username</th>

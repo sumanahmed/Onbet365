@@ -19,10 +19,10 @@
                         <option :value="null">Select Payment Method</option>
                         <option :value="1">Bkash Personal</option>
                         <option :value="2">Bkash Agent</option>
-                        <option :value="3" disabled="disabled">Nagad Personal</option>
-                        <option :value="4" disabled="disabled">Nagad Agent</option>
-                        <option :value="5" disabled="disabled">Rocket Personal</option>
-                        <option :value="6" disabled="disabled">Rocket Agent</option>
+                        <option :value="3">Nagad Personal</option>
+                        <option :value="4">Nagad Agent</option>
+                        <option :value="5">Rocket Personal</option>
+                        <option :value="6">Rocket Agent</option>
                     </select>
                     <span class="text-danger" v-if="errors.withdrawPaymentType">{{ errors.withdrawPaymentType[0] }}</span>
 

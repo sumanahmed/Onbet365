@@ -24,6 +24,12 @@ const routes = [
         component:() => import('./components/dashboard/SingleMatch')
     },
     {
+        path:'/complain',
+        name:'complain',
+        component:() => import('./components/profile/Complain'),   
+        meta: { requiresAuth:true }    
+    },
+    {
         path:'/profile',
         name:'profile',
         component:() => import('./components/profile/Profile'),   

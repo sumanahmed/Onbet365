@@ -41,12 +41,12 @@ Vue.filter('capitalizeFirstLetter',(string)=>{
   return string.charAt(0).toUpperCase() + string.slice(1);
 })
 
-Vue.prototype.$imagePath = 'https://dreambet365.uk/';
+Vue.prototype.$imagePath = 'https://notout365.uk/';
 
 export default router;
 
 Vue.use(VueGtag, {
-  config: { id: "G-ND0555EY0C" }
+  config: { id: "G-DFVLKEQQ1C" }
 }, router);
 
 new Vue({

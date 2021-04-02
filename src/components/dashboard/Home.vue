@@ -322,7 +322,7 @@
                             <span class="fa fa-window-close" aria-hidden="true"></span>
                         </button>
                         <h4 v-if="isBodyHidden" style="text-align:center" class="modal-title">Place a bet</h4>
-                        <p v-else-if="successMsg" class="text-white text-center mb-0">{{ successMsg }}</p>
+                        <p v-else-if="successMsg" class="text-white text-center mb-0" style="line-height: 2;">{{ successMsg }}</p>
                     </div>
                     <form>
                         <div v-if="isBodyHidden" class="modal-body modal-custom-body">
@@ -331,14 +331,14 @@
                                 <p v-if="processingMsg" class="text-info text-center" >{{ processingMsg }}</p>
                                 <p v-else-if="errorMsg" class="text-danger text-center">{{ errorMsg }}</p>
                                 <div class="modalQusAnsBlock">
-                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus">Q: {{ question }}</p>
-                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns">A: {{ betDetails.betName }}</p>
+                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailQus"><i class="fa fa-question-circle" aria-hidden="true"></i> {{ question }}</p>
+                                    <p style="text-transform: capitalize" class="text-secondary" id="betDetailAns"><i class="fa fa-reply" aria-hidden="true"></i> {{ betDetails.betName }}</p>
                                     <p class="text-secondary" v-if="betDetails.status != 0">
-                                        Bet Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
+                                        <i class="fa fa-bitcoin"></i> Rate : <input type="text" name="betRate" id="betDetailRate" :value="betDetails.betRate" readonly/>
                                     </p>
                                     <input autocomplete="off" v-if="betDetails.status != 0" type="number" @keyup="estimateReturn(betDetails.betRate)" v-model="betAmount" name="betAmount" id="betAmount" placeholder="0" value="" min="0" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                     <span class="text-secondary" style="font-size: 14px;" v-if="betDetails.status != 0">
-                                        Est. Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
+                                        Possible Return: <input type="text" name="" id="betEstReturn" v-model="estimateResult" value="" readonly/>
                                     </span>
                                 </div>
                             </div>
@@ -356,9 +356,9 @@
                 <div class="modal-content modal-custom-content">
                     <div class="modal-header modal-custom-header-notLogin">
                         <button id="customModelClose" type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelModal">
-                            <span class="fa fa-window-close" aria-hidden="true"></span>
+                            <span style="margin-right:3px;margin-bottom:3px" class="fa fa-window-close" aria-hidden="true"></span>
                         </button>
-                        <h6 style="text-align:center;margin-top:5px" class="modal-title"> Please login your account </h6>
+                        <h6 style="text-align:center;" class="modal-title"> Please login your account </h6>
                     </div>
                 </div>
             </div>

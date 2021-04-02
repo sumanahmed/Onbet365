@@ -39,6 +39,7 @@
                         <li><router-link to="/upcoming"><i class="fa fa-history" aria-hidden="true"></i> Upcoming</router-link></li>
                         <li v-if="isLoggedUser"><a style="color: #fff;"><i class="fa fa-user" aria-hidden="true"></i> Profile <i style="float: right;" class="fa fa-angle-down fa-sm " aria-hidden="true"></i></a>
                             <ul class="submenu">
+                                <li><router-link to="/register"> <span class="text-warning"> Join New user </span> </router-link></li>
                                 <li><router-link to="/profile">Profile</router-link></li>
                                 <li><router-link to="/profile-edit">Edit Profile</router-link></li>
                                 <li><router-link to="/change-club">Change Club</router-link></li>
@@ -50,6 +51,7 @@
                         </li>
                         <li v-if="isLoggedUser"><a style="color: #fff;"><i class="fa fa-credit-card" aria-hidden="true"></i> Wallet <i style="float: right;" class="fa fa-angle-down fa-sm " aria-hidden="true"></i> </a>
                             <ul class="submenu">
+                                <li><router-link to="/complain"><span class="text-warning">Your Complain</span></router-link></li>
                                 <li><router-link to="/deposit-request">Deposit request</router-link></li>
                                 <li><router-link to="/deposit-details">Deposit Details</router-link></li>
                                 <li><router-link to="/coin-transfer">Coin Transfer</router-link></li>

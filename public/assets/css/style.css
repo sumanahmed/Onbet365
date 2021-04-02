@@ -498,12 +498,13 @@ span.time {color: darksalmon;}
 }
 
 .modal-custom-header {
-    padding: 5px;
+    padding: 0px;
     display: block;
     background:#047565;
     border:0px;
     border-radius: 0;
     color:#fff;
+    line-height: 2.2;
 }
 
 .modal-custom-header-notLogin {
@@ -634,7 +635,7 @@ span.time {color: darksalmon;}
     border: 1px solid #ddd;
     padding: 3px 8px;
     font-size: 14px;
-    background: #00885c;
+    background: #f90000;
     color: #fff !important;
     font-weight: 700;
     float: right;
@@ -790,7 +791,7 @@ span.time {color: darksalmon;}
   
   .mainmenu li:hover .submenu {
     display: block;
-    max-height: 315px;
+    max-height: 335px;
   }
   
   /*
