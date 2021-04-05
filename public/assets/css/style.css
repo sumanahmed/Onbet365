@@ -173,7 +173,7 @@ span.date {
     color: aquamarine;
 }
 
-span.time {color: darksalmon;}
+span.time {color: #fff700;}
 
 .footer-section{
     height: 50px;
@@ -396,9 +396,10 @@ span.time {color: darksalmon;}
     display: table;
     width: 100%;
     font-size: 14px;
-    border: 2px solid #c2cc9d;
-    border-left: 5px solid rgb(0 208 255);
+    border: 1px solid #abd600;
+    border-left: 5px solid #abd600;
     padding: 5px;
+    background:#000;
 }
 
 .matchTournamentDetailPart {
@@ -427,9 +428,9 @@ span.time {color: darksalmon;}
     float: right;
     padding-right: 4px;
     font-size: 12px;
-    font-weight: 700;
-    color: red;
+    font-weight: 900;
     font-style: italic;
+    animation: customZoomIn 3s infinite;
 }
 
 .overs-upcomming-status span {
@@ -473,7 +474,7 @@ span.time {color: darksalmon;}
     outline: 0px auto -webkit-focus-ring-color;
 }
 
-.single-item:hover {
+.single-item:hover, .single-item-for-mobile:hover {
     background: #047565;
     border:1px solid #047565;
     color: #fff;
@@ -831,4 +832,15 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+@keyframes  customZoomIn {
+    /* You could think of as "step 1" */
+    0% {
+        color: #2c4841;
+    }
+    /* You could think of as "step 2" */
+    100% {
+        color: #ff3952;
+    }
 }
