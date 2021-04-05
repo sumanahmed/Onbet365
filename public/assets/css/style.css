@@ -399,7 +399,7 @@ span.time {color: #fff700;}
     border: 1px solid #abd600;
     border-left: 5px solid #abd600;
     padding: 5px;
-    background:#000;
+    background:#000
 }
 
 .matchTournamentDetailPart {
@@ -484,8 +484,12 @@ span.time {color: #fff700;}
 .single-item:hover.single-item span b {
     color: #eaf901 !important;
 }
+.single-item-for-mobile:hover.single-item-for-mobile span b {
+    color: #eaf901 !important;
+}
 .single-item-for-mobile {
     width: 50%;
+    cursor: pointer;
 }
  /* ========== Tab style End ==========*/
 
