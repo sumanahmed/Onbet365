@@ -401,8 +401,8 @@ span.time {color: #fff700;}
     padding: 5px;
     background:#000;
 }
-.sportCategoryCustom {
-    background: red;
+span.sportCategoryCustom {
+    background:rgb(255, 0, 0);
     padding: 1px 5px;
 }
 
