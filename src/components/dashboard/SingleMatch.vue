@@ -12,6 +12,7 @@
                             <div  class="matchTournamentLiveWrap">
                                 <div v-if="singleMatch" class="matchTournamentDetailPart">
                                     <p>
+                                        <span class="sportCategoryCustom">{{ singleMatch[0].sportName | capitalizeFirstLetter }}</span>
                                         {{ singleMatch[0].matchTitle | capitalizeFirstLetter }} 
                                         &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
                                         <span class="time">

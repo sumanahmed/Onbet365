@@ -50,6 +50,7 @@
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
+                                            <span class="sportCategoryCustom">{{ match['sportName'] | capitalizeFirstLetter }}</span>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
                                             <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
@@ -91,6 +92,7 @@
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
+                                            <span class="sportCategoryCustom">{{ match['sportName'] | capitalizeFirstLetter }}</span>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
                                             <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
@@ -136,6 +138,7 @@
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
+                                            <span class="sportCategoryCustom">{{ match['sportName'] | capitalizeFirstLetter }}</span>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
                                             <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
@@ -181,6 +184,7 @@
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
+                                            <span class="sportCategoryCustom">{{ match['sportName'] | capitalizeFirstLetter }}</span>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
                                             <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
@@ -226,6 +230,7 @@
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
+                                            <span class="sportCategoryCustom">{{ match['sportName'] | capitalizeFirstLetter }}</span>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
                                             <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
@@ -271,6 +276,7 @@
                                 <div  class="matchTournamentLiveWrap">
                                     <div class="matchTournamentDetailPart">
                                         <p>
+                                            <span class="sportCategoryCustom">{{ match['sportName'] | capitalizeFirstLetter }}</span>
                                             {{ match['matchTitle'] | capitalizeFirstLetter }} 
                                             <br/><i class="fa fa-calendar" aria-hidden="true"></i>
                                             <span class="time">
