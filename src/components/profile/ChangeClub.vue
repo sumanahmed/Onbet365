@@ -41,8 +41,12 @@ export default {
     },
     created () {
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         clubChange() {
             this.$store.state.loader = true
             config.postData('/user/update/club', this.form)

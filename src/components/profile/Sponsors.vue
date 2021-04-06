@@ -51,8 +51,12 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getSponsors()
         this.getResults()
+        this.scrollToTop()
     },
-    methods: {
+    methods: {        
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         getSponsors () {   
             this.$store.state.loader = true         
             config.getData('/user/get/sponsor/'+ this.username)

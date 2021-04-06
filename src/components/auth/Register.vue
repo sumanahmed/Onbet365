@@ -118,8 +118,12 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getClubList()
         this.getCountryList()
+        this.scrollToTop()
     },
-    methods: {
+    methods: {        
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         async storeUser () {
             await config.postData('/user/registation', this.form)
             .then((response) => {

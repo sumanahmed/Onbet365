@@ -68,8 +68,12 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getDepositDetails()
         this.getResults()
+        this.scrollToTop()
     },
-    methods: {        
+    methods: {   
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         getDepositDetails () {
             this.$store.state.loader = true
             config.getData('/user/deposit/history/'+ this.userId)

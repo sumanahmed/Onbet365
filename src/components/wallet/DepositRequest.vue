@@ -104,8 +104,12 @@ export default {
         if (!this.isPusherCall) {
             this.getLiveDepositNumber()
         }
+        this.scrollToTop()
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         depositRequest() {
             this.$store.state.loader = true
             Object.assign(this.form , { 'user_id': this.getUser.user_id})

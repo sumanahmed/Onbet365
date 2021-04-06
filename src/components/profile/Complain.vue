@@ -43,6 +43,7 @@ export default {
     },
     created () {
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
     computed : {
         countryList : function () {
@@ -50,6 +51,9 @@ export default {
         }
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         giveComplain() {
             this.$store.state.loader = true
             config.postData('/user/store/new/complain', this.form)

@@ -397,8 +397,12 @@ export default {
     created () {
         this.getLiveBet()
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
-    methods: {
+    methods: {        
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         showModal (betDetail, question) {
             const isUserLoggedIn = this.$store.state.loggedIn
             if (isUserLoggedIn) {

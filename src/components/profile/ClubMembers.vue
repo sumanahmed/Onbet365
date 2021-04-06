@@ -57,8 +57,12 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getClubMember()
         this.getResults()
+        this.scrollToTop()
     },
-    methods: {        
+    methods: {  
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },      
         getClubMember () {
             this.$store.state.loader = true
             config.getData('/user/follower/'+ this.username)

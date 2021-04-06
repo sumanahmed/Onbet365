@@ -91,6 +91,7 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getCoinTransfers()
         this.getResults()
+        this.scrollToTop()
     },
     computed : {
         loader: function () {
@@ -100,7 +101,10 @@ export default {
             return this.$store.state.commonObj.user
         }
     },
-    methods: {        
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },      
         getCoinTransfers () {
             this.$store.state.loader = true
             config.getData('/user/withdraw/history/'+ this.getUser.user_id)

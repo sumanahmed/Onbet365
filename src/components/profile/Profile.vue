@@ -53,10 +53,16 @@ export default {
     },
     created () {
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
     computed : {
         loggedUser : function () {
             return this.$store.state.commonObj.profile
+        }
+    },
+    methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
         }
     }
 }

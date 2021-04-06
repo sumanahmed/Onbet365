@@ -14,15 +14,14 @@
                                     <p>
                                         <span class="sportCategoryCustom">{{ singleMatch[0].sportName | capitalizeFirstLetter }}</span>
                                         {{ singleMatch[0].matchTitle | capitalizeFirstLetter }} 
-                                        &nbsp; <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <br/> <i class="fa fa-calendar" aria-hidden="true"></i>
                                         <span class="time">
                                             {{ singleMatch[0].matchDateTime | dateformat }} 
                                         </span>
                                         &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         <span class="time">
                                             {{ singleMatch[0].matchDateTime | timeformat }} 
-                                        </span><br/>
-                                        {{ singleMatch[0].tournamentName | capitalizeFirstLetter }} 
+                                        </span>
                                     </p>
                                 </div>
                                 <div class="matchTournamentLivePart">
@@ -129,14 +128,19 @@ export default {
         '$route.query.id': function (newVal, oldVal) {
             if(newVal != oldVal) {
                 this.getSingleMatch(newVal)
+                this.scrollToTop()
             }
         }
     },
     created () {
         this.getSingleMatch(this.$route.query.id)
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         showModal (betDetail, question) {
             const isUserLoggedIn = this.$store.state.loggedIn
             if (isUserLoggedIn) {

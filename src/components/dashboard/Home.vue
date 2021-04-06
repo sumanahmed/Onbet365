@@ -54,7 +54,7 @@
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
-                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            <br/> <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
                                             </span>
@@ -399,6 +399,7 @@ export default {
         }
     },
     created () {
+        
         this.$store.dispatch('toggleMobileMenu', 1)    
         window.Echo.channel('betUpdatenew')
         .listen('betdetailUpdateEvent', (e) => {
@@ -415,8 +416,13 @@ export default {
         if (!this.isPusherCall) {
             this.getLiveBet()
         }
+        this.scrollToTop()
+        
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },        
         showModal(betDetail, question) {
             const isUserLoggedIn = this.$store.state.loggedIn
             if (isUserLoggedIn) {

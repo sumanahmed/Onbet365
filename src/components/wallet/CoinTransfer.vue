@@ -48,8 +48,12 @@ export default {
     },
     created () {
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         coinTransfer() {
             this.$store.state.loader = true
             Object.assign(this.form , { 'user_id': this.getUser.user_id})

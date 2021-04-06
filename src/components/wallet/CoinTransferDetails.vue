@@ -59,8 +59,12 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getCoinTransfers()
         this.getResults()
+        this.scrollToTop()
     },
-    methods: {        
+    methods: { 
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },       
         getCoinTransfers () {
             this.$store.state.loader = true
             config.getData('/user/coin/transfer/history/'+ this.userId)

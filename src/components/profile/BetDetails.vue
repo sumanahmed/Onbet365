@@ -63,8 +63,12 @@ export default {
         this.$store.dispatch('toggleMobileMenu', 1)
         this.getBetDetails()
         this.getResults()
+        this.scrollToTop()
     },
     methods: {
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         getBetDetails () {   
             this.$store.state.loader = true         
             config.getData('/user/bet/history/'+ this.userId)

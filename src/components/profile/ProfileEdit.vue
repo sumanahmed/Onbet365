@@ -39,13 +39,17 @@ export default {
     },
     created () {
         this.$store.dispatch('toggleMobileMenu', 1)
+        this.scrollToTop()
     },
     computed : {
         countryList : function () {
             return this.$store.state.commonObj.country
         }
     },
-    methods: {
+    methods: {        
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
         update() {
             this.$store.state.loader = true
             config.postData('/user/profile/update', this.form_edit)
