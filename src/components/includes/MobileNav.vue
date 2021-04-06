@@ -20,7 +20,9 @@
             <div v-if="isLoggedUser && getUser" class="profile_section_mobile">
                 <div class="single-profile-mobile">
                     <div class="avater-image-mobile">
-                        <p>{{ getUser.user_name.substring(0,1) | capitalizeFirstLetter }}</p>
+                        <router-link to="/deposit-request"><i class="btn btn-sm btn-warning">Deposit</i></router-link>
+                        <span style="margin-top:5px;display:block;"></span>
+                        <router-link to="/withdraw-request"><i class="btn btn-sm btn-danger">Withdraw</i></router-link>
                     </div>
                     <div class="welcome-text-coin-mobile">
                         <p class="text-block m-0"><b>Welcome</b> : {{ getUser.user_name }} </p>

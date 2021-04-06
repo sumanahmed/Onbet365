@@ -659,7 +659,7 @@ span.sportCategoryCustom {
 
 
 .profile_section_mobile {
-    padding: 20px 5px 10px 5px;
+    padding: 15px 5px 10px 5px;
     height: 100px;
     background: #00895d;
 }
@@ -668,8 +668,8 @@ span.sportCategoryCustom {
 }
 
 .avater-image-mobile {
-    width: 21%;
-    padding-left: 18px;
+    width: 25%;
+    padding-left: 5px;
 }
 
 .avater-image-mobile p {

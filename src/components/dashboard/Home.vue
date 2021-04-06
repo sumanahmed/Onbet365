@@ -54,7 +54,7 @@
                                             <span class="time">
                                                 {{ match['matchDateTime'] | dateformat }} 
                                             </span>
-                                            <br/> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                            &nbsp; <i class="fa fa-clock-o" aria-hidden="true"></i>
                                             <span class="time">
                                                 {{ match['matchDateTime'] | timeformat }} 
                                             </span>
