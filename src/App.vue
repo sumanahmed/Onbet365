@@ -11,7 +11,7 @@
           <right-sidebar></right-sidebar> 
         </div>    
         <div class="footer-section">
-          <p class="footer-text">&copy; All right reserve DreamBet365 </p>
+          <p class="footer-text">dreambet365.uk &copy; {{ copyrightyear }} all right reserve </p>
         </div>
         <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
     </div>    
@@ -26,6 +26,11 @@ import RightSidebar from './components/includes/RightSidebar'
 
 export default {
   name: 'App',
+  data () {
+        return {
+            copyrightyear:''
+        }
+    },
   components: {
     'mobile-nav': MobileNav,
     'left-sidebar': LeftSidebar,
@@ -38,6 +43,10 @@ export default {
     loginLoader : function () {
       return this.$store.state.loginLoader
     }
-  }
+  },  
+  created() {    
+    var today = new Date();
+    this.copyrightyear = today.getFullYear();
+  },
 }
 </script>

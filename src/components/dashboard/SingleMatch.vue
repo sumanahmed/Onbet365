@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="matchTournamentLivePart">
                                     <p class="overs-upcomming-status">
-                                        <span class="upcomming-status">upcomming</span>
+                                        <span class="upcomming-status">Upcomming</span>
                                     </p>
                                 </div>
                             </div>

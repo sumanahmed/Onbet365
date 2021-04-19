@@ -18,11 +18,14 @@
 
             <!-- Mobile Profile section -->
             <div v-if="isLoggedUser && getUser" class="profile_section_mobile">
+            
+                <b class="liveTime">{{ customTime }}</b>
+                <b class="liveDate">{{ customDate }}</b>
                 <div class="single-profile-mobile">
                     <div class="avater-image-mobile">
-                        <router-link to="/deposit-request"><i class="btn btn-sm btn-warning">Deposit</i></router-link>
+                        <router-link to="/deposit-request"><i class="btn btn-sm btn-dark text-warning">Deposit</i></router-link>
                         <span style="margin-top:5px;display:block;"></span>
-                        <router-link to="/withdraw-request"><i class="btn btn-sm btn-danger">Withdraw</i></router-link>
+                        <router-link to="/withdraw-request"><i class="btn btn-sm btn-dark text-warning">Withdraw</i></router-link>
                     </div>
                     <div class="welcome-text-coin-mobile">
                         <p class="text-block m-0"><b>Welcome</b> : {{ getUser.user_name }} </p>
@@ -76,6 +79,8 @@ export default {
     name: 'MobileNav',
     data () {
         return {
+            customTime:'',
+            customDate: '',
             errors:[],
             form : {
                 username :'',
@@ -97,7 +102,46 @@ export default {
             return this.$store.state.mobileNav
         }
     },
-    methods: {	
+    created() {
+        setInterval(this.updateTime, 1000);
+        this.updateTime()
+    },
+    methods: {        
+        updateTime() {
+            var today = new Date();
+            var week = ['[SUN]', '[MON]', '[TUE]', '[WED]', '[THU]', '[FRI]', '[SAT]'];
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+        
+            var isFormat12H = true;
+            var ampm = "";
+            if (isFormat12H) {
+                ampm = h >= 12 ? "pm" : "am";
+                h = h % 12;
+                h = h ? h : 12;
+            }
+            h = this.checkTime(h);
+            m = this.checkTime(m);
+            s = this.checkTime(s);
+            this.customTime =  h + ":" + m + ":" + s + ampm;
+            this.customDate = this.zeroPadding(today.getFullYear(), 4) + '-' + this.zeroPadding(today.getMonth()+1, 2) + '-' + this.zeroPadding(today.getDate(), 2) + ' ' + week[today.getDay()];
+            
+        },
+
+        checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        },
+        zeroPadding(num, digit) {
+            var zero = '';
+            for(var i = 0; i < digit; i++) {
+                zero += '0';
+            }
+            return (zero + num).slice(-digit);
+        },
         mobileNavToggle (status) {
             if (status != 1) {
                 this.$store.dispatch('toggleMobileMenu', status)

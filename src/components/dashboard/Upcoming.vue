@@ -105,11 +105,9 @@
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
-                                        <p class="overs-live-status">
-                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
-                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
-                                        </p>
-                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
+                                        <p class="overs-upcomming-status">
+                                            <span class="upcomming-status">Upcomming</span>
+                                        </p>                                                   
                                     </div>
                                 </div>
 
@@ -151,11 +149,9 @@
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
-                                        <p class="overs-live-status">
-                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
-                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
+                                        <p class="overs-upcomming-status">
+                                            <span class="upcomming-status">Upcomming</span>
                                         </p>
-                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
@@ -197,11 +193,9 @@
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
-                                        <p class="overs-live-status">
-                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
-                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
+                                        <p class="overs-upcomming-status">
+                                            <span class="upcomming-status">Upcomming</span>
                                         </p>
-                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
@@ -243,11 +237,9 @@
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
-                                        <p class="overs-live-status">
-                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
-                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
+                                         <p class="overs-upcomming-status">
+                                            <span class="upcomming-status">Upcomming</span>
                                         </p>
-                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
@@ -289,17 +281,15 @@
                                         </p>
                                     </div>
                                     <div class="matchTournamentLivePart">
-                                        <p class="overs-live-status">
-                                            <b v-if="match['overs'] != null && match['status'] == 3" class="overs">Overs: {{ match["overs"] }} </b>
-                                            <span v-if="match['status'] == 3" class="live-status">Live</span>
+                                        <p class="overs-upcomming-status">
+                                            <span class="upcomming-status">Upcomming</span>
                                         </p>
-                                        <p v-if="match['status'] == 2 || match['status'] == 3" class="match-scores"> {{ match["score"] }} </p>                                                    
                                     </div>
                                 </div>
 
                                 <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
-                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                         <span style="color:#ffee00;font-weight:900">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} ?</span>
                                     </div>
 
                                     <div class="choice-answer-part">

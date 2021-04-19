@@ -71,7 +71,7 @@
 
                                 <div v-for="(matchesOption, index3) in match['matchOption']" :key="index3" class="match-options">
                                     <div class="question-part">
-                                        <span class="">{{ matchesOption["matchOption"] | capitalizeFirstLetter}} </span>
+                                        <span style="color:#ffee00;font-weight:900">{{ matchesOption["matchOption"] | capitalizeFirstLetter }} ?</span>
                                     </div>
 
                                     <div class="choice-answer-part">
